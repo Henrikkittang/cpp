@@ -1,0 +1,99 @@
+#include<iostream>
+#include<vector>
+#include<random>
+#include<cmath>
+
+#include "SFML/Graphics.hpp"
+
+const int g_width = 800;
+const int g_height = 800;
+const int g_scl = 20;
+
+
+class Hexagon
+{
+private:
+	sf::Vector2f m_center;
+	float m_height;
+	std::vector<sf::Vector2f> m_points;
+	std::vector<sf::Vertex> triangle_fan;
+
+public:
+	Hexagon(sf::Vector2f a_center, float a_height)
+	{
+		m_center = a_center;
+		m_height = a_height;
+
+		for(int i = 0; i < 6; i++)
+		{
+			sf::Vector2f base(0, a_height);
+			sf::Vector2f angled( base.y * sin(i*(3.14159265  / 3)), base.y * cos(i*(3.14159265  / 3)) );
+			m_points.push_back( sf::Vector2f( a_center.x - angled.x, a_center.y - angled.y ) );
+		}
+		sf::Color color = sf::Color(std::rand()%255, std::rand()%255, std::rand()%255);
+
+		triangle_fan.reserve(7);
+		triangle_fan.emplace_back(m_center, color);
+		for(auto& point : m_points)
+		{
+			triangle_fan.emplace_back(point, color);
+		}
+		triangle_fan.emplace_back(m_points[0],  color);
+	}
+
+	void draw(sf::RenderWindow& wn)
+    {
+		wn.draw(&triangle_fan[0], triangle_fan.size(), sf::TriangleFan);
+    }
+
+};
+
+
+
+int main(){
+
+	sf::RenderWindow window(sf::VideoMode(g_width, g_height), "noice texture", sf::Style::Close | sf::Style::Titlebar);
+	srand((int)time(0));
+
+
+	int hex_height = 30;
+	sf::Vector2f angled( hex_height * sin((3.14159265  / 2)), hex_height * cos((3.14159265  / 2)) );
+	int hex_widht = sqrt( pow(angled.x, 2) + pow(angled.y, 2) );
+	hex_widht = sqrt(3) * hex_height;
+
+	std::vector<Hexagon> hexagons;
+	int other = 0;
+	for(int i = 0; i < g_height; i += hex_height*1.4)
+	{
+		for(int j = 0; j < g_width+hex_widht; j += hex_widht)
+		{
+			if(other % 2 == 0){
+				hexagons.emplace_back( sf::Vector2f(j+(hex_widht/2), i), hex_height);
+			}else{
+				hexagons.emplace_back( sf::Vector2f(j, i), hex_height );
+			}
+		}
+		other++;
+	}
+
+	while(window.isOpen()){
+		sf::Event evt;
+		while(window.pollEvent(evt))
+		{
+			if(evt.type == evt.Closed){
+				window.close();
+			}
+
+			window.clear();
+
+			for(auto& hex : hexagons)
+			{
+				hex.draw(window);
+			}
+
+			window.display();
+
+		}
+	}
+	return 0;
+}
