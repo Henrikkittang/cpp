@@ -59,6 +59,7 @@ std::vector<Cell*> find_children(std::vector<std::vector<Cell>>& tgrid, const st
 
 std::vector<std::shared_ptr<Edge>> make_edges(std::vector<std::vector<Cell>>& cells)
 {
+
 	const int NORTH = 0;
 	const int WEST = 1;
 	const int EAST = 2;
@@ -147,10 +148,9 @@ std::vector<std::shared_ptr<Edge>> make_edges(std::vector<std::vector<Cell>>& ce
 	return edges;
 }
 
-
 std::vector<std::vector<float>> make_triangles(std::vector<std::shared_ptr<Edge>>& edges, sf::Vector2i& center_pos)
 {
-	const float radius = 1000.0f;
+	const float radius = 50.0f;
 	std::vector<std::vector<float>> triangles;
 
 	for(const auto& edge : edges)
@@ -219,26 +219,26 @@ std::vector<std::vector<float>> make_triangles(std::vector<std::shared_ptr<Edge>
 int main()
 {
 	sf::ContextSettings settings;
-	settings.antialiasingLevel = 0;
-	sf::RenderWindow window(sf::VideoMode(width, height), "light_casting", sf::Style::Close | sf::Style::Titlebar, settings);
+	settings.antialiasingLevel = 8;
+	sf::RenderWindow window(sf::VideoMode(width, height), "Light Casting", sf::Style::Close | sf::Style::Titlebar, settings);
 	std::vector<std::vector<Cell>> grid = std::vector<std::vector<Cell>>(height/scl, std::vector<Cell>(width/scl));
 	std::vector<std::shared_ptr<Edge>> edges;
 	std::vector<std::vector<float>> triangles;
 
-	for(int i = 1; i < grid.size()-1; i++)
+	for(size_t i = 1; i < grid.size()-1; i++)
 	{
 		grid[i][1].exists = true;
 	}
-	for(int i = 1; i < grid.size()-1; i++)
+	for(size_t i = 1; i < grid.size()-1; i++)
 	{
 		grid[i][grid.size()-2].exists = true;
 	}
 
-	for(int i = 1; i < grid[0].size()-1; i++)
+	for(size_t i = 1; i < grid[0].size()-1; i++)
 	{
 		grid[1][i].exists = true;
 	}
-	for(int i = 1; i < grid[0].size()-1; i++)
+	for(size_t i = 1; i < grid[0].size()-1; i++)
 	{
 		grid[grid[0].size()-2][i].exists = true;
 	}

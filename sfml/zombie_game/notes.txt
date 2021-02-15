@@ -1,0 +1,52 @@
+
+Weapons
+	- Sniper rifle: high damage, high accuracy, slow fire rate
+	- Gatling: statonary, high firerate
+	- Melee weapons: seperate class from guns
+	- Weapon weight: affect player speed
+	- Non-infinite ammo
+
+Know bugs
+	- Only the bullets belonging to the weapon equiped will be updated
+	- Revolver fires twices on each button press ???
+	- Some zombies flicker after some time
+	- Seg fault when firing gun outside boundries - limit player to boundries
+	- Seg fault when deleting two bullets in same frame ???
+		- Seen when firing at enemies and boundries
+
+Player
+	- Player have raytraced vision, light casting
+	- Default is walking, running mode
+	- Player health
+		- Health kit to heal
+
+Structures:
+	- Rooms
+	-! Zombies need pathfinding
+
+Zombie
+	- Vision: only follows player when in line of sight
+		-! Raytraced vision
+	- Some zombies listen all will detect more easly
+		- Affectd guns but not melee weapons
+	- Zombies that throw stuff
+	- Big zombies can break trough walls
+
+Level editor
+	- Placing zombies, structures, items etc.
+	-! Save files, data serialization
+	- No level editor, procedural generation
+
+Collision
+	- Bullet-Obstacle
+	- Enemy-Obstacle
+	- World boundries
+
+Misc
+	- Finding guns?
+	- Picking up ammo
+	- Better textures
+	- Animation
+	- Sounds
+	- Saving progress?
+	- Main menu?

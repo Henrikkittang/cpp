@@ -8,9 +8,9 @@
 #include "fps.hpp"
 #include "pathfinding.hpp"
 
-const int width = 800;
+const int width = 1200;
 const int height = 800;
-const int scl = 5;
+const int scl = 1;
 
 class Fruit{
 private:
@@ -67,7 +67,7 @@ public:
 	Snake(){
 		sf::RectangleShape head;
 
-		body = { {(width / scl) * 4, (width / scl) * 4} };
+		body = { {(width / scl) / 2, (width / scl) / 2 } };
 	}
 
 	void fillGrid(){
@@ -81,14 +81,16 @@ public:
 	void move(Fruit& fruit){
 		std::vector<int> curHeadPos = {(int)(body[0][0]/scl), (int)(body[0][1]/scl)};
 
-		if(path.size() == 0){
+		if(path.size() == 0)
+		{
 			fruit.newPosition(body);
 			fillGrid();
 			body.push_back(body[0]);
+
 			path = find_path(grid, {(int)curHeadPos[0], (int)curHeadPos[1]}, {(int)fruit.fruitPos.x, (int)fruit.fruitPos.y});
-			std::vector<int> test = {-1, -1};
-			while(path[0] == test){
+			while(path.empty()){
 				fruit.newPosition(body);
+
 				path = find_path(grid, {(int)curHeadPos[0], (int)curHeadPos[1]}, {(int)fruit.fruitPos.x, (int)fruit.fruitPos.y});
 			}
 		}

@@ -11,7 +11,7 @@ struct Point3{
 std::ostream& operator<<(std::ostream& out, const Point3& point)
 {
     // Makes point printable
-    out << "(" << point.x << ", " << point.y << ", " << point.z << ")";  
+    out << "(" << point.x << ", " << point.y << ", " << point.z << ")";
     return out;
 }
 
@@ -49,8 +49,8 @@ public:
     void operator*=(const double scalar)
     {
         // Multiplying constant to this vector
-        x *= scalar; 
-        y *= scalar; 
+        x *= scalar;
+        y *= scalar;
         z *= scalar;
     }
     Vector3 operator%(const Vector3& otherVect)
@@ -94,7 +94,7 @@ public:
 std::ostream& operator<<(std::ostream& out, const Vector3& vect)
 {
     // Makes vector3 printable
-    out << "[" << vect.x << ", " << vect.y << ", " << vect.z << "]";  
+    out << "[" << vect.x << ", " << vect.y << ", " << vect.z << "]";
     return out;
 }
 

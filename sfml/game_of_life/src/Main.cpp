@@ -1,263 +1,153 @@
 // Standar library
 #include<iostream>
 #include<vector>
-#include<unordered_set>
-#include <random>
-#include<bitset>
+#include<random>
+#include<array>
 
 // Require download
 #include<SFML/Graphics.hpp>
-const int width = 300;   // width and height of window
-const int height = 900;
-const int scl = 1;     // length of each square cell
+
 
 #include "fps.hpp"
 
-/*
-class Temp
+class Cell
 {
 private:
-
-	#define EmptyGrid std::vector<std::vector<unsigned char>> (floor(width/scl), std::vector<unsigned char>(floor(width/scl)));
-
-	std::vector<std::vector<unsigned char>> world;
-	std::vector<sf::Vertex> quads;
-
-	int get_neighbour_count(int x, int y)
-	{
-		int count = 0;
-		for(int i = -1; i < 2; i++){
-		for(int j = -1; j < 2; j++){
-			if(i != 0 || j != 0){
-				if((x+j) >= 0 && (x+j) < world[0].size() && (y+i) >= 0 && (y+i) < world.size()){
-					if((world.at(y+i).at(x+j)) & 0x01)
-					{
-						count++;
-					}
-				}
-			}
-		}
-    	}
-		return count;
-	}
-
-	void update_neighbours(int x, int y, std::vector<std::vector<unsigned char>>& grid)
-	{
-		for(int i = -1; i < 2; i++){
-		for(int j = -1; j < 2; j++){
-			if(i != 0 || j != 0){
-				int temp_pos[] = {x + j, y + i};
-				if(temp_pos[0] >= 0 && temp_pos[0] < world[0].size() && temp_pos[1] >= 0 && temp_pos[1] < world.size()){
-					grid[temp_pos[1]][temp_pos[0]] = ((grid[temp_pos[1]][temp_pos[0]] >> 1) + 1) << 1;
-				}
-			}
-		}
-    	}
-	}
-
-	void emplace_quad(int x, int y, std::vector<sf::Vertex>& arr)
-	{
-		arr.emplace_back(sf::Vector2f(x*scl, y*scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl+scl, y*scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl+scl, y*scl+scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl, y*scl+scl), sf::Color::White);
-	}
-
+	bool alive = false;
+	bool next_state = false;
+	int neighbours_count = 0;
+	int next_negbours_count = 0;
 public:
 
-	Temp()
+	int get_neighbour_count() const { return neighbours_count; }
+	bool is_alive() const { return alive; }
+	void add_neighbour(){ next_negbours_count++; }
+	void set_alive() { next_state = true; }
+
+	void update()
 	{
+		// std::cout << alive << ", " << next_state << ", ";
+		// std::cout << neighbours_count << ", " << next_negbours_count << "\n";
 
-		world = EmptyGrid;
-		quads.reserve(world.size() * world[0].size() * 0.4);
-
-		for(int i = 0; i < world.size(); i++)
-		{
-			for(int j = 0; j < world[i].size(); j++)
-			{
-				if((std::rand() % 2 == 0))
-				{
-					world[i][j] |= 1UL << 0;
-				}
-				int yes = get_neighbour_count(j, i);
-				world[i][j] = ((world[i][j] >> 1) + yes) << 1;
-			}
-		}
+		alive = next_state;
+		neighbours_count = next_negbours_count;
+		next_state = false;
+		next_negbours_count = 0;
 	}
-
-	void next_gen()
-	{
-
-		std::vector<std::vector<unsigned char>> next = EmptyGrid;
-		quads.clear();
-		for(int i = 0; i < world.size(); i++)
-		{
-			for(int j = 0; j < world[i].size(); j++)
-			{
-
-				if(world[i][j] == 0)
-				{
-					continue;
-				}
-
-				int count = world[i][j] >> 1;
-
-
-				if((world[i][j] >> 0) & 1U)
-				{
-					if(count == 2 || count == 3)
-					{
-						next[i][j] |= 1UL << 0;
-						update_neighbours(j, i, next);
-						emplace_quad(j, i, quads);
-					}
-				}else{
-					if(count == 3)
-					{
-						next[i][j] |= 1UL << 0;
-						update_neighbours(j, i, next);
-						emplace_quad(j, i, quads);
-					}
-				}
-			}
-		}
-		world = next;
-	}
-
-	void draw(sf::RenderWindow& wn)
-	{
-
-		wn.draw(&quads[0], quads.size(), sf::Quads);
-	}
-
-};*/
-
-
+};
 
 class Grid
 {
 private:
-	struct Cell
-	{
-		bool isAlive = false;
-		int neighbours_count = 0;
-	};
 
-	int m_widht, m_height;
-
-	#define EmptyGrid std::vector<std::vector<Cell>> (floor(width/scl), std::vector<Cell>(floor(width/scl)));
-
-	std::vector<std::vector<Cell>> world;
+	int m_width, m_height, m_scl;
+	std::vector<std::vector<Cell>> m_world;
 	std::vector<sf::Vertex> quads;
 
-	int get_neighbour_count(int x, int y)
+
+public:
+
+	Grid(int w, int h, int s)
 	{
-		int count = 0;
-		for(int i = -1; i < 2; i++){
-		for(int j = -1; j < 2; j++){
-			if(i != 0 || j != 0){
-				int temp_pos[] = {x + j, y + i};
-				if(temp_pos[0] >= 0 && temp_pos[0] < world[0].size() && temp_pos[1] >= 0 && temp_pos[1] < world.size()){
-						if(world.at(temp_pos[1]).at(temp_pos[0]).isAlive){
-							count++;
-					}
+		m_width = w / s;
+		m_height = h / s;
+		m_scl = s;
+
+		m_world = std::vector<std::vector<Cell>> (m_height, std::vector<Cell>(m_width));;
+		quads.reserve(m_height * m_width * 0.4);
+
+		for(int i = 0; i < m_height; i++)
+		{
+			for(int j = 0; j < m_width; j++)
+			{
+				if(std::rand() % 2 == 0)
+				{
+					m_world[i][j].set_alive();
+					m_world[i][j].update();
+					update_neighbours(j, i);
 				}
 			}
 		}
-    	}
-		return count;
 	}
 
 
-	void update_neighbours(int x, int y, std::vector<std::vector<Cell>>& grid)
+private:
+	void update_neighbours(int x, int y)
 	{
 		for(int i = -1; i < 2; i++){
-		for(int j = -1; j < 2; j++){
-			if(i != 0 || j != 0){
-				int temp_pos[] = {x + j, y + i};
-				if(temp_pos[0] >= 0 && temp_pos[0] < world[0].size() && temp_pos[1] >= 0 && temp_pos[1] < world.size()){
-					grid[temp_pos[1]][temp_pos[0]].neighbours_count++;
-				}
+			for(int j = -1; j < 2; j++){
+				if(i == 0 && j == 0)
+					continue;
+
+				int px = x + j; int py = y + i;
+				if(px >= 0 && px < m_width && py >= 0 && py < m_height)
+					m_world[py][px].add_neighbour();
 			}
-		}
     	}
 	}
 
-	void emplace_quad(int x, int y, std::vector<sf::Vertex>& arr)
+	void emplace_quad(int x, int y)
 	{
-		arr.emplace_back(sf::Vector2f(x*scl, y*scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl+scl, y*scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl+scl, y*scl+scl), sf::Color::White);
-		arr.emplace_back(sf::Vector2f(x*scl, y*scl+scl), sf::Color::White);
+		quads.emplace_back(sf::Vector2f(x*m_scl, y*m_scl), sf::Color::White);
+		quads.emplace_back(sf::Vector2f(x*m_scl+m_scl, y*m_scl), sf::Color::White);
+		quads.emplace_back(sf::Vector2f(x*m_scl+m_scl, y*m_scl+m_scl), sf::Color::White);
+		quads.emplace_back(sf::Vector2f(x*m_scl, y*m_scl+m_scl), sf::Color::White);
 	}
 
 public:
 
-	Grid(int w, int h)
-	{
-		m_widht = w;
-		m_height = h;
-
-		world = EmptyGrid;
-		quads.reserve(world.size() * world[0].size() * 0.4);
-
-		for(int i = 0; i < world.size(); i++)
-		{
-			for(int j = 0; j < world[i].size(); j++)
-			{
-				world[i][j].isAlive = (std::rand() % 2 == 0);
-
-				world[i][j].neighbours_count = get_neighbour_count(j, i);
-			}
-		}
-	}
-
-
-
 	void next_gen()
 	{
-
-		auto next = EmptyGrid;
 		quads.clear();
-		for(int i = 0; i < world.size(); i++)
-		{
-			for(int j = 0; j < world[i].size(); j++)
-			{
 
-				if(!world[i][j].isAlive && world[i][j].neighbours_count == 0)
+		for(int i = 0; i < m_height; i++)
+		{
+			for(int j = 0; j < m_width; j++)
+			{
+				if(!m_world[i][j].is_alive() && m_world[i][j].get_neighbour_count() < 3)
 				{
 					continue;
 				}
 
-				if(world[i][j].isAlive && (world[i][j].neighbours_count == 2 || world[i][j].neighbours_count == 3)){
-					next[i][j].isAlive = true;
-					update_neighbours(j, i, next);
-					emplace_quad(j, i, quads);
-				}else if(!world[i][j].isAlive && world[i][j].neighbours_count == 3){
-					next[i][j].isAlive = true;
-					update_neighbours(j, i, next);
-					emplace_quad(j, i, quads);
+				if( (m_world[i][j].is_alive() && (m_world[i][j].get_neighbour_count() == 2 || m_world[i][j].get_neighbour_count() == 3)) ||
+					(!m_world[i][j].is_alive() && m_world[i][j].get_neighbour_count() == 3))
+				{
+					m_world[i][j].set_alive();
+					update_neighbours(j, i);
+					emplace_quad(j, i);
 				}
 			}
 		}
-		world = next;
+
+
+		for(int i = 0; i < m_height; i++)
+		{
+			for(int j = 0; j < m_width; j++)
+			{
+				m_world[i][j].update();
+			}
+		}
 	}
 
-	void draw(sf::RenderWindow& wn)
-	{
 
+	void draw(sf::RenderWindow& wn) const
+	{
 		wn.draw(&quads[0], quads.size(), sf::Quads);
 	}
-
 };
 
 int main(){
+
+	int width = 1800;   // width and height of window
+	int height = 900;
+	int scl = 1;     // length of each square cell
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Game of life", sf::Style::Close | sf::Style::Titlebar); // inits window
 	// window.setFramerateLimit(1);
 	srand((int)time(0));
 
-	Grid map(0, 0);
+	Grid map(width, height, scl);
+
 
 	FPS fps;
 	float lastFPS;
@@ -280,8 +170,8 @@ int main(){
 
 		window.clear();
 
-		map.draw(window);
 		map.next_gen();
+		map.draw(window);
 
 		window.display();
 

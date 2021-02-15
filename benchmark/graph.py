@@ -42,7 +42,7 @@ ax_me.bar(0.8, opt_data_median, width=0.2, label='opt_data')
 ax_me.bar(1.2, un_opt_data_median, width=0.2, label='un_opt_data')
 ax_me.set_title('Median')
 
-#plt.legend()
+plt.legend()
 plt.show()
 
 

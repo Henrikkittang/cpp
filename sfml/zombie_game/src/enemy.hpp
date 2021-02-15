@@ -16,19 +16,25 @@ public:
 
 public:
 
-	void move(const sf::Vector2f& dir)
+	void bounce(const sf::Vector2f& dir)
 	{
 		float length = sqrtf(powf(dir.x, 2) + powf(dir.y, 2));
 		auto dir_vect = sf::Vector2f( dir.x / length, dir.y / length );
 		enemy.move(dir_vect.x * m_speed, dir_vect.y* m_speed);
 	}
 
-	const sf::Vector2f& pos() const { return enemy.getPosition(); }
-	float size() const { return enemy.getSize().x; }
-
-	void draw(sf::RenderWindow& wn, float angle)
+	void move(const sf::Vector2f& dir, float rotation_angle)
 	{
-		enemy.setRotation(angle);
+		bounce(dir);
+		enemy.setRotation(rotation_angle);
+	}
+
+	const sf::Vector2f& pos() const { return enemy.getPosition(); }
+	float size() const { return m_size; }
+	sf::Vector2f center() { return sf::Vector2f(pos().x + size()/2, pos().y + size()/2 ); }
+
+	void draw(sf::RenderWindow& wn)
+	{
 		enemy.setTexture(&m_texture);
 
 		float len = (health/m_default_health) * m_size;
@@ -65,7 +71,7 @@ class RegularZombie : public Enemy
 public:
 	RegularZombie(float ax, float ay)
 	{
-		m_speed = 4;
+		m_speed = 2;
 		m_size = 40;
 		m_default_health = 60;
 		health = 60;
@@ -85,7 +91,7 @@ class FastZombie : public Enemy
 public:
 	FastZombie(float ax, float ay)
 	{
-		m_speed = 8;
+		m_speed = 4;
 		m_size = 30;
 		m_default_health = 40;
 		health = 40;
@@ -104,7 +110,7 @@ class BigZombie : public Enemy
 public:
 	BigZombie(float ax, float ay)
 	{
-		m_speed = 2;
+		m_speed = 1;
 		m_size = 60;
 		m_default_health = 100;
 		health = 100;

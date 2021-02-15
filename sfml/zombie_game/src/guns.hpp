@@ -9,7 +9,7 @@ class Bullet
 private:
 	sf::RectangleShape bullet;
  	sf::Vector2f dir_vect;
-	float m_speed = 30;
+	float m_speed = 15;
 	float m_damage = 20;
 public:
 	Bullet(const sf::Vector2f& cur_pos, const sf::Vector2f& t_args, float damage=20)
@@ -72,8 +72,8 @@ protected:
 	// float m_weight;
 	size_t m_mag_capacity;
 	size_t m_mag_amount;
+	size_t m_bullet_damage;
 	// size_t m_total_bullets;
-	std::vector<float> m_offset;
 	std::vector<Bullet> m_bullets;
 
 public:
@@ -100,7 +100,7 @@ public:
 
 		else if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fire_loop > m_fire_frequency)
 		{
-			sf::Vector2f mouse_pos = (sf::Vector2f)sf::Mouse::getPosition(wn);
+			sf::Vector2f mouse_pos = wn.mapPixelToCoords(sf::Mouse::getPosition(wn));;
 			sf::Vector2f vect = {mouse_pos.x-cur_pos.x, mouse_pos.y-cur_pos.y };
 			float length = sqrtf(powf(vect.x, 2) + powf(vect.y, 2));
 			vect = sf::Vector2f( vect.x / length * 500, vect.y / length * 500 );
@@ -114,7 +114,8 @@ public:
 		std::vector<Bullet> temp;
 		for(auto& bullet : m_bullets)
 		{
-			if(bullet.pos().x > 0 && bullet.pos().x < width && bullet.pos().y > 0 &&bullet.pos().y < height)
+			// Delete bullets when they are a certian distance from player, aka cur_pos
+			// if(bullet.pos().x > 0 && bullet.pos().x < width && bullet.pos().y > 0 &&bullet.pos().y < height)
 			{
 				bullet.move();
 				bullet.draw(wn);
@@ -123,6 +124,14 @@ public:
 		}
 		m_bullets = temp;
 		m_fire_loop++;
+	}
+
+	void draw_bullets(sf::RenderWindow& wn)
+	{
+		for(auto& bullet : m_bullets)
+		{
+			bullet.draw(wn);
+		}
 	}
 
 	const std::vector<Bullet>& get_bullets() const { return m_bullets; }
@@ -153,11 +162,12 @@ public:
 		m_realod_time = 120;
 		m_mag_capacity = 6;
 		m_mag_amount = 6;
+		m_bullet_damage = 40;
 	}
 
 	void fire_weapon(const sf::Vector2f& cur_pos, const sf::Vector2f& vect) override
 	{
-		m_bullets.emplace_back(cur_pos, offset_vector(vect, -30, 30), 40);
+		m_bullets.emplace_back(cur_pos, offset_vector(vect, -30, 30), m_bullet_damage);
 	}
 };
 
@@ -172,11 +182,12 @@ public:
 		m_realod_time = 100;
 		m_mag_capacity = 80;
 		m_mag_amount = 80;
+		m_bullet_damage = 5;
 	}
 
 	void fire_weapon(const sf::Vector2f& cur_pos, const sf::Vector2f& vect) override
 	{
-		m_bullets.emplace_back(cur_pos, offset_vector(vect, -80, 80), 5);
+		m_bullets.emplace_back(cur_pos, offset_vector(vect, -80, 80), m_bullet_damage);
 	}
 };
 
@@ -190,13 +201,14 @@ public:
 		m_realod_time = 100;
 		m_mag_capacity = 8;
 		m_mag_amount = 8;
+		m_bullet_damage = 15;
 	}
 
 	void fire_weapon(const sf::Vector2f& cur_pos, const sf::Vector2f& vect) override
 	{
 		for(int i = 0; i < 10; i++)
 		{
-			m_bullets.emplace_back(cur_pos, offset_vector(vect, -150, 150), 5);
+			m_bullets.emplace_back(cur_pos, offset_vector(vect, -150, 150), m_bullet_damage);
 		}
 	}
 };

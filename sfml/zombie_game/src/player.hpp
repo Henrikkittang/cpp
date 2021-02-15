@@ -12,8 +12,9 @@ class Player
 {
 private:
 	float m_size = 40;
-	float m_speed = 15;
+	float m_speed = 7;
 	size_t m_gun_idx = 0;
+	sf::Text m_gun_text;
 	sf::Vector2f m_dir;
 	sf::RectangleShape m_player;
 	sf::Texture m_texture;
@@ -29,6 +30,11 @@ public:
 		m_player.setSize(sf::Vector2f(m_size, m_size));
 		//m_player.setFillColor(sf::Color::Red);
 		m_player.setOrigin(m_size/2, m_size/2);
+
+		m_gun_text.setFont(m_font);
+		m_gun_text.setStyle(sf::Text::Bold);
+		m_gun_text.setCharacterSize(34);
+		m_gun_text.setFillColor(sf::Color::Red);
 
 		m_texture.loadFromFile("images/player.png");
 		m_player.setTexture(&m_texture);
@@ -67,18 +73,19 @@ public:
 
 	void move(sf::RenderWindow& wn)
 	{
-		m_player.setRotation(get_angle((sf::Vector2f)sf::Mouse::getPosition(wn))- 180);
+		sf::Vector2f mouse_pos = wn.mapPixelToCoords(sf::Mouse::getPosition(wn));
+		m_player.setRotation(get_angle(mouse_pos)- 180);
 
 		m_dir = {0, 0};
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)){
-			m_dir.y = -1;
+			m_dir.y = -m_speed;
 		}if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
-			m_dir.y = 1;
+			m_dir.y = m_speed;
 		}if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
-			m_dir.x = -1;
+			m_dir.x = -m_speed;
 		}if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
-			m_dir.x = 1;
+			m_dir.x = m_speed;
 		}
 
 		if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1) ){
@@ -89,7 +96,7 @@ public:
 			m_gun_idx = CurGunIdx::SHOTGUN;
 		}
 
-		m_player.move(m_dir.x*m_speed, m_dir.y*m_speed);
+		m_player.move(m_dir);
 	}
 
 	void bounce(const sf::Vector2f& vect)
@@ -100,6 +107,11 @@ public:
 	void update_bullets(sf::RenderWindow& wn)
 	{
 		m_guns[m_gun_idx]->update_bullets(wn, pos());
+	}
+
+	void draw_bullets(sf::RenderWindow& wn)
+	{
+		m_guns[m_gun_idx]->draw_bullets(wn);
 	}
 
 	const std::vector<Bullet>& get_bullets() const
@@ -117,35 +129,55 @@ public:
 		return m_player.getPosition();
 	}
 
+	size_t size() const { return m_size; }
+	sf::Vector2f dir() const { return m_dir; }
+
+	std::array<sf::Vector2f, 4> hitbox() const
+	{
+		sf::Vector2f corner = {pos().x - m_size / 2, pos().y - m_size / 2 };
+
+		std::array<sf::Vector2f, 4> arr = {
+			corner,
+			{corner.x + m_size, corner.y},
+			{corner.x + m_size, corner.y + m_size},
+			{corner.x, corner.y + m_size}
+		};
+		return arr;
+	}
+
 	void draw(sf::RenderWindow& wn)
 	{
 		wn.draw(m_player);
 
-		sf::Text text;
-		text.setFont(m_font);
-		text.setStyle(sf::Text::Bold);
-		text.setCharacterSize(34);
-		text.setFillColor(sf::Color::Black);
+		m_gun_text.setPosition(wn.mapPixelToCoords(sf::Vector2i(0, 0)));
 
 		size_t capacity =  m_guns[m_gun_idx]->mag_capacity();
 		size_t amount =  m_guns[m_gun_idx]->mag_amount();
-		std::stringstream gunText;
+		std::stringstream temp_text;
 
 		switch (m_gun_idx)
 		{
 			case CurGunIdx::REVOLVER:
-				gunText << "Revovler: ";
+				temp_text << "Revovler: ";
 				break;
 			case CurGunIdx::MACHINGUN:
-				gunText << "Machinegun: ";
+				temp_text << "Machinegun: ";
 				break;
 			case CurGunIdx::SHOTGUN:
-				gunText << "Shotgun: ";
+				temp_text << "Shotgun: ";
 				break;
 		}
-		gunText << amount << "/" << capacity;
-		text.setString(gunText.str());
-		wn.draw(text);
+		temp_text << amount << "/" << capacity;
+		m_gun_text.setString(temp_text.str());
+		wn.draw(m_gun_text);
+
+		sf::RectangleShape r;
+		r.setSize(sf::Vector2f(m_size, m_size));
+		r.setOutlineColor(sf::Color::Red);
+		r.setOutlineThickness(2);
+		r.setPosition(hitbox()[0]);
+		r.setFillColor(sf::Color::Transparent);
+		wn.draw(r);
 	}
 };
 

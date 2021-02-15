@@ -73,7 +73,8 @@ bin/Debug/obj/Main.cpp.o: src/Main.cpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp src/player.hpp \
- src/guns.hpp src/enemy.hpp
+ src/guns.hpp src/enemy.hpp src/world.hpp src/obstacle.hpp \
+ src/pathfinding.hpp src/fps.hpp
 
 C:/SFML-2.5.1/include/SFML/Graphics.hpp:
 
@@ -228,3 +229,11 @@ src/player.hpp:
 src/guns.hpp:
 
 src/enemy.hpp:
+
+src/world.hpp:
+
+src/obstacle.hpp:
+
+src/pathfinding.hpp:
+
+src/fps.hpp:

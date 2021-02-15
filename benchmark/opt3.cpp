@@ -1,149 +1,125 @@
+#include<vector>
+#include<memory>
+#include<cmath>
+#include<queue>
+#include<unordered_set>
+#include<array>
+#include<iostream>
 
 #include "benchmark.hpp"
 
-template<typename T>
-struct DoublyNode
-{
-private:
-    DoublyNode<T>* next = nullptr;
-    DoublyNode<T>* prev = nullptr;
+struct Node{
+    std::array<int, 2> position;
+    std::shared_ptr<Node> parent;
+    double h, g, f;
 
-public:
-    T data;
-
-    template<class U> friend class DoublyLinkedList;
-    template<class U> friend class LinkedListIterator;
-
-    DoublyNode(const T& d)
-        :data(d)
-    {}
-    
-    DoublyNode(const DoublyNode& other)
-        :data(other.data), next(other.next), prev(other.prev)
-    {}
+    Node(const std::array<int, 2>& pos)
+        :position(pos) {}
 
 };
 
-template<typename T>
-class LinkedListIterator
-{
-private:
-	DoublyNode<T>* m_node = nullptr;
-public:
 
-	LinkedListIterator(DoublyNode<T>* node)
-		:m_node(node)
-	{}
-
-	void operator++(){ m_node = m_node->next; }
-	void operator++(int){ m_node = m_node->next; }
-	void operator--(){ m_node = m_node->prev; }
-	void operator--(int){ m_node = m_node->prev; }
-	DoublyNode<T>& operator*(){ return (*m_node);  }
-	DoublyNode<T>* operator->() { return m_node; }
- 	bool operator==(LinkedListIterator other){ return (m_node->next == other->next); }
-	bool operator!=(LinkedListIterator other){ return (m_node->next != other->next); }
-	bool has_next(){ return m_node->next != nullptr; }
-	bool not_null() {return m_node != nullptr; }
+struct NodeCompare{
+    bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b ) const{
+        return a->f > b->f;
+   }
 };
 
-template<typename T>
-class LinkedListAllocator
-{
-private:
-    size_t m_capacity = 0;
-    size_t m_size = 0;
-    DoublyNode<T>* m_memory = nullptr;
 
-    void allocate(size_t new_capcity)
-    {
-        m_memory = (DoublyNode<T>*)::operator new( sizeof(DoublyNode<T>) * new_capcity );
-        m_capacity = new_capcity;
-        m_size = 0;
+struct VectorHash {
+    size_t operator()(const std::array<int, 2>& v) const {
+		return (v[0] + v[1])*(v[0] + v[1] + 1)/2 + v[1];
     }
+};
 
-public:
 
-    DoublyNode<T>* push_back(const T& data, size_t list_size)
-    {
-        if(m_size >= m_capacity)
-        {
-            allocate(list_size*2);
+std::vector<std::array<int, 2>> find_children(const std::vector<std::vector<int>>& grid, const std::array<int, 2>& pos){
+    std::vector<std::array<int, 2>> children;
+    children.reserve(8);
+
+
+    for(int t = -1; t < 2; t++){
+        for(int q = -1; q < 2; q++){
+            if(t != 0 || q != 0){
+                if(abs(t) == abs(q)) continue;
+
+                std::array<int, 2> cur_pos = {pos[0]+q, pos[1]+t};
+                if(cur_pos[0] >= 0 && cur_pos[0] < grid[0].size() && cur_pos[1] >= 0 && cur_pos[1] < grid.size())
+                {
+                    if(grid[cur_pos[1]][cur_pos[0]] == 0)
+                    {
+                        children.emplace_back(cur_pos);
+                    }
+                }
+            }
         }
-        m_memory[m_size] = DoublyNode<T>(data);
-        return &(m_memory[m_size++]);
     }
 
-};
+    return std::move(children);
+}
 
-template<typename T>
-class DoublyLinkedList
-{
-private:
-    size_t m_size = 0;
-    DoublyNode<T>* m_head = nullptr;
-    DoublyNode<T>* m_tail = nullptr;
-    LinkedListAllocator<T> alloactor;
+std::vector<std::array<int, 2>> find_path(const std::vector<std::vector<int>>& grid, const std::array<int, 2>& start, const std::array<int, 2>& end ){
 
+	double heuristic = sqrt(pow(end[0]-start[0], 2) + pow(end[1] - start[1], 2) );
 
-public:
-    LinkedListIterator<T> begin() { return LinkedListIterator<T>(m_head); }
-    LinkedListIterator<T> end() { return LinkedListIterator<T>(m_tail); }
+	std::vector<std::shared_ptr<Node>> queue_container;
+	queue_container.reserve(int(heuristic*1.5));
 
+    std::shared_ptr<Node> cur_node = std::make_shared<Node>(start);
+    std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, NodeCompare> open(NodeCompare(), queue_container);
+    open.push(cur_node);
 
-    void push_back(const T& data)
-    {
-        DoublyNode<T>* new_node = alloactor.push_back(data, m_size);
-        if(m_head == nullptr)
-        {
-            m_head = new_node;
-            m_tail = m_head;
-        }else{
-            auto prev_node = m_tail;
-            m_tail->next = new_node;
-            m_tail = new_node;
-            m_tail->prev = prev_node;
+    std::unordered_set<std::array<int, 2>, VectorHash> open_set;
+    std::unordered_set<std::array<int, 2>, VectorHash> closed_set;
+	closed_set.reserve(int(heuristic*1.5));
+	open_set.reserve(int(heuristic*1.5));
+    open_set.emplace(cur_node->position);
+
+    while(cur_node->position != end){
+		if(open_set.empty()) return {};
+        cur_node = open.top(); open.pop();
+        auto it = open_set.find(cur_node->position);
+        open_set.erase(it);
+
+        std::vector<std::array<int, 2>> children = find_children(grid, cur_node->position);
+        closed_set.emplace(cur_node->position);
+
+        for(const auto& child_pos : children){
+            if(closed_set.find(child_pos) != closed_set.end() || open_set.find(child_pos) != open_set.end()) continue;
+
+            std::shared_ptr<Node> new_node = std::make_shared<Node>(child_pos);
+            new_node->g = cur_node->g + 1;
+            new_node->h = sqrt(pow(end[0] - child_pos[0], 2) + pow(end[1] - child_pos[1], 2));
+            new_node->f = new_node->g + new_node->h;
+			new_node->parent = cur_node,
+
+            open.emplace(std::move(new_node));
+
+            open_set.emplace(child_pos);
         }
-        m_size++;
     }
 
-    void pop_back()
-    {
-		if(m_head != nullptr)
-		{
-			DoublyNode<T>* temp = m_tail;
-			m_tail = m_tail->prev;
-			m_tail->next = nullptr;
-			::operator delete(temp,  sizeof(DoublyNode<T>));
-			m_size--;
-		}
+    std::vector<std::array<int, 2>> path;
+	path.reserve(heuristic);
+    while(cur_node != nullptr){
+        path.emplace_back(cur_node->position);
+        cur_node = cur_node->parent;
     }
-
-    size_t size() const{ return m_size; }
-};
-
+    return path;
+}
 
 
 int main(){
     Benchmark timer("graph/opt.txt");
     std::cout << "starting... \n";
 
-    DoublyLinkedList<int> list;
+    std::vector<std::vector<int>> grid( 1000 , std::vector<int> (1000, 0));
 
     timer.start();
 
-    for(int i = 0; i < 1000000; i++)
-    {
-        list.push_back(10);
-    }
+    auto path = find_path(grid, {1, 1}, {998, 998});
 
-    timer.stop();   
-    std::cout << list.size() << "\n";
+    timer.stop();
+    
 }
-
-
-
-
-
-
 
