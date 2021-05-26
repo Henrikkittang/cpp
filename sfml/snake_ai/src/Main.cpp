@@ -109,7 +109,7 @@ public:
 		std::vector<sf::Vertex> triangle_strip;
 		triangle_strip.reserve(body.size() * 4);
 
-		triangle_strip.emplace_back(sf::Vector2f(body[0][0], body[0][1]), sf::Color::Red);
+		triangle_strip.emplace_back(sf::Vector2f(body[0][0], body[0][1]), sf::Color::Yellow);
 		for(const auto& bodyPart : body){
 			triangle_strip.emplace_back(sf::Vector2f(bodyPart[0], bodyPart[1]), sf::Color::Red);
 			triangle_strip.emplace_back(sf::Vector2f(bodyPart[0], bodyPart[1] + scl), sf::Color::Red);
