@@ -16,14 +16,14 @@ const int scl = 10;
 
 int main(){
 	sf::RenderWindow window(sf::VideoMode(width, height), "aMAZEing", sf::Style::Close | sf::Style::Titlebar);
-	// window.setFramerateLimit(1);
+	// window.setFramerateLimit(60);
 
 	int grid_w  = width / scl;
 	int grid_h = height / scl;
 
-	Prims maze_generation(grid_w, grid_h);
+	Backtracking maze_generation(grid_w, grid_h);
 	auto maze = maze_generation.generate_maze(grid_w, grid_h);
-	BFS bfs(maze, {0, 0}, {grid_w, grid_h});
+	AStar pathfinding(maze, {1, 1}, {grid_w-2, grid_h-2});
 
 	srand((int)time(0));
 
@@ -37,8 +37,8 @@ int main(){
 
 		window.clear();
 
-		bfs.step();
-		bfs.draw(window, scl);
+		pathfinding.step();
+		pathfinding.draw(window, scl);
 
 		window.display();
 

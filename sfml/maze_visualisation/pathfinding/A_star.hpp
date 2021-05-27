@@ -8,38 +8,42 @@
 
 #include<SFML/Graphics.hpp>
 
+struct Node{
+    std::array<int, 2> position;
+    std::shared_ptr<Node> parent=nullptr;
+    double h=0, g=0, f=0;
+
+    Node(std::array<int, 2> pos)
+        :position(pos) {}
+
+};
+
+
+struct NodeCompare{
+    bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b ) const{
+        return a->f > b->f;
+    }
+};
+
+
+struct VectorHash {
+    size_t operator()(std::array<int, 2> v) const {
+        return (v[0] + v[1])*(v[0] + v[1] + 1)/2 + v[1];
+    }
+};
+
 class AStar
 {
 
 private:
 
-
-	struct Node{
-		std::array<int, 2> position;
-		std::shared_ptr<Node> parent=nullptr;
-		double h=0, g=0, f=0;
-
-		Node(std::array<int, 2> pos)
-			:position(pos) {}
-
-	};
+    bool outOfBounds(std::array<int, 2> pos)
+    {
+        return pos[0] >= 0 && pos[0] < m_grid[0].size() && pos[1] >= 0 && pos[1] < m_grid.size();
+    }
 
 
-	struct NodeCompare{
-		bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b ) const{
-			return a->f > b->f;
-	}
-	};
-
-
-	struct VectorHash {
-		size_t operator()(std::array<int, 2> v) const {
-			return (v[0] + v[1])*(v[0] + v[1] + 1)/2 + v[1];
-		}
-	};
-
-
-	std::vector<std::array<int, 2>> find_children(const std::vector<std::vector<int>>& grid, std::array<int, 2> pos){
+	std::vector<std::array<int, 2>> find_neighbours(std::array<int, 2> pos){
 		std::vector<std::array<int, 2>> children;
 		children.reserve(8);
 
@@ -48,163 +52,131 @@ private:
 				if(abs(t) == abs(q)) continue;
 
 				std::array<int, 2> cur_pos = {pos[0]+q, pos[1]+t};
-				if(cur_pos[0] >= 0 && cur_pos[0] < grid[0].size() && cur_pos[1] >= 0 && cur_pos[1] < grid.size())
-				{
-					if(grid[cur_pos[1]][cur_pos[0]] == 0)
-					{
+				if(!outOfBounds(cur_pos))
+					if(m_grid[cur_pos[1]][cur_pos[0]] == 0)
 						children.emplace_back(cur_pos);
-					}
-				}
-
 			}
 		}
-
 		return children;
 	}
 
 
 private:
 
-	double heuristic;
-	bool pathFound = false;
-	std::array<int, 2> start;
-	std::array<int, 2> end;
+	std::array<int, 2> m_start;
+	std::array<int, 2> m_end;
+	std::vector<std::vector<int>> m_grid;
 
-	std::vector<std::vector<int>> grid;
-#ifdef SFML_CONFIG_HPP
-	std::vector<sf::Vertex> grid_repr;
-#endif
-
-	// Container for queue
-	std::vector<std::shared_ptr<Node>> queue_container;
+	bool m_path_found;
 
 	// Makes queue
-    std::shared_ptr<Node> cur_node;
+    std::shared_ptr<Node> m_cur_node;
     std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, NodeCompare> open;
 
 	// Makes open and closed set
-    std::unordered_set<std::array<int, 2>, VectorHash> open_set;
-    std::unordered_set<std::array<int, 2>, VectorHash> closed_set;
+    std::unordered_set<std::array<int, 2>, VectorHash> m_open_set;
+    std::unordered_set<std::array<int, 2>, VectorHash> m_closed_set;
 
-	std::vector<std::array<int, 2>> path;
-
+	std::vector<std::array<int, 2>> m_path;
+	std::vector<sf::Vertex> m_grid_repr;
 
 public:
 
-	AStar(const std::vector<std::vector<int>>& a_grid, std::array<int, 2> a_start, std::array<int, 2> a_end)
-	{
-		grid = a_grid;
-		start = a_start;
-		end = a_end;
+	AStar(const std::vector<std::vector<int>>& grid, std::array<int, 2> start, std::array<int, 2> end)
+        : m_grid(grid), m_start(start), m_end(end), m_cur_node(std::make_shared<Node>(start)), m_path_found(false)
+    {
+		double heuristic = sqrt(pow(m_end[0]-m_start[0], 2) + pow(m_end[1] - m_start[1], 2) );
 
-		heuristic = sqrt(pow(end[0]-start[0], 2) + pow(end[1] - start[1], 2) );
-
-		cur_node = std::make_shared<Node>(start);;
-
+        std::vector<std::shared_ptr<Node>> queue_container; 
 		queue_container.reserve(int(heuristic*1.5));
-		closed_set.reserve(int(heuristic*1.5));
-		open_set.reserve(int(heuristic*1.5));
-		path.reserve(heuristic);
-
 		open = std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, NodeCompare>(NodeCompare(), std::move(queue_container));
+		open.push(m_cur_node);
 
-		open.push(cur_node);
-		open_set.emplace(start);
+		m_closed_set.reserve(int(heuristic*1.5));
 
-
+		m_open_set.reserve(int(heuristic*1.5));
+		m_open_set.emplace(m_start);
 	}
 
 	void step()
 	{
-		if(cur_node != nullptr &&  cur_node->position != end && !pathFound){
-			if(open_set.empty())
-			{
-				cur_node = nullptr;
-				return;
-			}
+        
 
-			cur_node = open.top(); open.pop();
-			auto it = open_set.find(cur_node->position);
-			open_set.erase(it);
+		if(m_cur_node != nullptr &&  m_cur_node->position != m_end && !m_path_found){
+            if(m_open_set.empty())
+            {
+                m_cur_node = nullptr;
+                return;
+            }
+            m_cur_node = open.top(); open.pop();
+			auto it = m_open_set.find(m_cur_node->position);
+			m_open_set.erase(it);
 
-			std::vector<std::array<int, 2>> children = find_children(grid, cur_node->position);
-			closed_set.emplace(cur_node->position);
+			std::vector<std::array<int, 2>> neighbors = find_neighbours(m_cur_node->position);
+			m_closed_set.emplace(m_cur_node->position);
 
-			for(const auto& child_pos : children){
-				if(closed_set.find(child_pos) != closed_set.end() || open_set.find(child_pos) != open_set.end()) continue;
+			for(const auto& neighbors_pos : neighbors){
+				if(m_closed_set.find(neighbors_pos) != m_closed_set.end() || m_open_set.find(neighbors_pos) != m_open_set.end()) continue;
 
-				std::shared_ptr<Node> new_node = std::make_shared<Node>(child_pos);
-				new_node->g = cur_node->g + 1;
-				// new_node->h = sqrt(pow(end[0] - child_pos[0], 2) + pow(end[1] - child_pos[1], 2));
-				new_node->h = abs(child_pos[0] - end[0]) + abs(child_pos[1] - end[1]);
+				std::shared_ptr<Node> new_node = std::make_shared<Node>(neighbors_pos);
+				new_node->g = m_cur_node->g + 1;
+				// new_node->h = sqrt(pow(m_end[0] - child_pos[0], 2) + pow(m_end[1] - child_pos[1], 2));
+				new_node->h = abs(neighbors_pos[0] - m_end[0]) + abs(neighbors_pos[1] - m_end[1]);
 				new_node->f = new_node->g + new_node->h;
-				new_node->parent = cur_node,
+				new_node->parent = m_cur_node,
 
 				open.emplace(std::move(new_node));
-				open_set.emplace(child_pos);
+				m_open_set.emplace(neighbors_pos);
 			}
 		}else{
-			pathFound = true;
+			m_path_found = true;
+            m_path.reserve(m_cur_node->g);
 		}
-		if(pathFound && cur_node != nullptr)
+		if(m_path_found && m_cur_node != nullptr)
 		{
-			path.push_back(cur_node->position);
-			cur_node = cur_node->parent;
+			m_path.push_back(m_cur_node->position);
+			m_cur_node = m_cur_node->parent;
 		}
 	}
 
-#ifdef SFML_CONFIG_HPP
+    void add_quad(int x, int y, std::vector<sf::Vertex>& quads, const sf::Color& color)
+    {
+        quads.emplace_back(sf::Vector2f(x * scl    , y * scl    ), color);
+        quads.emplace_back(sf::Vector2f(x * scl+scl, y * scl    ), color);
+        quads.emplace_back(sf::Vector2f(x * scl+scl, y * scl+scl), color);
+        quads.emplace_back(sf::Vector2f(x * scl    , y * scl+scl), color);
+    }
+
 	void draw(sf::RenderWindow& wn, size_t scl)
 	{
 		std::vector<sf::Vertex> quads;
-		quads.reserve(open_set.size() + closed_set.size() + path.size());
+		quads.reserve(m_open_set.size() + m_closed_set.size() + m_path.size());
 
-		if(grid_repr.empty())
+		if(m_grid_repr.empty())
 		{
-			grid_repr.reserve(grid.size()*grid[0].size());
-			for(size_t i = 0; i < grid.size(); i++)
-			{
-				for(size_t j = 0; j < grid[i].size(); j++)
-				{
-					if(grid[i][j] == 1)
-					{
-						grid_repr.emplace_back(sf::Vector2f(j * scl, i * scl), sf::Color::Red);
-						grid_repr.emplace_back(sf::Vector2f(j * scl+scl, i * scl), sf::Color::Red);
-						grid_repr.emplace_back(sf::Vector2f(j * scl+scl, i * scl+scl), sf::Color::Red);
-						grid_repr.emplace_back(sf::Vector2f(j * scl, i * scl+scl), sf::Color::Red);
-					}
-				}
-			}
+			m_grid_repr.reserve(m_grid.size()*m_grid[0].size());
+			for(size_t i = 0; i < m_grid.size(); i++)
+				for(size_t j = 0; j < m_grid[i].size(); j++)
+					if(m_grid[i][j] == 1)
+                        add_quad(j, i, m_grid_repr, sf::Color::Red);
+			
 		}
 
-		for(const auto& t : open_set)
-		{
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl), sf::Color::Green);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1]  * scl), sf::Color::Green);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1] * scl+scl), sf::Color::Green);
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl+scl), sf::Color::Green);
-		}
+		for(const auto& t : m_open_set)		
+            add_quad(t[0], t[1], quads, sf::Color::Green);
 
-		for(const auto& t : closed_set)
-		{
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl), sf::Color::Blue);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1]  * scl), sf::Color::Blue);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1] * scl+scl), sf::Color::Blue);
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl+scl), sf::Color::Blue);
-		}
+		for(const auto& t : m_closed_set)
+            add_quad(t[0], t[1], quads, sf::Color::Blue);
+		
+		for(const auto& t : m_path)
+            add_quad(t[0], t[1], quads, sf::Color::Yellow);
+		
+        add_quad(m_start[0], m_start[1], quads, sf::Color::White);
+        add_quad(m_end[0], m_end[1], quads, sf::Color::White);
 
-		for(const auto& t : path)
-		{
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl), sf::Color::Yellow);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1]  * scl), sf::Color::Yellow);
-			quads.emplace_back(sf::Vector2f(t[0] * scl+scl, t[1] * scl+scl), sf::Color::Yellow);
-			quads.emplace_back(sf::Vector2f(t[0] * scl, t[1] * scl+scl), sf::Color::Yellow);
-		}
-
-		wn.draw(&grid_repr[0], grid_repr.size(), sf::Quads);
+		wn.draw(&m_grid_repr[0], m_grid_repr.size(), sf::Quads);
 		wn.draw(&quads[0], quads.size(), sf::Quads);
 	}
-#endif
 
 };
 
