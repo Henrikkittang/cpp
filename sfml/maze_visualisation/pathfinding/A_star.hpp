@@ -52,7 +52,7 @@ private:
 				if(abs(t) == abs(q)) continue;
 
 				std::array<int, 2> cur_pos = {pos[0]+q, pos[1]+t};
-				if(!outOfBounds(cur_pos))
+				if(outOfBounds(cur_pos))
 					if(m_grid[cur_pos[1]][cur_pos[0]] == 0)
 						children.emplace_back(cur_pos);
 			}
@@ -108,29 +108,34 @@ public:
                 m_cur_node = nullptr;
                 return;
             }
+
             m_cur_node = open.top(); open.pop();
 			auto it = m_open_set.find(m_cur_node->position);
 			m_open_set.erase(it);
 
+
 			std::vector<std::array<int, 2>> neighbors = find_neighbours(m_cur_node->position);
 			m_closed_set.emplace(m_cur_node->position);
 
+
 			for(const auto& neighbors_pos : neighbors){
+
 				if(m_closed_set.find(neighbors_pos) != m_closed_set.end() || m_open_set.find(neighbors_pos) != m_open_set.end()) continue;
+
 
 				std::shared_ptr<Node> new_node = std::make_shared<Node>(neighbors_pos);
 				new_node->g = m_cur_node->g + 1;
 				// new_node->h = sqrt(pow(m_end[0] - child_pos[0], 2) + pow(m_end[1] - child_pos[1], 2));
 				new_node->h = abs(neighbors_pos[0] - m_end[0]) + abs(neighbors_pos[1] - m_end[1]);
-				new_node->f = new_node->g + new_node->h;
-				new_node->parent = m_cur_node,
+                new_node->f = new_node->g + new_node->h;
+                new_node->parent = m_cur_node,
 
 				open.emplace(std::move(new_node));
 				m_open_set.emplace(neighbors_pos);
+
 			}
 		}else{
 			m_path_found = true;
-            m_path.reserve(m_cur_node->g);
 		}
 		if(m_path_found && m_cur_node != nullptr)
 		{
@@ -139,7 +144,7 @@ public:
 		}
 	}
 
-    void add_quad(int x, int y, std::vector<sf::Vertex>& quads, const sf::Color& color)
+    void add_quad(int x, int y, std::vector<sf::Vertex>& quads, const sf::Color& color, size_t scl)
     {
         quads.emplace_back(sf::Vector2f(x * scl    , y * scl    ), color);
         quads.emplace_back(sf::Vector2f(x * scl+scl, y * scl    ), color);
@@ -158,21 +163,21 @@ public:
 			for(size_t i = 0; i < m_grid.size(); i++)
 				for(size_t j = 0; j < m_grid[i].size(); j++)
 					if(m_grid[i][j] == 1)
-                        add_quad(j, i, m_grid_repr, sf::Color::Red);
+                        add_quad(j, i, m_grid_repr, sf::Color::Red, scl);
 			
 		}
 
 		for(const auto& t : m_open_set)		
-            add_quad(t[0], t[1], quads, sf::Color::Green);
+            add_quad(t[0], t[1], quads, sf::Color::Green, scl);
 
 		for(const auto& t : m_closed_set)
-            add_quad(t[0], t[1], quads, sf::Color::Blue);
+            add_quad(t[0], t[1], quads, sf::Color::Blue, scl);
 		
 		for(const auto& t : m_path)
-            add_quad(t[0], t[1], quads, sf::Color::Yellow);
+            add_quad(t[0], t[1], quads, sf::Color::Yellow, scl);
 		
-        add_quad(m_start[0], m_start[1], quads, sf::Color::White);
-        add_quad(m_end[0], m_end[1], quads, sf::Color::White);
+        add_quad(m_start[0], m_start[1], quads, sf::Color::White, scl);
+        add_quad(m_end[0], m_end[1], quads, sf::Color::White, scl);
 
 		wn.draw(&m_grid_repr[0], m_grid_repr.size(), sf::Quads);
 		wn.draw(&quads[0], quads.size(), sf::Quads);

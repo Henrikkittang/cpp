@@ -3,10 +3,6 @@
 
 #include<SFML/Graphics.hpp>
 
-const int width = 800;
-const int height = 800;
-const int scl = 10;
-
 #include "../maze_generation/prims.hpp"
 #include "../maze_generation/backtracking.hpp"
 #include "../maze_generation/division.hpp"
@@ -15,13 +11,17 @@ const int scl = 10;
 
 
 int main(){
+    const int width = 800;
+    const int height = 800;
+    const int scl = 4;
+
 	sf::RenderWindow window(sf::VideoMode(width, height), "aMAZEing", sf::Style::Close | sf::Style::Titlebar);
 	// window.setFramerateLimit(60);
 
 	int grid_w  = width / scl;
 	int grid_h = height / scl;
 
-	Backtracking maze_generation(grid_w, grid_h);
+	Prims maze_generation(grid_w, grid_h);
 	auto maze = maze_generation.generate_maze(grid_w, grid_h);
 	AStar pathfinding(maze, {1, 1}, {grid_w-2, grid_h-2});
 

@@ -39,7 +39,7 @@ struct Node
 
 class PathfindingVisualsation
 {
-public:
+protected:
 
     std::array<int, 2> m_start;
 	std::array<int, 2> m_end;
