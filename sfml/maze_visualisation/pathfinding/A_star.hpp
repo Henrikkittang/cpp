@@ -5,8 +5,11 @@
 #include<queue>
 #include<unordered_set>
 #include<array>
+#include <limits>
 
 #include<SFML/Graphics.hpp>
+
+// #include "pathfinding_visualsation.hpp"
 
 struct Node{
     std::array<int, 2> position;
@@ -39,25 +42,22 @@ private:
 
     bool outOfBounds(std::array<int, 2> pos)
     {
-        return pos[0] >= 0 && pos[0] < m_grid[0].size() && pos[1] >= 0 && pos[1] < m_grid.size();
+        return pos[0] < 0 || pos[0] >= m_grid[0].size() || pos[1] < 0 || pos[1] >= m_grid.size();
     }
 
 
 	std::vector<std::array<int, 2>> find_neighbours(std::array<int, 2> pos){
-		std::vector<std::array<int, 2>> children;
-		children.reserve(8);
+		std::vector<std::array<int, 2>> neighbors;
+		neighbors.reserve(4);
+        std::array<std::array<int, 2>, 8> sides =  {{ {0,-1}, {-0, 1}, {-1, 0}, {1,  0} }};
 
-		for(int t = -1; t < 2; t++){
-			for(int q = -1; q < 2; q++){
-				if(abs(t) == abs(q)) continue;
-
-				std::array<int, 2> cur_pos = {pos[0]+q, pos[1]+t};
-				if(outOfBounds(cur_pos))
-					if(m_grid[cur_pos[1]][cur_pos[0]] == 0)
-						children.emplace_back(cur_pos);
-			}
-		}
-		return children;
+        for(auto p : sides)
+        {
+            std::array<int, 2> cur_pos = {pos[0]+p[0], pos[1]+p[1]};
+			if(!outOfBounds(cur_pos) && m_grid[cur_pos[1]][cur_pos[0]] == 0)
+                neighbors.emplace_back(cur_pos);
+        }
+        return neighbors;
 	}
 
 
@@ -100,8 +100,6 @@ public:
 
 	void step()
 	{
-        
-
 		if(m_cur_node != nullptr &&  m_cur_node->position != m_end && !m_path_found){
             if(m_open_set.empty())
             {
@@ -113,20 +111,17 @@ public:
 			auto it = m_open_set.find(m_cur_node->position);
 			m_open_set.erase(it);
 
-
 			std::vector<std::array<int, 2>> neighbors = find_neighbours(m_cur_node->position);
 			m_closed_set.emplace(m_cur_node->position);
-
 
 			for(const auto& neighbors_pos : neighbors){
 
 				if(m_closed_set.find(neighbors_pos) != m_closed_set.end() || m_open_set.find(neighbors_pos) != m_open_set.end()) continue;
 
-
 				std::shared_ptr<Node> new_node = std::make_shared<Node>(neighbors_pos);
 				new_node->g = m_cur_node->g + 1;
 				// new_node->h = sqrt(pow(m_end[0] - child_pos[0], 2) + pow(m_end[1] - child_pos[1], 2));
-				new_node->h = abs(neighbors_pos[0] - m_end[0]) + abs(neighbors_pos[1] - m_end[1]);
+				new_node->h = abs(neighbors_pos[0] - m_end[0]) + abs(neighbors_pos[1] - m_end[1]) ;
                 new_node->f = new_node->g + new_node->h;
                 new_node->parent = m_cur_node,
 
