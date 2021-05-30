@@ -50,6 +50,7 @@ protected:
 	std::vector<sf::Vertex> m_grid_repr;
 
 protected:
+    PathfindingVisualsation(){}
 
     PathfindingVisualsation(const std::vector<std::vector<int>>& grid, std::array<int, 2> start, std::array<int, 2> end)
         : m_grid(grid), 
@@ -69,14 +70,13 @@ protected:
     {
 		std::vector<std::array<int, 2>> neighbors;
 		neighbors.reserve(4);
-        std::array<std::array<int, 2>, 8> sides =  {{ {0,-1}, {-0, 1}, {-1, 0}, {1,  0} }};
+        std::array<std::array<int, 2>, 4> sides =  {{ {0,-1}, {-0, 1}, {-1, 0}, {1, 0} }};
 
         for(auto p : sides)
         {
             std::array<int, 2> cur_pos = {pos[0]+p[0], pos[1] + p[1]};
 			if(!outOfBounds(cur_pos) && m_grid[cur_pos[1]][cur_pos[0]] == 0)
                 neighbors.emplace_back(cur_pos);
-        
         }
         return neighbors;
 	}
@@ -97,5 +97,10 @@ protected:
                 if(m_grid[i][j] == 1)
                     add_quad(j, i, quads, sf::Color::Red, scl);	
 	}
+
+
+public:
+    virtual void draw(sf::RenderWindow& wn, size_t scl) {};
+    virtual void step() {};
 };
 
