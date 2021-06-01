@@ -9,34 +9,6 @@ class Prims : public MazeVisualsation
 private:
 	std::vector<std::array<int, 2>> m_frontiers;
 
-private:
-
-	void connect_nodes(std::array<int, 2> cur_pos, std::array<int, 2> node_pos)
-	{
-		if(cur_pos[0] > node_pos[0]){
-			m_map[cur_pos[1]][cur_pos[0]-1] = PASSAGE;
-		}else if(cur_pos[0] < node_pos[0]){
-			m_map[cur_pos[1]][cur_pos[0]+1] = PASSAGE;
-		}else if(cur_pos[1] > node_pos[1]){
-			m_map[cur_pos[1]-1][cur_pos[0]] = PASSAGE;
-		}else if(cur_pos[1] < node_pos[1]){
-			m_map[cur_pos[1]+1][cur_pos[0]] = PASSAGE;
-		}
-	}
-
-	std::vector<std::array<int ,2>> find_frontiers(std::array<int, 2> pos, int state)
-	{
-		std::vector<std::array<int ,2>> m_frontiers;
-		m_frontiers.reserve(4);
-
-		if(pos[0]-2 >= 0 			&& m_map[pos[1]][pos[0]-2] == state) m_frontiers.push_back({pos[0]-2, pos[1]  });
-		if(pos[0]+2 < m_map[0].size() && m_map[pos[1]][pos[0]+2] == state) m_frontiers.push_back({pos[0]+2, pos[1]  });
-		if(pos[1]-2 >= 0 			&& m_map[pos[1]-2][pos[0]] == state) m_frontiers.push_back({pos[0]  , pos[1]-2});
-		if(pos[1]+2 < m_map.size() 	&& m_map[pos[1]+2][pos[0]] == state) m_frontiers.push_back({pos[0]  , pos[1]+2});
-
-		return m_frontiers;
-	}
-
 public:
 	Prims(size_t width, size_t height)
 	{

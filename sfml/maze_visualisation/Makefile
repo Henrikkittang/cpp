@@ -5,7 +5,7 @@ build: compile link
 all: build run
 
 compile:
-	g++ -I include -c src/main.cpp
+	g++ -I include -c src/main.cpp -std=c++17 
 link: 
 	g++ main.o -o main -L lib $(SFML_GRAPHICS)
 run:

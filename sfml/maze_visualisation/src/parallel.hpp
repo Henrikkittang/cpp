@@ -28,8 +28,6 @@ void instance(PathfindingVisualsation* pathfinding, int width, int height, size_
         pathfinding->step();
         pathfinding->draw(window, scl);
 
-        
-        
         window.display();
     }
 }

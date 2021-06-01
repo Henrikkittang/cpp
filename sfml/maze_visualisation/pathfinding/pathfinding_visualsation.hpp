@@ -19,7 +19,6 @@ struct Node
 
 };
 
-
 struct NodeCompare
 {
     bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b ) const
@@ -27,7 +26,6 @@ struct NodeCompare
         return a->f > b->f;
     }
 };
-
 
 struct VectorHash 
 {

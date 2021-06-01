@@ -5,15 +5,44 @@
 
 #include<SFML/Graphics.hpp>
 
+#define WALL 1
+#define PASSAGE 0
+
 class MazeVisualsation
 {
 protected:
-	#define WALL 1
-	#define PASSAGE 0
+	
 
 	std::vector<std::vector<int>> m_map;
 
 protected:
+
+    void connect_nodes(std::array<int, 2> cur_pos, std::array<int, 2> node_pos)
+	{
+		if(cur_pos[0] > node_pos[0]){
+			m_map[cur_pos[1]][cur_pos[0]-1] = PASSAGE;
+		}else if(cur_pos[0] < node_pos[0]){
+			m_map[cur_pos[1]][cur_pos[0]+1] = PASSAGE;
+		}else if(cur_pos[1] > node_pos[1]){
+			m_map[cur_pos[1]-1][cur_pos[0]] = PASSAGE;
+		}else if(cur_pos[1] < node_pos[1]){
+			m_map[cur_pos[1]+1][cur_pos[0]] = PASSAGE;
+		}
+	}
+
+	std::vector<std::array<int ,2>> find_frontiers(std::array<int, 2> pos, int state)
+	{
+		std::vector<std::array<int ,2>> frontiers;
+		frontiers.reserve(4);
+
+		if(pos[0]-2 >= 0 			&& m_map[pos[1]][pos[0]-2] == state) frontiers.push_back({pos[0]-2, pos[1]  });
+		if(pos[0]+2 < m_map[0].size() && m_map[pos[1]][pos[0]+2] == state) frontiers.push_back({pos[0]+2, pos[1]  });
+		if(pos[1]-2 >= 0 			&& m_map[pos[1]-2][pos[0]] == state) frontiers.push_back({pos[0]  , pos[1]-2});
+		if(pos[1]+2 < m_map.size() 	&& m_map[pos[1]+2][pos[0]] == state) frontiers.push_back({pos[0]  , pos[1]+2});
+
+		return frontiers;
+	}
+
 
 	void init(size_t width, size_t height)
 	{
@@ -24,12 +53,6 @@ protected:
 	{
 		return (std::rand() % (int)(end - start)) + start;
 	}
-
-	struct VectorHash {
-		size_t operator()(std::array<int, 2> v) const {
-			return (v[0] + v[1])*(v[0] + v[1] + 1)/2 + v[1];
-		}
-	};
 
 public:
 

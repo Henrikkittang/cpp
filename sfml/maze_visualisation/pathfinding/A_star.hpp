@@ -26,6 +26,8 @@ private:
 	
 public:
 
+    AStar(){}
+
 	AStar(const std::vector<std::vector<int>>& grid, std::array<int, 2> start, std::array<int, 2> end)
         : PathfindingVisualsation(grid, start, end)
     {
