@@ -9,7 +9,7 @@
 int main(){
     const int width = 800;
     const int height = 800;
-    const int scl = 10;
+    const int scl = 5;
 
 	
 	srand((int)time(0));
@@ -20,7 +20,7 @@ int main(){
     // Paralell<Backtracking, AStar, DFS> parallel(grid_w, grid_h, scl);
     // parallel.run();
 
-    Kruskal maze_generation(grid_w, grid_h);
+    Backtracking maze_generation(grid_w, grid_h);
     sf::RenderWindow window(sf::VideoMode(width, height), "aMAZEing", sf::Style::Close | sf::Style::Titlebar);
     while(window.isOpen()){
         sf::Event evt;

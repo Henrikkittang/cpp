@@ -18,6 +18,7 @@ class KruskalUnion
 {
 private:
     std::vector<Set> m_container;
+    
 public:
 
     KruskalUnion(){}
@@ -33,14 +34,13 @@ public:
         }
     }
 
+    
+
     int find(std::array<int, 2> pos)
     {
         for(int i = 0; i < m_container.size(); i++)
-        {
-            if(m_container[i].find(pos) != m_container[i].end()){
+            if(m_container[i].find(pos) != m_container[i].end())
                 return i;
-            }
-        }
         return -1;
     }
 

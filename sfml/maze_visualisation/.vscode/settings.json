@@ -67,5 +67,14 @@
         "xthread": "cpp",
         "thread": "cpp",
         "unordered_map": "cpp"
-    }
+    },
+    "files.exclude": {
+        "*.dll": true,
+        "Makefile": true,
+        "build/": true,
+        "include/": true,
+        "lib/": true,
+    },
+
+    
 }
