@@ -2,16 +2,16 @@
 void draw_triangle(float x1, float y1, float x2, float y2, float x3, float y3, sf::RenderWindow& wn)
 {
     sf::Vertex line0[] = {
-        sf::Vertex(sf::Vector2(x1, y1)),
-        sf::Vertex(sf::Vector2(x2, y2)),
+        sf::Vertex(sf::Vector2f(x1, y1)),
+        sf::Vertex(sf::Vector2f(x2, y2)),
     };
     sf::Vertex line1[] = {
-        sf::Vertex(sf::Vector2(x2, y2)),
-        sf::Vertex(sf::Vector2(x3, y3)),
+        sf::Vertex(sf::Vector2f(x2, y2)),
+        sf::Vertex(sf::Vector2f(x3, y3)),
     };
     sf::Vertex line2[] = {
-        sf::Vertex(sf::Vector2(x3, y3)),
-        sf::Vertex(sf::Vector2(x1, y1)),
+        sf::Vertex(sf::Vector2f(x3, y3)),
+        sf::Vertex(sf::Vector2f(x1, y1)),
     };
 
     wn.draw(line0, 2, sf::Lines);

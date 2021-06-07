@@ -158,8 +158,8 @@ std::vector<std::vector<float>> make_triangles(std::vector<std::shared_ptr<Edge>
 		for(int i = 0; i < 2; i++)
 		{
 			Vector2<float> edge_vect(0, 0);
-			if(i == 0) edge_vect = Vector2(edge->start.x - center_pos.x, edge->start.y - center_pos.y);
-			if(i == 1) edge_vect = Vector2(edge->end.x - center_pos.x, edge->end.y - center_pos.y);
+			if(i == 0) edge_vect = Vector2<float>(edge->start.x - center_pos.x, edge->start.y - center_pos.y);
+			if(i == 1) edge_vect = Vector2<float>(edge->end.x - center_pos.x, edge->end.y - center_pos.y);
 
 			float cur_ang = atan2f(edge_vect.y, edge_vect.x);
 
@@ -179,7 +179,7 @@ std::vector<std::vector<float>> make_triangles(std::vector<std::shared_ptr<Edge>
 
 				for(const auto& edge2 : edges)
 				{
-					Vector2 edge2_vect = Vector2(edge2->end.x - edge2->start.x, edge2->end.y - edge2->start.y);
+					Vector2<float> edge2_vect = Vector2<float>(edge2->end.x - edge2->start.x, edge2->end.y - edge2->start.y);
 
 					if(fabs(edge2_vect.x - edge_vect.x) > 0.0f && fabs(edge2_vect.y - edge_vect.y) > 0.0f)
 					{

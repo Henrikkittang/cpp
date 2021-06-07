@@ -1,4 +1,6 @@
 #pragma once
+#include <cstring>
+
 
 template<typename T>
 class Allocator
@@ -11,7 +13,7 @@ public:
 	T* allocate(size_t amount)
 	{
 		return ((T*)::operator new( amount * sizeof(T) ));
-	}
+    }
 
 	void deallocate(T* pointer, size_t amount=1)
 	{

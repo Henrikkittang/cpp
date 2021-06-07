@@ -2,8 +2,6 @@
 #include<vector>
 #include<memory>
 #include<cmath>
-#include<queue>
-#include<unordered_set>
 #include<array>
 
 #include<SFML/Graphics.hpp>

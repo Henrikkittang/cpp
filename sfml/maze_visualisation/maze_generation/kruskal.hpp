@@ -68,10 +68,7 @@ private:
         int x = (rand() % (width + 1)) * 2;
         int y = (rand() % (height + 1)) * 2;
 
-        std::array<int, 2> pos = {x, y};
-        return pos;
-
-        
+        return {x, y};
     }
 
 public:

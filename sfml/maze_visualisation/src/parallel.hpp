@@ -6,9 +6,11 @@
 #include "../maze_generation/prims.hpp"
 #include "../maze_generation/backtracking.hpp"
 #include "../maze_generation/division.hpp"
+#include "../maze_generation/kruskal.hpp"
 
 #include "../pathfinding/pathfinding_visualsation.hpp"
 #include "../pathfinding/A_star.hpp"
+#include "../pathfinding/H_star.hpp"
 #include "../pathfinding/bfs.hpp"
 #include "../pathfinding/dfs.hpp"
 

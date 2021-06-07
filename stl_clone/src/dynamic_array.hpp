@@ -107,7 +107,9 @@ public:
         if(new_capacity > m_capacity ) allocate(new_capacity);
     }
 
-    const size_t size() const { return m_size; }
+    size_t size() const { return m_size; }
+    size_t capacity() const { return m_capacity; }
+
 
     void push_back(const T& new_element)
     {

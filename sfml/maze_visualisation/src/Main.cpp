@@ -4,12 +4,13 @@
 #include<SFML/Graphics.hpp>
 
 #include  "parallel.hpp"
-#include "../maze_generation/kruskal.hpp"
+#include "../maze_generation/division.hpp"
+
 
 int main(){
     const int width = 800;
     const int height = 800;
-    const int scl = 5;
+    const int scl = 10;
 
 	
 	srand((int)time(0));
@@ -17,10 +18,14 @@ int main(){
 	int grid_w  = width / scl;
 	int grid_h = height / scl;
 
-    // Paralell<Backtracking, AStar, DFS> parallel(grid_w, grid_h, scl);
+
+    
+
+    
+    // Paralell<Backtracking, AStar, HStar> parallel(grid_w, grid_h, scl);
     // parallel.run();
 
-    Backtracking maze_generation(grid_w, grid_h);
+    Division maze_generation(grid_w, grid_h);
     sf::RenderWindow window(sf::VideoMode(width, height), "aMAZEing", sf::Style::Close | sf::Style::Titlebar);
     while(window.isOpen()){
         sf::Event evt;
