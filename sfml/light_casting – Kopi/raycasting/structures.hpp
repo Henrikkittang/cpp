@@ -4,14 +4,24 @@
 #include<SFML/Graphics.hpp>
 
 
-struct Edge{
+struct Edge
+{
 	sf::Vector2f start;
 	sf::Vector2f end;
 };
 
-struct Cell{
+struct Cell
+{
 	bool exists;
-	bool edges_exists[4];
-	std::shared_ptr<Edge> edges_pointer[4] = {std::make_shared<Edge>(), std::make_shared<Edge>(), std::make_shared<Edge>(), std::make_shared<Edge>()};
-
+    std::array<bool, 4> edges_exists;
+	std::array<std::shared_ptr<Edge>, 4> edges_pointer{};
 };
+
+struct Triangle 
+{
+    std::array<int, 2> p1;
+    std::array<int, 2> p2;
+    std::array<int, 2> p3;
+};
+
+

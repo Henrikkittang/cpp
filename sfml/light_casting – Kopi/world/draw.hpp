@@ -49,40 +49,44 @@ public:
     {
         if (triangles.empty()) return;
         
-        std::vector<sf::Vertex> triangle_fan = {{center_pos}};
-        triangle_fan.reserve(triangles.size());
+        std::vector<sf::Vertex> triangle_fan = {sf::Vertex(center_pos)};
+        triangle_fan.reserve(triangles.size()+2);
 
         for(const auto& triangle : triangles)
             triangle_fan.emplace_back(sf::Vector2f(triangle[0], triangle[1]));
-        triangle_fan.emplace_back(sf::Vector2f(triangles[1][0], triangles[1][1]));
+        triangle_fan.emplace_back(sf::Vector2f(triangles[0][0], triangles[0][1]));
         
         wn.draw(&triangle_fan[0], triangle_fan.size(), sf::TriangleFan);
     }
 
     void draw_edges(sf::RenderWindow& wn, std::vector<std::shared_ptr<Edge>>& edges)
     {
+        std::vector<sf::Vertex> lines;
+        lines.reserve(edges.size()*2);
+
+
         for(const auto& edge : edges)
         {
-            sf::Vertex line[2];
-            line[0].position = sf::Vector2f(edge->start.x, edge->start.y);
-            line[0].color  = sf::Color::Red;
-            line[1].position = sf::Vector2f(edge->end.x, edge->end.y);
-            line[1].color  = sf::Color::Red;
+            lines.emplace_back(edge->start, sf::Color::Red);
+            lines.emplace_back(edge->end, sf::Color::Red);
 
-            sf::CircleShape circle1;
-            circle1.setRadius(4);
+            int radius = 3;
+            int point_count = 5;
+
+            sf::CircleShape circle1(radius, point_count);
             circle1.setFillColor(sf::Color::Cyan);
-            circle1.setPosition(edge->start.x - 4, edge->start.y - 4);
+            circle1.setPosition(edge->start);
+            circle1.setOrigin(radius, radius);
 
-            sf::CircleShape circle2;
-            circle2.setRadius(4);
+            sf::CircleShape circle2(radius, point_count);
             circle2.setFillColor(sf::Color::Cyan);
-            circle2.setPosition(edge->end.x - 4, edge->end.y - 4);
+            circle2.setPosition(edge->end);
+            circle2.setOrigin(radius, radius);
 
-            wn.draw(line, 2, sf::Lines);
             wn.draw(circle1);
             wn.draw(circle2);
         }
+        wn.draw(&lines[0], lines.size(), sf::Lines);
     }
 
 

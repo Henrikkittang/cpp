@@ -34,7 +34,7 @@ private:
     }
 
 public:
-    EdgesGenerator(std::vector<std::vector<Cell>>& cells, int width, int height, int scl)
+    EdgesGenerator(const std::vector<std::vector<Cell>>& cells, int width, int height, int scl)
         : m_cells(cells), m_width(width), m_height(height), m_scl(scl)
     {}
 

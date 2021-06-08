@@ -9,18 +9,18 @@ class TrianglesGeneration
 {
 private:
 
-    std::vector<std::shared_ptr<Edge>>& m_edges; 
-    sf::Vector2i& m_center_pos;
+    const std::vector<std::shared_ptr<Edge>>& m_edges; 
+    const sf::Vector2i& m_center_pos;
 
 public:
 
-    TrianglesGeneration(std::vector<std::shared_ptr<Edge>>& edges, sf::Vector2i& center_pos) 
+    TrianglesGeneration(const std::vector<std::shared_ptr<Edge>>& edges, const sf::Vector2i& center_pos) 
         : m_edges(edges), m_center_pos(center_pos)
     {}        
 
     std::vector<std::array<float, 3>> make_triangles()
     {
-        const float radius = 50.0f;
+        const float radius = 1000.0f;
         std::vector<std::array<float, 3>> triangles;
 
         for(const auto& edge1 : m_edges)
@@ -31,13 +31,14 @@ public:
                 if(i == 0) edge_vect = math::Vector2<float>(edge1->start.x - m_center_pos.x, edge1->start.y - m_center_pos.y);
                 if(i == 1) edge_vect = math::Vector2<float>(edge1->end.x   - m_center_pos.x, edge1->end.y   - m_center_pos.y);
 
-                float cur_ang = atan2f(edge_vect.y, edge_vect.x);
+                float base_angle = atan2f(edge_vect.y, edge_vect.x);
 
                 for(int j = 0; j < 3; j++)
                 {
-                    if(j == 0) cur_ang -= 0.0001f;
-                    if(j == 1) cur_ang = cur_ang;
-                    if(j == 2) cur_ang += 0.0002f;
+                    float cur_ang = 0;
+                    if(j == 0) cur_ang = base_angle - 0.0001f;
+                    if(j == 1) cur_ang = base_angle;
+                    if(j == 2) cur_ang = base_angle + 0.0001f;
 
                     edge_vect.x = radius * cosf(cur_ang);
                     edge_vect.y = radius * sinf(cur_ang);
@@ -66,7 +67,7 @@ public:
                                     min_angle = atan2f(min_point.y - m_center_pos.y, min_point.x - m_center_pos.x);
                                     valid_ray = true;
                                 }
-                            }
+                            }   
                         }
                     }
                     if(valid_ray){
@@ -81,7 +82,18 @@ public:
             [&](const std::array<float, 3>& t1, const std::array<float, 3>& t2)
             {
                 return t1[2] < t2[2];
-            });
+            }
+        );
+
+        auto it = std::unique(
+            triangles.begin(),
+            triangles.end(),
+            [&](const std::array<float, 3>& t1, const std::array<float, 3>& t2)
+            {
+                return (fabs(t1[0] - t2[0])  < 1.0f) &&  (fabs(t1[1] - t2[1])  < 1.0f);
+            }
+        ); 
+        triangles.resize(std::distance(triangles.begin(), it));
 
         return triangles;
     }

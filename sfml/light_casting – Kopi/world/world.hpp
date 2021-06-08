@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "draw.hpp"
+#include "fps.hpp"
 #include "../raycasting/structures.hpp"
 #include "../raycasting/edges_generator.hpp"
 #include "../raycasting/triangles_generator.hpp"
@@ -22,6 +23,9 @@ private:
     sf::RenderWindow m_window;
 
     Draw m_draw;
+    FPS fps;
+	float lastFPS;
+	float currentFPS;
 
 private:
     void update_edges(const sf::Vector2i& mp)
@@ -31,7 +35,7 @@ private:
             if(mp.x >= 0 && mp.x < m_width && mp.y >= 0 && mp.y < m_height)
             {
                 int pos[2] = {mp.x / m_scl, mp.y / m_scl};
-                m_grid.at(pos[1]).at(pos[0]).exists = true;
+                m_grid[pos[1]][pos[0]].exists = true;
                 m_edges.clear();
                 m_edges = EdgesGenerator(m_grid, m_width, m_height, m_scl).make_edges();
             }
@@ -39,7 +43,7 @@ private:
         }
     }
 
-    void update_triangles(sf::Vector2i mp)
+    void update_triangles(const sf::Vector2i& mp)
     {
         m_triangles.clear();
         if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
@@ -79,11 +83,15 @@ public:
                     m_window.close();
                 }
             }
+            currentFPS = fps.getFPS();
+            if(currentFPS != lastFPS){
+                std::cout << currentFPS << "\n";
+                lastFPS = currentFPS;
+            }
             
             m_window.clear();
 
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_window);
-            sf::Vector2f temp = (sf::Vector2f)mouse_pos;
 
             this->update_edges(mouse_pos);
             this->update_triangles(mouse_pos);
@@ -94,7 +102,7 @@ public:
 
             m_window.display();
 
-
+            fps.update();
         }
     }
 
