@@ -45,6 +45,19 @@ public:
         wn.draw(vertices, 3, sf::Triangles);
     }
 
+    void draw_triangles(sf::RenderWindow& wn, const std::vector<std::array<float, 3>>& triangles, const sf::Vector2f& center_pos)
+    {
+        if (triangles.empty()) return;
+        
+        std::vector<sf::Vertex> triangle_fan = {{center_pos}};
+        triangle_fan.reserve(triangles.size());
+
+        for(const auto& triangle : triangles)
+            triangle_fan.emplace_back(sf::Vector2f(triangle[0], triangle[1]));
+        triangle_fan.emplace_back(sf::Vector2f(triangles[1][0], triangles[1][1]));
+        
+        wn.draw(&triangle_fan[0], triangle_fan.size(), sf::TriangleFan);
+    }
 
     void draw_edges(sf::RenderWindow& wn, std::vector<std::shared_ptr<Edge>>& edges)
     {
@@ -73,7 +86,7 @@ public:
     }
 
 
-    void draw_cells(sf::RenderWindow& wn, std::vector<std::vector<Cell>>& cells)
+    void draw_cells(sf::RenderWindow& wn, const std::vector<std::vector<Cell>>& cells)
     {
         for(int q = 0; q < (m_height/m_scl); q++)
         for(int j = 0; j < (m_width/m_scl); j++){

@@ -24,48 +24,27 @@ private:
     Draw m_draw;
 
 private:
-    void update_edges()
+    void update_edges(const sf::Vector2i& mp)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_window);
-
-            if(mouse_pos.x >= 0 && mouse_pos.x < m_width && mouse_pos.y >= 0 && mouse_pos.y < m_height)
+            if(mp.x >= 0 && mp.x < m_width && mp.y >= 0 && mp.y < m_height)
             {
-                int pos[2] = {mouse_pos.x / m_scl, mouse_pos.y / m_scl};
+                int pos[2] = {mp.x / m_scl, mp.y / m_scl};
                 m_grid.at(pos[1]).at(pos[0]).exists = true;
                 m_edges.clear();
                 m_edges = EdgesGenerator(m_grid, m_width, m_height, m_scl).make_edges();
             }
-            std::cout << m_edges.size() << "\n";
+            // std::cout << m_edges.size() << "\n";
         }
     }
 
-    void update_something()
+    void update_triangles(sf::Vector2i mp)
     {
+        m_triangles.clear();
         if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
-            sf::Vector2i mp = sf::Mouse::getPosition(m_window);
-            m_triangles.clear();
             m_triangles = TrianglesGeneration(m_edges, mp).make_triangles();
-            // std::cout << triangles.size() << "\n";
-
-            sf::Vertex center;
-            center.position = sf::Vector2f(mp.x, mp.y);
-            std::vector<sf::Vertex> triangle_fan = {center};
-            triangle_fan.reserve(m_triangles.size());
-
-            for(const auto& data : m_triangles)
-            {
-                // sf::Vertex vertex(sf::Vector2f(data[0], data[1]));
-                // vertex.position = sf::Vector2f(data[0], data[1]);
-                triangle_fan.emplace_back(sf::Vector2f(data[0], data[1]));
-            }
-            sf::Vertex vertex;
-            vertex.position = sf::Vector2f(m_triangles[1][0], m_triangles[1][1]);
-            triangle_fan.push_back(vertex);
-            m_window.draw(&triangle_fan[0], triangle_fan.size(), sf::TriangleFan);
-
         }
     }
 
@@ -103,12 +82,15 @@ public:
             
             m_window.clear();
 
-            this->update_edges();
-            this->update_something();
+            sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_window);
+            sf::Vector2f temp = (sf::Vector2f)mouse_pos;
+
+            this->update_edges(mouse_pos);
+            this->update_triangles(mouse_pos);
 
             m_draw.draw_cells(m_window, m_grid);
             m_draw.draw_edges(m_window, m_edges);
-
+            m_draw.draw_triangles(m_window, m_triangles, (sf::Vector2f)mouse_pos);
 
             m_window.display();
 
