@@ -8,7 +8,10 @@ int main()
     int height = 800;
     int scl = 20;
 
-    World world = {width, height, scl};
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 16;
+
+    World world = {width, height, scl, settings};
     world.update();
 
 }

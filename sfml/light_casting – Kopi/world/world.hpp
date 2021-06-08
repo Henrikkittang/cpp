@@ -71,10 +71,10 @@ private:
 
 public:
 
-    World(int width, int height, int scl)
+    World(int width, int height, int scl, const sf::ContextSettings& settings = sf::ContextSettings())
         : m_width(width), m_height(height), m_scl(scl),
           m_grid(std::vector<std::vector<Cell>>(height/scl, std::vector<Cell>(width/scl))),
-          m_window(sf::VideoMode(width, height), "Light Casting", sf::Style::Close | sf::Style::Titlebar),
+          m_window(sf::VideoMode(width, height), "Light Casting", sf::Style::Close | sf::Style::Titlebar, settings),
           m_draw(width, height, scl)
     {
         for(size_t i = 1; i < m_grid.size()-1; i++)

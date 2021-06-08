@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <array>
-
+#include<iostream>
 #include "structures.hpp"
 
 // enum Directions { NORTH, WEST, EAST, SOUTH };
@@ -14,19 +14,23 @@ private:
 	std::vector<std::shared_ptr<Edge>> m_edges;
 
     
+    bool outside_bounds(std::array<int, 2> pos)
+    {
+        return pos[0] < 0 || pos[0] >= m_cells[0].size() || pos[1] < 0 || pos[1] >= m_cells.size();
+    }
+
     std::vector<Cell*> find_neighbours(std::array<int, 2> pos)
     {
-        std::vector<Cell*> neighbours;
-        neighbours.reserve(4);
-        std::array<std::array<int, 2>, 4> offsets = {{ {0, -1}, {0,  1}, {-1, 0}, {1, 0} }};
+        std::vector<Cell*> neigbours;
+        neigbours.reserve(4);
+        std::array<std::array<int, 2>, 4> sides =  {{ {0, -1}, {-1, 0}, {1, 0}, {0, 1} }};
 
-        for(const auto offset : offsets)
-        {
-            std::array<int, 2> temp = {pos[0] + offset[0], pos[1] + offset[1]};
-            if(temp[0] >= 0 && temp[0] < m_cells[0].size() && temp[1] >= 0 && temp[1] < m_cells.size())
-                neighbours.push_back(&m_cells[ temp[1] ][ temp[0] ]);
+        for(auto side : sides){            
+            std::array<int, 2> temp = {pos[0] + side[0], pos[1] + side[1]};
+            if(!outside_bounds(temp))
+                neigbours.push_back(&m_cells[ temp[1] ][ temp[0] ]);
         }
-        return neighbours;   
+        return neigbours;
     }
 
 public:
