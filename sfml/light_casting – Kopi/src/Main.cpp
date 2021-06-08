@@ -8,6 +8,7 @@ int main()
     int height = 800;
     int scl = 20;
 
+    
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 

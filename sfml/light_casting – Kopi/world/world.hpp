@@ -54,7 +54,7 @@ private:
 
 public:
 
-    World(int width, int height, int scl, const sf::ContextSettings& settings = sf::ContextSettings())
+    World(int width, int height, int scl, const sf::ContextSettings& settings=sf::ContextSettings())
         : m_width(width), m_height(height), m_scl(scl),
           m_grid(std::vector<std::vector<Cell>>(height/scl, std::vector<Cell>(width/scl))),
           m_window(sf::VideoMode(width, height), "Light Casting", sf::Style::Close | sf::Style::Titlebar, settings),

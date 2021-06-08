@@ -8,7 +8,7 @@ BUILD_PATH = $(DEBUG_PATH)
 SOURCE = src/main.cpp
 	
 CC      = g++
-CFLAGS  = -std=c++17 -O3
+CFLAGS  = -std=c++17 -g
 
 build: compile link
 all: build run 
