@@ -8,7 +8,7 @@ BUILD_PATH = $(DEBUG_PATH)
 SOURCE = src/main.cpp
 	
 CC      = g++
-CFLAGS  = -std=c++17 
+CFLAGS  = -std=c++17 -g
 
 build: compile link
 all: build run 
@@ -24,6 +24,9 @@ all: build run
 # CC = g++
 # CFLAGS += -g
 # CFLAGS += -pg
+
+assembly:
+	${CC} -S -I include -c $(SOURCE) -o $(BUILD_PATH).s
 
 compile: 
 	@echo ">>> Compiling..."
