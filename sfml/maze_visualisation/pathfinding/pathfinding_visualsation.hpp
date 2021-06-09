@@ -66,8 +66,8 @@ protected:
     {
 		std::vector<std::array<int, 2>> neighbors;
 		neighbors.reserve(4);
-        std::array<std::array<int, 2>, 4> sides =  {{ {0,-1}, {-0, 1}, {-1, 0}, {1, 0} }};
-
+        std::array<std::array<int, 2>, 4> sides =  {{ {0, -1}, {0, 1}, {-1, 0}, {1, 0} }};
+    
         for(auto p : sides)
         {
             std::array<int, 2> cur_pos = {pos[0]+p[0], pos[1] + p[1]};
