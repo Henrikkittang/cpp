@@ -1,3 +1,5 @@
+#include<iostream>
+
 #include<SFML/Graphics.hpp>
 
 #include "../world/world.hpp"
@@ -8,7 +10,6 @@ int main()
     int height = 800;
     int scl = 20;
 
-    
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
