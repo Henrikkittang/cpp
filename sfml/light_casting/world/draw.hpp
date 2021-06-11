@@ -15,22 +15,19 @@ public:
 
     void draw_triangle(float x1, float y1, float x2, float y2, float x3, float y3, sf::RenderWindow& wn)
     {
-        sf::Vertex line0[] = {
+        std::array<sf::Vertex, 6> lines = {
             sf::Vertex(sf::Vector2f(x1, y1)),
             sf::Vertex(sf::Vector2f(x2, y2)),
-        };
-        sf::Vertex line1[] = {
+
             sf::Vertex(sf::Vector2f(x2, y2)),
             sf::Vertex(sf::Vector2f(x3, y3)),
-        };
-        sf::Vertex line2[] = {
+        
             sf::Vertex(sf::Vector2f(x3, y3)),
             sf::Vertex(sf::Vector2f(x1, y1)),
         };
 
-        wn.draw(line0, 2, sf::Lines);
-        wn.draw(line1, 2, sf::Lines);
-        wn.draw(line2, 2, sf::Lines);
+        wn.draw(&lines[0], lines.size(), sf::Lines);
+
     }
 
     void fill_triangle(float x1, float y1, float x2, float y2, float x3, float y3, sf::RenderWindow& wn)

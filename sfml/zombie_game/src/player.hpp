@@ -37,7 +37,7 @@ public:
 		m_gun_text.setFillColor(sf::Color::Red);
 
 		m_texture.loadFromFile("images/player.png");
-		m_player.setTexture(&m_texture);
+		m_player.setTexture(&m_texture);    
 		m_font.loadFromFile("fonts/arial.ttf");
 	}
 

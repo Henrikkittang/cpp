@@ -11,7 +11,7 @@ SOURCE 	     = src/main.cpp
 CC        = g++
 CPPFLAGS  = -std=c++17
 
-DEBUG_FLAGS   = -g -Og
+DEBUG_FLAGS   = -g 
 RELEASE_FLAGS = -O3
 
 
@@ -42,13 +42,15 @@ assembly-debug:
 
 profile-debug:
 	@echo ">>> Compiling debug..."
-	${CC} ${CPPFLAGS} $(DEBUG_FLAGS) -pg -I include -c $(SOURCE) -o $(DEBUG_PATH).o;  
+	${CC} ${CPPFLAGS} $(DEBUG_FLAGS) -pg -I include -c $(SOURCE) -o $(DEBUG_PATH).o  
 	
 	@echo ">>> Linking debug..."
 	${CC} ${CPPFLAGS} $(DEBUG_FLAGS) -pg $(DEBUG_PATH).o -o $(DEBUG_PATH).exe -L lib $(SFML_GRAPHICS)
-	
+
 	@echo ">>> Profiling debug..."
-	gprof $(DEBUG_PATH).exe gmon.out > analysis.txt;   
+	$(DEBUG_PATH).exe 
+
+	gprof $(DEBUG_PATH).exe gmon.out > analysis.txt   
 
 
 
@@ -78,13 +80,16 @@ clean-release:
 
 profile-release:
 	@echo ">>> Compiling release..."
-	${CC} ${CPPFLAGS} $(RELEASE_FLAGS) -pg -I include -c $(SOURCE) -o $(RELEASE_PATH).o;  
+	${CC} ${CPPFLAGS} $(RELEASE_FLAGS) -pg -I include -c $(SOURCE) -o $(RELEASE_PATH).o
 	
 	@echo ">>> Linking release..."
 	${CC} ${CPPFLAGS} $(RELEASE_FLAGS) -pg $(RELEASE_PATH).o -o $(RELEASE_PATH).exe -L lib $(SFML_GRAPHICS)
 	
+	@echo ">>> Profiling debug..."
+	$(RELEASE_PATH).exe 
+
 	@echo ">>> Profiling release..."
-	gprof $(RELEASE_PATH).exe gmon.out > analysis.txt;   
+	gprof $(RELEASE_PATH).exe gmon.out > analysis.txt
 	
 
 
