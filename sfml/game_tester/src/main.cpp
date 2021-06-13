@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 
 #include <jsoncpp.cpp>
 #include<SFML/Graphics.hpp>
@@ -9,7 +10,6 @@ int main()
 {
 
     World world;
-
     world.update();
 
     /*Json::Value people;

@@ -2,29 +2,31 @@
 
 #include<SFML/Graphics.hpp>
 
+
+#include "world.hpp"
+// #include "../entity/entity.hpp"
+#include "../entity/player.hpp"
+
+
 class World
 {
 private:
 
     sf::RenderWindow m_window;
-
-  
-
-    void load_world()
-    {
-
-    }
-
-
-
+    Player entity;
+ 
 public:
 
     World(int sreen_width=1024, int scree_height=768, const sf::ContextSettings& settings=sf::ContextSettings())
           : m_window(sf::VideoMode(sreen_width, scree_height), "Game tester", sf::Style::Close | sf::Style::Titlebar, settings)
-    {}
-
-   void update()
     {
+        entity = Player(sf::Vector2f(100, 100), sf::Vector2f(40, 40), "textures/player.png");
+    }
+
+    void update()
+    {
+        sf::Clock delta_clock;
+        float dt = 0;
         while(m_window.isOpen()){
             sf::Event evt;
             while(m_window.pollEvent(evt)){
@@ -33,8 +35,11 @@ public:
                 }
             }
             m_window.clear();
+            dt = delta_clock.restart().asSeconds();
 
-           
+            entity.draw(m_window);
+            entity.move(dt);
+
             m_window.display();
         }
     }

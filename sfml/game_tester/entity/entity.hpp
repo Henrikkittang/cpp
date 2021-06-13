@@ -1,33 +1,36 @@
 #pragma once
 #include <array>
+#include <string>
 
 #include <SFML/graphics.hpp>
 
 class Entity
 {
-private:    
-
+protected:    
     sf::RectangleShape m_rectangle;
-
-    
+    sf::Texture m_texture;
 
 public:
 
-    Entity(const sf::Vector2f& position, int width, int height, const std::string& texture_path)
-    {
-        sf::Texture* texture = new sf::Texture();
-        texture->loadFromFile(texture_path);
+    Entity(){}
 
-        m_rectangle = sf::RectangleShape(sf::Vector2f(width, height));
+    Entity(const sf::Vector2f& position, const sf::Vector2f& size, const std::string& texture_path)
+    {
+        m_texture.loadFromFile(texture_path);
+
+        m_rectangle = sf::RectangleShape(size);
         m_rectangle.setPosition(position);
-        m_rectangle.setOrigin(width/2, height/2);
-        m_rectangle.setTexture(texture);
+        m_rectangle.setOrigin(size.x/2, size.y/2);
+        // m_rectangle.setFillColor(sf::Color::Green);
+
+        m_rectangle.setTexture(&m_texture);
     }
 
-    ~Entity()
-    {
-        delete m_rectangle.getTexture();
+    Entity(const Entity& other)
+    {   
+        m_rectangle.setTexture(&m_texture); 
     }
+
 
     void drawHitbox(sf::RenderWindow& wn)
     {
@@ -41,7 +44,9 @@ public:
 
 
     void draw(sf::RenderWindow& wn)
-    {
+    {   
+        m_rectangle.setTexture(&m_texture);
+
         wn.draw(m_rectangle);
         drawHitbox(wn);
     }
