@@ -3,9 +3,7 @@
 #include<vector>
 
 
-
-
-template<typename T, int W, int H>
+template<typename T, uint32_t W, uint32_t H>
 class Grid
 {
 private:

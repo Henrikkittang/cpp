@@ -1,7 +1,7 @@
 #pragma once
 #include "movable.hpp"
 
-class Player : public Movable
+class Player : public Entity, public Movable
 {
 private:
 
@@ -14,7 +14,7 @@ public:
         const sf::Vector2f& size, 
         const std::string& texture_path
     )
-        : Movable(position, size, texture_path, 500)
+        : Entity(position, size, texture_path), Movable(500)
     {}
 
     void move(float dt) override
