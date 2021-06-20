@@ -102,6 +102,7 @@ public:
 
             m_window.display();
 
+
             // fps.update();
         }
     }

@@ -10,7 +10,7 @@ class TrianglesGeneration
 private:
 
     const std::vector<std::shared_ptr<Edge>>& m_edges; 
-    math::Vector2 m_center_pos;
+    const math::Vector2& m_center_pos;
 
     std::vector<std::array<float, 3>> m_triangles;
     float m_radius = 1000.0f;
@@ -65,8 +65,8 @@ public:
                 for(int j = 0; j < 3; j++)
                 {
                     if(j == 0) edge_vect.rotateR(-0.0001f);
-                    if(j == 1) edge_vect.rotateR(0.0001f);
-                    if(j == 2) edge_vect.rotateR(0.0001f);
+                    else if(j == 1) edge_vect.rotateR(0.0001f);
+                    else if(j == 2) edge_vect.rotateR(0.0001f);
 
                     float min_t1 = INFINITY;
                     float min_angle;

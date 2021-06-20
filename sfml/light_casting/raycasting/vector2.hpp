@@ -12,55 +12,55 @@ namespace math
         Vector2(float x=0, float y=0)
             : x(x), y(y){}
 
-        Vector2 operator+(const Vector2& otherVector2)
+        Vector2 operator+(const Vector2& otherVector2) const
         {
             return Vector2(x + otherVector2.x, y + otherVector2.y);
         }
 
-        Vector2 operator-(const Vector2& otherVector2)
+        Vector2 operator-(const Vector2& otherVector2) const
         {
             return Vector2(x - otherVector2.x, y - otherVector2.y);
         }
 
-        float operator*(const Vector2& otherVector2)
+        float operator*(const Vector2& otherVector2) const
         {
             return x * otherVector2.x + y * otherVector2.y;
         }
 
-        Vector2 operator*(const float a_scalar)
+        Vector2 operator*(const float a_scalar) const
         {
             return Vector2(x*a_scalar, y*a_scalar);
         }
 
-        Vector2 operator/(const float a_scalar)
+        Vector2 operator/(const float a_scalar) const
         {
             return Vector2(x/a_scalar, y/a_scalar);
         }
 
-        bool operator==(const Vector2& a_vect)
+        bool operator==(const Vector2& a_vect) const
         {
             return (x == a_vect.x && y == a_vect.y);
         }
 
-        bool operator!=(const Vector2& a_vect)
+        bool operator!=(const Vector2& a_vect) const
         {
             return (x != a_vect.x || y != a_vect.y);
         }
 
-        float angleR(Vector2& otherVector2)
+        float angleR(Vector2& otherVector2) const
         {
             float scalar = x * otherVector2.x + y * otherVector2.y;
             float lenProd = length() * otherVector2.length();
             float angle = acosf(scalar/lenProd);
             return angle;
         }
-        float angleD(Vector2& otherVector2)
+        float angleD(Vector2& otherVector2) const
         {
             float angleDegrees = angleR(otherVector2) * (180 / 3.141592653589793238463);
             return angleDegrees;
         }
 
-        float length()
+        float length() const
         {
             return sqrtf(powf(x, 2) + powf(y, 2));
         }
@@ -86,7 +86,7 @@ namespace math
             rotateR(radians);
         }
 
-        bool isParallel(const Vector2& vect)
+        bool isParallel(const Vector2& vect) const
         {
             Vector2 cop1 = Vector2(x, y);
             Vector2 cop2 = vect;
