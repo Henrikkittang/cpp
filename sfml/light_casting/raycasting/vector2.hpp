@@ -6,6 +6,7 @@
 
 namespace math
 {
+    
     struct Vector2{
         float x, y;
 
@@ -27,14 +28,14 @@ namespace math
             return x * otherVector2.x + y * otherVector2.y;
         }
 
-        Vector2 operator*(const float a_scalar) const
+        Vector2 operator*(float scalar) const
         {
-            return Vector2(x*a_scalar, y*a_scalar);
+            return Vector2(x*scalar, y*scalar);
         }
 
-        Vector2 operator/(const float a_scalar) const
+        Vector2 operator/(float scalar) const
         {
-            return Vector2(x/a_scalar, y/a_scalar);
+            return Vector2(x/scalar, y/scalar);
         }
 
         bool operator==(const Vector2& a_vect) const

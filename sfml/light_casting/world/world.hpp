@@ -48,7 +48,7 @@ private:
         m_triangles.clear();
         if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
-            m_triangles = TrianglesGeneration(m_edges, {(float)mp.x, (float)mp.y}).make_triangles();
+            m_triangles = TrianglesGeneration(m_edges, m_grid, {mp.x, mp.y}).make_triangles();
         }
     }
 

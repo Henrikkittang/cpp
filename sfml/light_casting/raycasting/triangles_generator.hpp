@@ -11,6 +11,7 @@ private:
 
     const std::vector<std::shared_ptr<Edge>>& m_edges; 
     const math::Vector2& m_center_pos;
+    const std::vector<std::vector<Cell>>& m_grid; 
 
     std::vector<std::array<float, 3>> m_triangles;
     float m_radius = 1000.0f;
@@ -45,8 +46,11 @@ private:
 
 public:
 
-    TrianglesGeneration(const std::vector<std::shared_ptr<Edge>>& edges, const math::Vector2& center_pos) 
-        : m_edges(edges), m_center_pos(center_pos)
+    TrianglesGeneration(
+        const std::vector<std::shared_ptr<Edge>>& edges, 
+        const std::vector<std::vector<Cell>>& grid,
+        const math::Vector2& center_pos) 
+        : m_edges(edges), m_grid(grid), m_center_pos(center_pos)
     {}        
 
     std::vector<std::array<float, 3>> make_triangles()
@@ -57,46 +61,86 @@ public:
         {
             for(int i = 0; i < 2; i++)
             {
-                math::Vector2 edge_vect;
-                if(i == 0) edge_vect = edge1->start - m_center_pos;
-                if(i == 1) edge_vect = edge1->end - m_center_pos;
+                math::Vector2 rayDirection;
+                if(i == 0) rayDirection = edge1->start - m_center_pos;
+                if(i == 1) rayDirection = edge1->end - m_center_pos;
  
 
                 for(int j = 0; j < 3; j++)
                 {
-                    if(j == 0) edge_vect.rotateR(-0.0001f);
-                    else if(j == 1) edge_vect.rotateR(0.0001f);
-                    else if(j == 2) edge_vect.rotateR(0.0001f);
+                    if(j == 0) rayDirection.rotateR(-0.0001f);
+                    else if(j == 1) rayDirection.rotateR(0.0001f);
+                    else if(j == 2) rayDirection.rotateR(0.0001f);
+                                        
+                    // Form ray cast from player into scene
+                    math::Vector2 vRayStart = m_center_pos / 20;
+                    rayDirection.normalize();
+                            
+                    // Lodev.org also explains this additional optimistaion (but it's beyond scope of video)
+                    // math::Vector2 vRayUnitStepSize = { abs(1.0f / rayDirection.x), abs(1.0f / rayDirection.y) };
 
-                    float min_t1 = INFINITY;
-                    float min_angle;
-                    math::Vector2 min_point;
-                    bool valid_ray = false;
+                    math::Vector2 vRayUnitStepSize = { 
+                        sqrt(1 + (rayDirection.y / rayDirection.x) * (rayDirection.y / rayDirection.x)), 
+                        sqrt(1 + (rayDirection.x / rayDirection.y) * (rayDirection.x / rayDirection.y)) };
+                    
+                    
+                    sf::Vector2i vMapCheck = {vRayStart.x, vRayStart.y};
+                    math::Vector2 vRayLength1D;
+                    sf::Vector2i vStep;
 
-                    for(const auto& edge2 : m_edges)
-                    {
-                        math::Vector2 edge2_vect = edge2->end - edge2->start;
-
-                        if( (edge2_vect - edge_vect).length() > 0.0f )
-                        // if( !edge_vect.isParallel(edge2_vect) )
-                        {
-                            float t2 = (edge_vect.x * (edge2->start.y - m_center_pos.y) + edge_vect.y * (m_center_pos.x - edge2->start.x)) / (edge2_vect.x*edge_vect.y - edge2_vect.y*edge_vect.x);
-                            float t1 = (edge2->start.x + edge2_vect.x*t2 - m_center_pos.x) / edge_vect.x;
-
-                            if(t1 > 0 && t2 >= 0 && t2 <= 1.0f)
-                            {
-                                if(t1 < min_t1)
-                                {
-                                    min_t1 = t1;
-                                    min_point = m_center_pos + edge_vect * t1;
-                                    min_angle = atan2f(min_point.y - m_center_pos.y, min_point.x - m_center_pos.x);
-                                    valid_ray = true;
-                                }
-                            }   
-                        }
+                    // Establish Starting Conditions
+                    if (rayDirection.x < 0){
+                        vStep.x = -1;
+                        vRayLength1D.x = (vRayStart.x - float(vMapCheck.x)) * vRayUnitStepSize.x;
+                    }else{
+                        vStep.x = 1;
+                        vRayLength1D.x = (float(vMapCheck.x + 1) - vRayStart.x) * vRayUnitStepSize.x;
                     }
-                    if(valid_ray)
-                        m_triangles.push_back({min_point.x, min_point.y, min_angle});
+
+                    if (rayDirection.y < 0){
+                        vStep.y = -1;
+                        vRayLength1D.y = (vRayStart.y - float(vMapCheck.y)) * vRayUnitStepSize.y;
+                    }else{
+                        vStep.y = 1;
+                        vRayLength1D.y = (float(vMapCheck.y + 1) - vRayStart.y) * vRayUnitStepSize.y;
+                    }
+
+                    // Perform "Walk" until collision or range check
+                    bool tile_found = false;
+                    float max_distance = m_grid[0].size() * m_grid.size();
+                    float cur_distance = 0.0f;
+                    while (!tile_found && cur_distance < max_distance)
+                    {
+                        // Walk along shortest path
+                        if (vRayLength1D.x < vRayLength1D.y){
+                            vMapCheck.x += vStep.x;
+                            cur_distance = vRayLength1D.x;
+                            vRayLength1D.x += vRayUnitStepSize.x;
+                        }else{
+                            vMapCheck.y += vStep.y;
+                            cur_distance = vRayLength1D.y;
+                            vRayLength1D.y += vRayUnitStepSize.y;
+                        }
+
+                        // Test tile at new test point
+                        if (vMapCheck.x >= 0 && vMapCheck.x < m_grid[0].size() && vMapCheck.y >= 0 && vMapCheck.y < m_grid.size())
+                            if(m_grid[vMapCheck.y][vMapCheck.x].exists == true)
+                                tile_found = true;
+                    }
+
+                    // Calculate intersection location
+                    if (tile_found)
+                    {
+                        math::Vector2 vIntersection = vRayStart + rayDirection * cur_distance;
+                        // float angle = atan2f(vIntersection.y - m_center_pos.y, vIntersection.x - m_center_pos.x);
+                        float angle = atan2f(rayDirection.y, rayDirection.x);
+                        m_triangles.push_back({vIntersection.x*20, vIntersection.y*20, atan2f(rayDirection.y, rayDirection.x)}); 
+                    }
+                                
+                                
+                    
+                    // End
+
                 }
             }
         }
