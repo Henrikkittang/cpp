@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "draw.hpp"
-// #include "fps.hpp"
+#include "fps.hpp"
 #include "../raycasting/structures.hpp"
 #include "../raycasting/edges_generator.hpp"
 #include "../raycasting/triangles_generator.hpp"
@@ -23,9 +23,9 @@ private:
     sf::RenderWindow m_window;
 
     Draw m_draw;
-    // FPS fps;
-	// float lastFPS;
-	// float currentFPS;
+    FPS fps;
+	float lastFPS;
+	float currentFPS;
 
 private:
     void update_edges(const sf::Vector2i& mp)
@@ -48,8 +48,8 @@ private:
         m_triangles.clear();
         if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
-            m_triangles = TrianglesGeneration(m_edges, m_grid, {mp.x, mp.y}).make_triangles();
-        }
+            m_triangles = TrianglesGeneration(m_edges, m_grid, {mp.x, mp.y}, m_scl).make_triangles();
+        }   
     }
 
 public:

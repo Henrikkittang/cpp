@@ -10,12 +10,14 @@ class TrianglesGeneration
 private:
 
     const std::vector<std::shared_ptr<Edge>>& m_edges; 
-    const math::Vector2& m_center_pos;
+    const trig::Vector2i& m_center_pos;
     const std::vector<std::vector<Cell>>& m_grid; 
+    float m_scl;
 
     std::vector<std::array<float, 3>> m_triangles;
-    float m_radius = 1000.0f;
+    float m_radius = 1000.0f;   
 
+private:
 
     void sort_triangles()
     {  
@@ -49,8 +51,9 @@ public:
     TrianglesGeneration(
         const std::vector<std::shared_ptr<Edge>>& edges, 
         const std::vector<std::vector<Cell>>& grid,
-        const math::Vector2& center_pos) 
-        : m_edges(edges), m_grid(grid), m_center_pos(center_pos)
+        const trig::Vector2i& center_pos,
+        int scl) 
+        : m_edges(edges), m_grid(grid), m_center_pos(center_pos), m_scl(scl)
     {}        
 
     std::vector<std::array<float, 3>> make_triangles()
@@ -61,48 +64,46 @@ public:
         {
             for(int i = 0; i < 2; i++)
             {
-                math::Vector2 rayDirection;
-                if(i == 0) rayDirection = edge1->start - m_center_pos;
-                if(i == 1) rayDirection = edge1->end - m_center_pos;
+                trig::Vector2f ray_direction;
+                if(i == 0) ray_direction = (trig::Vector2f)(edge1->start - m_center_pos);
+                if(i == 1) ray_direction = (trig::Vector2f)(edge1->end - m_center_pos);
  
 
                 for(int j = 0; j < 3; j++)
                 {
-                    if(j == 0) rayDirection.rotateR(-0.0001f);
-                    else if(j == 1) rayDirection.rotateR(0.0001f);
-                    else if(j == 2) rayDirection.rotateR(0.0001f);
+                    if(j == 0) ray_direction.rotateR(-0.0001f);
+                    else if(j == 1) ray_direction.rotateR(0.0001f);
+                    else if(j == 2) ray_direction.rotateR(0.0001f);
                                         
                     // Form ray cast from player into scene
-                    math::Vector2 vRayStart = m_center_pos / 20;
-                    rayDirection.normalize();
-                            
-                    // Lodev.org also explains this additional optimistaion (but it's beyond scope of video)
-                    // math::Vector2 vRayUnitStepSize = { abs(1.0f / rayDirection.x), abs(1.0f / rayDirection.y) };
+                    trig::Vector2f ray_start = ((trig::Vector2f)m_center_pos)/m_scl;
+                    ray_direction.normalize();
 
-                    math::Vector2 vRayUnitStepSize = { 
-                        sqrt(1 + (rayDirection.y / rayDirection.x) * (rayDirection.y / rayDirection.x)), 
-                        sqrt(1 + (rayDirection.x / rayDirection.y) * (rayDirection.x / rayDirection.y)) };
-                    
-                    
-                    sf::Vector2i vMapCheck = {vRayStart.x, vRayStart.y};
-                    math::Vector2 vRayLength1D;
-                    sf::Vector2i vStep;
+                    // Lodev.org also explains this additional optimistaion (but it's beyond scope of video)
+                    trig::Vector2f step_size = { 
+                        std::abs(1.0f / ray_direction.x),  // fabs?
+                        std::abs(1.0f / ray_direction.y) // fabs?
+                    };
+
+                    trig::Vector2i map_check = (trig::Vector2i)ray_start;
+                    trig::Vector2i step;
+                    trig::Vector2f ray_length1D;
 
                     // Establish Starting Conditions
-                    if (rayDirection.x < 0){
-                        vStep.x = -1;
-                        vRayLength1D.x = (vRayStart.x - float(vMapCheck.x)) * vRayUnitStepSize.x;
+                    if (ray_direction.x < 0){
+                        step.x = -1;
+                        ray_length1D.x = (ray_start.x - float(map_check.x)) * step_size.x;
                     }else{
-                        vStep.x = 1;
-                        vRayLength1D.x = (float(vMapCheck.x + 1) - vRayStart.x) * vRayUnitStepSize.x;
+                        step.x = 1;
+                        ray_length1D.x = (float(map_check.x + 1) - ray_start.x) * step_size.x;
                     }
 
-                    if (rayDirection.y < 0){
-                        vStep.y = -1;
-                        vRayLength1D.y = (vRayStart.y - float(vMapCheck.y)) * vRayUnitStepSize.y;
+                    if (ray_direction.y < 0){
+                        step.y = -1;
+                        ray_length1D.y = (ray_start.y - float(map_check.y)) * step_size.y;
                     }else{
-                        vStep.y = 1;
-                        vRayLength1D.y = (float(vMapCheck.y + 1) - vRayStart.y) * vRayUnitStepSize.y;
+                        step.y = 1;
+                        ray_length1D.y = (float(map_check.y + 1) - ray_start.y) * step_size.y;
                     }
 
                     // Perform "Walk" until collision or range check
@@ -112,45 +113,39 @@ public:
                     while (!tile_found && cur_distance < max_distance)
                     {
                         // Walk along shortest path
-                        if (vRayLength1D.x < vRayLength1D.y){
-                            vMapCheck.x += vStep.x;
-                            cur_distance = vRayLength1D.x;
-                            vRayLength1D.x += vRayUnitStepSize.x;
+                        if (ray_length1D.x < ray_length1D.y){
+                            map_check.x += step.x;
+                            cur_distance = ray_length1D.x;
+                            ray_length1D.x += step_size.x;
                         }else{
-                            vMapCheck.y += vStep.y;
-                            cur_distance = vRayLength1D.y;
-                            vRayLength1D.y += vRayUnitStepSize.y;
+                            map_check.y += step.y;
+                            cur_distance = ray_length1D.y;
+                            ray_length1D.y += step_size.y;
                         }
 
                         // Test tile at new test point
-                        if (vMapCheck.x >= 0 && vMapCheck.x < m_grid[0].size() && vMapCheck.y >= 0 && vMapCheck.y < m_grid.size())
-                            if(m_grid[vMapCheck.y][vMapCheck.x].exists == true)
+                        if (map_check.x >= 0 && map_check.x < m_grid[0].size() && map_check.y >= 0 && map_check.y < m_grid.size())
+                            if(m_grid[map_check.y][map_check.x].exists == true)
                                 tile_found = true;
                     }
 
                     // Calculate intersection location
                     if (tile_found)
                     {
-                        math::Vector2 vIntersection = vRayStart + rayDirection * cur_distance;
+                        trig::Vector2f vIntersection = ray_start + ray_direction * cur_distance;
                         // float angle = atan2f(vIntersection.y - m_center_pos.y, vIntersection.x - m_center_pos.x);
-                        float angle = atan2f(rayDirection.y, rayDirection.x);
-                        m_triangles.push_back({vIntersection.x*20, vIntersection.y*20, atan2f(rayDirection.y, rayDirection.x)}); 
+                        float angle = atan2f(ray_direction.y, ray_direction.x);
+                        m_triangles.push_back({vIntersection.x*m_scl, vIntersection.y*m_scl, angle}); 
                     }
-                                
-                                
-                    
-                    // End
-
                 }
             }
         }
-        
+   
         sort_triangles();
         filter_triangels();
 
         return m_triangles;
     }
-
 
 
 };

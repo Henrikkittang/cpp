@@ -5,8 +5,8 @@
 
 struct Edge
 {
-	math::Vector2 start;
-	math::Vector2 end;
+	trig::Vector2i start;
+	trig::Vector2i end;
 
     Edge(int sx, int sy, int ex, int ey)
         : start(sx, sy), end(ex, ey) {}

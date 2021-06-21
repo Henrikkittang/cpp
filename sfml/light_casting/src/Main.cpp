@@ -11,7 +11,7 @@ int main()
     int scl = 20;
 
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    settings.antialiasingLevel = 16;
 
     World world = {width, height, scl, settings};
     world.update();
