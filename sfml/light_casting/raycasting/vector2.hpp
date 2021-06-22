@@ -108,7 +108,6 @@ namespace trig
     using Vector2d = Vector2<double>;
 
 
-// Might have to be moved outside namespace
 #ifdef _GLIBCXX_OSTREAM
     std::ostream& operator<<(std::ostream& out, const Vector2f& vect)
     {

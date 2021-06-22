@@ -33,7 +33,6 @@ private:
 
     void filter_triangels()
     {
-        // std::cout << m_triangles.size() << ", ";
         auto it = std::unique(
             m_triangles.begin(),
             m_triangles.end(),
@@ -43,7 +42,6 @@ private:
             }
         ); 
         m_triangles.resize(std::distance(m_triangles.begin(), it));
-        // std::cout << m_triangles.size() << "\n";
     }
 
 public:
@@ -60,13 +58,13 @@ public:
     {
         m_triangles.clear();
 
-        for(const auto& edge1 : m_edges)
+        for(const auto& edge : m_edges)
         {
             for(int i = 0; i < 2; i++)
             {
                 trig::Vector2f ray_direction;
-                if(i == 0) ray_direction = (trig::Vector2f)(edge1->start - m_center_pos);
-                if(i == 1) ray_direction = (trig::Vector2f)(edge1->end - m_center_pos);
+                if(i == 0) ray_direction = (trig::Vector2f)(edge->start - m_center_pos);
+                if(i == 1) ray_direction = (trig::Vector2f)(edge->end - m_center_pos);
  
 
                 for(int j = 0; j < 3; j++)
@@ -74,10 +72,11 @@ public:
                     if(j == 0) ray_direction.rotateR(-0.0001f);
                     else if(j == 1) ray_direction.rotateR(0.0001f);
                     else if(j == 2) ray_direction.rotateR(0.0001f);
-                                        
+                    ray_direction.normalize();
+
+
                     // Form ray cast from player into scene
                     trig::Vector2f ray_start = ((trig::Vector2f)m_center_pos)/m_scl;
-                    ray_direction.normalize();
 
                     // Lodev.org also explains this additional optimistaion (but it's beyond scope of video)
                     trig::Vector2f step_size = { 
@@ -133,7 +132,6 @@ public:
                     if (tile_found)
                     {
                         trig::Vector2f vIntersection = ray_start + ray_direction * cur_distance;
-                        // float angle = atan2f(vIntersection.y - m_center_pos.y, vIntersection.x - m_center_pos.x);
                         float angle = atan2f(ray_direction.y, ray_direction.x);
                         m_triangles.push_back({vIntersection.x*m_scl, vIntersection.y*m_scl, angle}); 
                     }
