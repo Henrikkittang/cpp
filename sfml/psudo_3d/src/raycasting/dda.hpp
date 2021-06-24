@@ -3,12 +3,16 @@
 #include "../world/dynamic_grid.hpp"
 #include "vector2.hpp"
 
-trig::Vector2f DDA(const trig::Vector2f& start_position, const DynamicGrid<bool>& grid)
+
+// Start position in grid space
+float DDA(const trig::Vector2f& start_position, float angle, const DynamicGrid<bool>& grid)
 {
     // Form ray cast from player into scene
-    trig::Vector2f ray_start = start_position/m_scl;
+    trig::Vector2f ray_start = start_position;
+    trig::Vector2f ray_direction = {sinf(angle), cosf(angle)};
+    // trig::Vector2f ray_direction = {1, 0};
+    // ray_direction.rotateR(angle);
 
-    // Lodev.org also explains this additional optimistaion (but it's beyond scope of video)
     trig::Vector2f step_size = { 
         std::abs(1.0f / ray_direction.x),  // fabs?
         std::abs(1.0f / ray_direction.y) // fabs?
@@ -57,13 +61,12 @@ trig::Vector2f DDA(const trig::Vector2f& start_position, const DynamicGrid<bool>
         if (!grid.out_of_bounds(map_check.x, map_check.y))
             if(grid.index(map_check.x, map_check.y) == true )
                 tile_found = true;
+        else
+            break;
     }
 
-    // Calculate intersection location
     if (tile_found)
-    {
-        trig::Vector2f vIntersection = ray_start + ray_direction * cur_distance;
-        float angle = atan2f(ray_direction.y, ray_direction.x);
-        m_triangles.push_back({vIntersection.x*m_scl, vIntersection.y*m_scl, angle}); 
-    }
+        return cur_distance; 
+    else
+        return -1.0f;
 }

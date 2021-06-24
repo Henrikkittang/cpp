@@ -28,10 +28,10 @@ public:
     int get_scl() const { return m_scl; }
 
 
-    T index(int row, int column) { return m_container[column * m_width + row]; }
-    const T& index(int row, int column) const { return m_container[column * m_width + row]; }
+    T index(int row, int column) const { return m_container[column * m_width + row]; }
+    // const T& index(int row, int column) const { return m_container[column * m_width + row]; }
 
-    bool out_of_bounds(int row, int column) {  return row < 0 || row >= get_width() || column < 0 || column > get_height();  }
+    bool out_of_bounds(int row, int column) const {  return row < 0 || row >= get_width() || column < 0 || column > get_height();  }
 
     std::vector<T> get_neighbours(int row, int column, bool diagonal=false)
     {

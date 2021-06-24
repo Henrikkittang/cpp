@@ -4,6 +4,9 @@
 #define PI 3.141592653589793238463
 
 
+// Make vector from angle
+// Get angle of vector from "default vector" aka [1, 0] using atan2
+
 namespace trig
 {
     template<typename T>
@@ -18,19 +21,19 @@ namespace trig
         operator Vector2<double>() const { return Vector2<double>(double(x), double(y)); }    
 
 
-        Vector2 operator+(const Vector2& otherVector2) const
+        Vector2 operator+(const Vector2& other) const
         {
-            return Vector2(x + otherVector2.x, y + otherVector2.y);
+            return Vector2(x + other.x, y + other.y);
         }
 
-        Vector2 operator-(const Vector2& otherVector2) const
+        Vector2 operator-(const Vector2& other) const
         {
-            return Vector2(x - otherVector2.x, y - otherVector2.y);
+            return Vector2(x - other.x, y - other.y);
         }
 
-        T operator*(const Vector2& otherVector2) const
+        T operator*(const Vector2& other) const
         {
-            return x * otherVector2.x + y * otherVector2.y;
+            return x * other.x + y * other.y;
         }
 
         Vector2 operator*(T scalar) const
@@ -43,26 +46,27 @@ namespace trig
             return Vector2(x/scalar, y/scalar);
         }
 
-        bool operator==(const Vector2& a_vect) const
+        bool operator==(const Vector2& other) const
         {
-            return (x == a_vect.x && y == a_vect.y);
+            return (x == other.x && y == other.y);
         }
 
-        bool operator!=(const Vector2& a_vect) const
+        bool operator!=(const Vector2& other) const
         {
-            return (x != a_vect.x || y != a_vect.y);
+            return (x != other.x || y != other.y);
         }
 
-        double angleR(Vector2& otherVector2) const
+        double angleR(Vector2& other) const
         {
-            double scalar = x * otherVector2.x + y * otherVector2.y;
-            double lenProd = length() * otherVector2.length();
+            double scalar = x * other.x + y * other.y;
+            double lenProd = length() * other.length();
             double angle = acosf(scalar/lenProd);
             return angle;
         }
-        double angleD(Vector2& otherVector2) const
+
+        double angleD(Vector2& other) const
         {
-            double angleDegrees = angleR(otherVector2) * (180 / PI);
+            double angleDegrees = angleR(other) * (180 / PI);
             return angleDegrees;
         }
 
@@ -92,14 +96,9 @@ namespace trig
             rotateR(radians);
         }
 
-        bool isParallel(const Vector2& vect) const
+        bool isParallel(const Vector2& other) const
         {
-            Vector2 cop1 = Vector2(x, y);
-            Vector2 cop2 = vect;
-            cop1.normalize();
-            cop2.normalize();
-
-            return (cop1 == cop2);
+            return x * other.y == y * other.x;
         }
     };
 
