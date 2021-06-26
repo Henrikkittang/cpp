@@ -31,7 +31,9 @@ public:
     T index(int row, int column) const { return m_container[column * m_width + row]; }
     // const T& index(int row, int column) const { return m_container[column * m_width + row]; }
 
-    bool out_of_bounds(int row, int column) const {  return row < 0 || row >= get_width() || column < 0 || column > get_height();  }
+    void set(int row, int column, T value) { m_container[column * m_width + row] = value; }
+
+    bool out_of_bounds(int row, int column) const {  return row < 0 || row >= get_width() || column < 0 || column >= get_height();  }
 
     std::vector<T> get_neighbours(int row, int column, bool diagonal=false)
     {

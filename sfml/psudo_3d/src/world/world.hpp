@@ -7,6 +7,7 @@
 #include "../raycasting/dda.hpp"
 #include "dynamic_grid.hpp"
 #include "player.hpp"
+#include "temp.hpp"
 
 #define WALL true
 #define PASSAGE false
@@ -29,26 +30,40 @@ public:
         : m_width(width), m_height(height), m_scl(scl),
         m_window(sf::VideoMode(width, height), "Psudo 3D", sf::Style::Close | sf::Style::Titlebar)
     {
+        /*
         std::vector<bool> grid = 
         {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         };
-        m_grid = DynamicGrid<bool>(width/scl, height/scl, scl, grid);
+        
+        
+        */
+
+        Prims prims(width/scl, height/scl);
+        auto g = prims.generate_maze(width/scl, height/scl);
+        m_grid = DynamicGrid<bool>(width/scl, height/scl, scl);
+
+        for(int y = 0; y <  height/scl; y++)
+            for(int x = 0; x <  height/scl; x++)
+                if(g[y][x] == 0)
+                    m_grid.set(x, y, false);
+                else
+                    m_grid.set(x, y, true);
 
         m_player.position.x = 2.0f;
         m_player.position.y = 2.0f;
@@ -86,104 +101,34 @@ public:
             m_window.clear();
             dt = delta_clock.restart().asSeconds();
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
-                m_player.angle -= (m_player.speed * 0.75f) * dt;
-            }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
-                m_player.angle += (m_player.speed * 0.75f) * dt;
-            }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)){
-                m_player.position.x += sinf(m_player.angle) * m_player.speed * dt;
-			    m_player.position.y += cosf(m_player.angle) * m_player.speed * dt;
-                if(m_grid.index((int)m_player.position.x, (int)m_player.position.y) == WALL || 
-                    m_grid.out_of_bounds((int)m_player.position.x, (int)m_player.position.y))
-                {
-                    m_player.position.x -= sinf(m_player.angle) * m_player.speed * dt;
-			        m_player.position.y -= cosf(m_player.angle) * m_player.speed * dt;
-                }
-            }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
-                m_player.position.x -= sinf(m_player.angle) * m_player.speed * dt;
-			    m_player.position.y -= cosf(m_player.angle) * m_player.speed * dt;
-                if(m_grid.index((int)m_player.position.x, (int)m_player.position.y) == WALL || 
-                    m_grid.out_of_bounds((int)m_player.position.x, (int)m_player.position.y))
-                {
-                    m_player.position.x += sinf(m_player.angle) * m_player.speed * dt;
-			        m_player.position.y += cosf(m_player.angle) * m_player.speed * dt;
-                }
-            }
+            m_player.move(dt, m_grid);
 
             for(int x = 0; x < m_width; x++)
             {
 
                 // Calculating distance with raytracing
                 float ray_angle = (m_player.angle - m_player.fov / 2.0f) + ((float)x / (float)m_width) * m_player.fov;
-                float distance_to_wall = 0.0f;
-                float step_size = 0.1f;
-                bool hit_wall = false;
-                bool hit_corner = false;
-                trig::Vector2f player_direction = {sinf(ray_angle), cosf(ray_angle)};
-                float max_depth = m_width / m_scl;
-
-                while(!hit_wall && distance_to_wall < max_depth)
-                {
-                    distance_to_wall += step_size;
-
-                    trig::Vector2i test = (trig::Vector2i)(m_player.position + player_direction * distance_to_wall); 
-
-                    if(m_grid.out_of_bounds(test.x, test.y))
-                    {
-                        hit_wall = true;
-                        distance_to_wall = max_depth;
-                    }else
-                    {
-                        if(m_grid.index(test.x, test.y) == WALL)
-                        {
-                            hit_wall = true;
-
-                            std::vector<std::pair<float, float>> corners;
-                            for (int tx = 0; tx < 2; tx++)
-                            {
-                                for (int ty = 0; ty < 2; ty++)
-                                {
-                                    // Angle of corner to eye
-                                    float vy = (float)test.y + ty - m_player.position.y;
-                                    float vx = (float)test.x + tx - m_player.position.x;
-                                    float distance = sqrt(vx*vx + vy*vy); 
-                                    float dot = (player_direction.x * vx / distance) + (player_direction.y * vy / distance);
-                                    corners.push_back(std::make_pair(distance, dot));
-                                }
-                            }
-                            std::sort(corners.begin(), corners.end(), [](
-                            const std::pair<float, float>& left, const std::pair<float, float>& right) 
-                            {
-                                return left.first < right.first; 
-                            });
-						
-                            // First two/three are closest (we will never see all four)
-                            float angle = 0.005;
-                            if (acos(corners.at(0).second) < angle) hit_corner = true;
-                            if (acos(corners.at(1).second) < angle) hit_corner = true;
-                            // if (acos(corners.at(2).second) < angle) hit_corner = true;
-                        }
-                    }
-                }
+                
+                float distance_to_wall = DDA(m_player.position, ray_angle, m_grid);
 
                 // Drawing 
                 int ceiling = (float)(m_height / 2.0) - m_height / ((float)distance_to_wall);
                 int floor = m_height - ceiling;
-                float shade = 1 - (distance_to_wall / max_depth);
-
-                if(hit_corner)
-                    shade = 0;
-
+                float max_dist = sqrtf(powf(m_width/m_scl-1, 2) + powf(m_height/m_scl-1, 2) );
+                float shade = 1 - (distance_to_wall / max_dist);
+            
                 for(int y = 0; y < m_height; y++)
                 {
                     if(y < ceiling)
                         m_image.setPixel(x, y, sf::Color::Black);
                     else if(y > ceiling && y <= floor)
-                        m_image.setPixel(x, y, sf::Color(0, 255*shade, 0));
+                        m_image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
                     else
                     {
-                        float b = (((float)y -m_height/2.0f) / ((float)m_height / 2.0f));
-                        m_image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
+                        m_image.setPixel(x, y, sf::Color::Black);
+
+                        // float b = (((float)y -m_height/2.0f) / ((float)m_height / 2.0f));
+                        // m_image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
                     }
                 }
             }

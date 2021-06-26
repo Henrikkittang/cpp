@@ -16,6 +16,9 @@ namespace trig
         Vector2(T x=0, T y=0)
             : x(x), y(y){}
 
+        Vector2(std::array<T, 2> pos)
+            : x(pos[0]), y(pos[1]){}
+
         operator Vector2<int>() const { return Vector2<int>(int(x), int(y)); }    
         operator Vector2<float>() const { return Vector2<float>(float(x), float(y)); }    
         operator Vector2<double>() const { return Vector2<double>(double(x), double(y)); }    

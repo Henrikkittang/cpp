@@ -58,11 +58,12 @@ float DDA(const trig::Vector2f& start_position, float angle, const DynamicGrid<b
 
         // Test tile at new test point
         
-        if (!grid.out_of_bounds(map_check.x, map_check.y))
+        if(grid.out_of_bounds(map_check.x, map_check.y))
+            break;
+        else
             if(grid.index(map_check.x, map_check.y) == true )
                 tile_found = true;
-        else
-            break;
+        
     }
 
     if (tile_found)
