@@ -23,15 +23,25 @@ public:
         m_container(grid)
     {}
 
+    DynamicGrid(uint32_t scl, const std::vector<std::vector<T>>& grid)
+        :m_width(grid[0].size()), m_height(grid.size()), m_scl(scl)
+    {
+        m_container.reserve(m_width * m_height);
+        for(const auto& row : grid)
+        {
+            m_container.insert(m_container.end(), row.begin(), row.end());
+        }
+    }
+
     int get_width() const { return  m_width; }
     int get_height() const { return m_height; }
     int get_scl() const { return m_scl; }
 
 
     T index(int row, int column) const { return m_container[column * m_width + row]; }
-    // const T& index(int row, int column) const { return m_container[column * m_width + row]; }
-
+    T* get(int row, int column) { return &( m_container[column * m_width + row] ); }
     void set(int row, int column, T value) { m_container[column * m_width + row] = value; }
+
 
     bool out_of_bounds(int row, int column) const {  return row < 0 || row >= get_width() || column < 0 || column >= get_height();  }
 

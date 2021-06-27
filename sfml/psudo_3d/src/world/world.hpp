@@ -7,10 +7,11 @@
 #include "../raycasting/dda.hpp"
 #include "dynamic_grid.hpp"
 #include "player.hpp"
-#include "temp.hpp"
 
 #define WALL true
 #define PASSAGE false
+
+
 
 class World
 {
@@ -30,7 +31,7 @@ public:
         : m_width(width), m_height(height), m_scl(scl),
         m_window(sf::VideoMode(width, height), "Psudo 3D", sf::Style::Close | sf::Style::Titlebar)
     {
-        /*
+        
         std::vector<bool> grid = 
         {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -52,22 +53,11 @@ public:
         };
         
         
-        */
-
-        Prims prims(width/scl, height/scl);
-        auto g = prims.generate_maze(width/scl, height/scl);
-        m_grid = DynamicGrid<bool>(width/scl, height/scl, scl);
-
-        for(int y = 0; y <  height/scl; y++)
-            for(int x = 0; x <  height/scl; x++)
-                if(g[y][x] == 0)
-                    m_grid.set(x, y, false);
-                else
-                    m_grid.set(x, y, true);
-
-        m_player.position.x = 2.0f;
-        m_player.position.y = 2.0f;
-        m_player.angle = 0.0f;
+        
+        m_grid = DynamicGrid<bool>(m_width/m_scl, m_height/m_scl, m_scl, grid);
+       
+        m_player.camera.pos.x = 2.0f;
+        m_player.camera.pos.y = 2.0f;
         m_player.speed = 5.0f;
 
         std::cout << m_grid.get_width()  << "\n";
@@ -91,7 +81,8 @@ public:
     void update()
     {
         sf::Clock delta_clock;
-        float dt = 0;
+        float dt = 0.0f;
+        float acc = 0.0f;
         while(m_window.isOpen()){
             sf::Event evt;
             while(m_window.pollEvent(evt))
@@ -100,6 +91,13 @@ public:
                 
             m_window.clear();
             dt = delta_clock.restart().asSeconds();
+            acc += dt;
+            
+            if (acc > 1.0f)
+            {
+                std::cout << 1.0f / dt << "\n";
+                acc = 0.0f;
+            }
 
             m_player.move(dt, m_grid);
 
@@ -107,14 +105,14 @@ public:
             {
 
                 // Calculating distance with raytracing
-                float ray_angle = (m_player.angle - m_player.fov / 2.0f) + ((float)x / (float)m_width) * m_player.fov;
+                float ray_angle = (m_player.camera.angle - m_player.camera.fov / 2.0f) + ((float)x / (float)m_width) * m_player.camera.fov;
                 
-                float distance_to_wall = DDA(m_player.position, ray_angle, m_grid);
+                float distance_to_wall = DDA(m_player.camera.pos, ray_angle, m_grid);
 
                 // Drawing 
                 int ceiling = (float)(m_height / 2.0) - m_height / ((float)distance_to_wall);
                 int floor = m_height - ceiling;
-                float max_dist = sqrtf(powf(m_width/m_scl-1, 2) + powf(m_height/m_scl-1, 2) );
+                float max_dist = sqrtf(powf(m_grid.get_width()-1, 2) + powf(m_grid.get_height()-1, 2) );
                 float shade = 1 - (distance_to_wall / max_dist);
             
                 for(int y = 0; y < m_height; y++)

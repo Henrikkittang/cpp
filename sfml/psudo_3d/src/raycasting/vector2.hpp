@@ -99,6 +99,18 @@ namespace trig
             rotateR(radians);
         }
 
+        void move(T xoffset, T yoffset)
+        {
+            x += xoffset; 
+            y += yoffset;
+        }
+
+        void move(Vector2<bool> other)
+        {
+            x += other.x; 
+            y += other.y;
+        }
+        
         bool isParallel(const Vector2& other) const
         {
             return x * other.y == y * other.x;
