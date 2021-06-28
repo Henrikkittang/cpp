@@ -5,7 +5,7 @@
 
 
 // Start position in grid space
-float DDA(const trig::Vector2f& start_position, float angle, const DynamicGrid<bool>& grid)
+float DDA_point(const trig::Vector2f& start_position, float angle, const DynamicGrid<bool>& grid)
 {
     // Form ray cast from player into scene
     trig::Vector2f ray_start = start_position;
@@ -67,7 +67,12 @@ float DDA(const trig::Vector2f& start_position, float angle, const DynamicGrid<b
         
     }
 
-    return (tile_found ? cur_distance : -1.0f);
-
-    
+    if (tile_found)
+    {
+        trig::Vector2f intersection = ray_start + ray_direction * cur_distance;
+        return intersection;
+    }else
+    {
+        return tig::Vector2f(-1.0f, -1.0f);
+    }
 }

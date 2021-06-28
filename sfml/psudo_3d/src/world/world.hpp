@@ -7,10 +7,51 @@
 #include "../raycasting/dda.hpp"
 #include "dynamic_grid.hpp"
 #include "player.hpp"
+#include "camera.hpp"
 
 #define WALL true
 #define PASSAGE false
 
+
+sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
+{
+    sf::Image image;
+    image.create(grid.get_width()*grid.get_scl(), grid.get_height()*grid.get_scl(), sf::Color::Black);
+    
+    int screen_width = grid.get_width() * grid.get_scl();
+    int screen_height = grid.get_height() * grid.get_scl();
+
+
+    for(int x = 0; x < screen_width; x++)
+    {
+        // Calculating distance with raytracing
+        float ray_angle = (camera.angle - camera.fov / 2.0f) + ((float)x / (float)screen_width) * camera.fov;
+        
+        float distance_to_wall = DDA(camera.pos, ray_angle, grid);
+
+        // Drawing 
+        int ceiling = (float)(screen_height / 2.0) -screen_height / ((float)distance_to_wall);
+        int floor =screen_height - ceiling;
+        float max_dist = sqrtf(powf(grid.get_width()-1, 2) + powf(grid.get_height()-1, 2) );
+        float shade = 1 - (distance_to_wall / max_dist);
+    
+        for(int y = 0; y < screen_height; y++)
+        {
+            if(y < ceiling)
+                image.setPixel(x, y, sf::Color::Black);
+            else if(y > ceiling && y <= floor)
+                image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
+            else
+            {
+                image.setPixel(x, y, sf::Color::Black);
+
+                // float b = (((float)y -screescreen_height/2.0f) / ((float)screescreen_height / 2.0f));
+                // m_image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
+            }
+        }
+    }
+    return image;
+}
 
 
 class World
@@ -21,7 +62,6 @@ private:
     DynamicGrid<bool> m_grid;
     
     Player m_player;
-    sf::Image m_image;
 
 private:
 
@@ -63,9 +103,6 @@ public:
         std::cout << m_grid.get_width()  << "\n";
         std::cout << m_grid.get_height() << "\n";
 
-
-        m_image.create(width, height, sf::Color::Black);
-
         for(int y = 0; y < m_grid.get_height(); y++)
         {
             for(int x = 0; x < m_grid.get_width(); x++)
@@ -101,38 +138,10 @@ public:
 
             m_player.move(dt, m_grid);
 
-            for(int x = 0; x < m_width; x++)
-            {
-
-                // Calculating distance with raytracing
-                float ray_angle = (m_player.camera.angle - m_player.camera.fov / 2.0f) + ((float)x / (float)m_width) * m_player.camera.fov;
-                
-                float distance_to_wall = DDA(m_player.camera.pos, ray_angle, m_grid);
-
-                // Drawing 
-                int ceiling = (float)(m_height / 2.0) - m_height / ((float)distance_to_wall);
-                int floor = m_height - ceiling;
-                float max_dist = sqrtf(powf(m_grid.get_width()-1, 2) + powf(m_grid.get_height()-1, 2) );
-                float shade = 1 - (distance_to_wall / max_dist);
-            
-                for(int y = 0; y < m_height; y++)
-                {
-                    if(y < ceiling)
-                        m_image.setPixel(x, y, sf::Color::Black);
-                    else if(y > ceiling && y <= floor)
-                        m_image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
-                    else
-                    {
-                        m_image.setPixel(x, y, sf::Color::Black);
-
-                        // float b = (((float)y -m_height/2.0f) / ((float)m_height / 2.0f));
-                        // m_image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
-                    }
-                }
-            }
+            auto image = render_world(m_player.camera, m_grid);
 
             sf::Texture texture;
-            texture.loadFromImage(m_image);
+            texture.loadFromImage(image);
             sf::Sprite sprite;
             sprite.setTexture(texture, true);
 
