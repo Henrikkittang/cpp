@@ -13,11 +13,17 @@ namespace trig
     struct Vector2{
         T x, y;
 
-        Vector2(T x=0, T y=0)
+        Vector2()
+            :x(0), y(0) {}
+
+        Vector2(T x, T y)
             : x(x), y(y){}
 
         Vector2(std::array<T, 2> pos)
             : x(pos[0]), y(pos[1]){}
+
+        Vector2(T angle)
+            : x(sinf(angle)), y(cosf(angle)){}
 
         operator Vector2<int>() const { return Vector2<int>(int(x), int(y)); }    
         operator Vector2<float>() const { return Vector2<float>(float(x), float(y)); }    
@@ -29,9 +35,21 @@ namespace trig
             return Vector2(x + other.x, y + other.y);
         }
 
+        void operator+=(const Vector2& other)
+        {
+            x += other.x;
+            y += other.y;
+        }
+
         Vector2 operator-(const Vector2& other) const
         {
             return Vector2(x - other.x, y - other.y);
+        }
+
+        void operator-=(const Vector2& other)
+        {
+            x -= other.x;
+            y -= other.y;
         }
 
         T operator*(const Vector2& other) const
@@ -155,9 +173,14 @@ namespace trig
         return Vector2<T>(v2.x - v1.x, v2.y - v1.y);
     }
 
-    template<typename T>
-    Vector2<T> make_vector(std::array<T, 2> p1, std::array<T, 2> p2)
-    {
-        return Vector2<T>(p2[0] - p1[0], p2[1] - p1[1]);
-    }    
+    // template<typename T>
+    // Vector2<T> make_vector(std::array<T, 2> p1, std::array<T, 2> p2)
+    // {
+    //     return Vector2<T>(p2[0] - p1[0], p2[1] - p1[1]);
+    // }  
+    // template<typename T>
+    // Vector2<T> make_vector(std::vector<T> p1, std::vector<T> p2)
+    // {
+    //     return Vector2<T>(p2[0] - p1[0], p2[1] - p1[1]);
+    // }    
 }

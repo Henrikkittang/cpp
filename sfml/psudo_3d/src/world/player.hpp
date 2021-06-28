@@ -18,22 +18,20 @@ struct Player
         }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
             camera.angle += (speed * 0.75f) * dt;
         }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)){
-            camera.pos.x += sinf(camera.angle) * speed * dt;
-            camera.pos.y += cosf(camera.angle) * speed * dt;
+            trig::Vector2f vect_angle(camera.angle);
+            camera.pos += vect_angle * speed * dt;
             if(grid.index((int)camera.pos.x, (int)camera.pos.y) == true || 
                 grid.out_of_bounds((int)camera.pos.x, (int)camera.pos.y))
             {
-                camera.pos.x -= sinf(camera.angle) * speed * dt;
-                camera.pos.y -= cosf(camera.angle) * speed * dt;
+                camera.pos -= vect_angle * speed * dt;
             }
         }if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
-            camera.pos.x -= sinf(camera.angle) * speed * dt;
-            camera.pos.y -= cosf(camera.angle) * speed * dt;
+            trig::Vector2f vect_angle(camera.angle);
+            camera.pos -= vect_angle * speed * dt;
             if(grid.index((int)camera.pos.x, (int)camera.pos.y) == true || 
                 grid.out_of_bounds((int)camera.pos.x, (int)camera.pos.y))
             {
-                camera.pos.x += sinf(camera.angle) * speed * dt;
-                camera.pos.y += cosf(camera.angle) * speed * dt;
+                camera.pos += vect_angle * speed * dt;
             }
         }
     }
