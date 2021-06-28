@@ -19,7 +19,7 @@ private:
 	sf::RectangleShape m_player;
 	sf::Texture m_texture;
 	sf::Font m_font;
-	std::array<Gun*, 3> m_guns = {new Revolver(), new MachineGun(), new Shotgun()} ;
+	std::array<Gun*, 3> m_guns;
 	enum CurGunIdx { REVOLVER, MACHINGUN, SHOTGUN };
 
 public:
@@ -30,7 +30,7 @@ public:
 		m_player.setSize(sf::Vector2f(m_size, m_size));
 		//m_player.setFillColor(sf::Color::Red);
 		m_player.setOrigin(m_size/2, m_size/2);
-
+    
 		m_gun_text.setFont(m_font);
 		m_gun_text.setStyle(sf::Text::Bold);
 		m_gun_text.setCharacterSize(34);
@@ -39,6 +39,9 @@ public:
 		m_texture.loadFromFile("images/player.png");
 		m_player.setTexture(&m_texture);    
 		m_font.loadFromFile("fonts/arial.ttf");
+
+        m_guns = {new Revolver(), new MachineGun(), new Shotgun()} ;
+
 	}
 
 	~Player()

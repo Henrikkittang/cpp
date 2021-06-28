@@ -19,23 +19,7 @@ private:
 
     sf::RenderWindow m_window;
     Player entity;
-    Chunk m_collision_map;
-    std::vector<Entity> m_entities;
-
-    void update_collision_map()
-    {
-        for(const auto& enity : m_entities)
-        {
-            int pos[2] = { entity.getPos().x / TileSize, entity.getPos().y / TileSize };
-            int size[2] = { entity.getWidth() / TileSize, entity.getHeight() / TileSize };
-            
-            for(int i = 0; i < size[0]; i++)
-                m_collision_map.index(pos[0] + i * TileSize, pos[1]);
-            for(int i = 0; i < size[1]; i++)
-                m_collision_map.index(pos[0], pos[1] + i * TileSize);
-            
-        }
-    }
+    
 
 public:
 

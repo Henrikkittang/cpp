@@ -2,6 +2,8 @@
 
 #include "entity.hpp"
 #include "../trigonometry/vector.hpp"
+#include "../world/grid.hpp"
+
 
 class Movable
 {
@@ -23,6 +25,9 @@ public:
     
 
     virtual void move(float dt) = 0;
-    // virtual void collision(float dt) = 0;
+    virtual void collision(float dt, Grid<int, 16, 16> collision_map) = 0;
 
 };
+
+
+

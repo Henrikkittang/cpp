@@ -34,4 +34,23 @@ public:
         m_rectangle.move(m_direction.x, m_direction.y);
     }
 
+
+    void collision(float dt, Grid<int, 16, 16> collision_map) override
+    {
+        // 48 = tilesize
+        auto cornersPixel = hitbox();
+        std::array<sf::Vector2i, 4> corners;
+        for(int i = 0; i < cornersPixel.size(); i++)
+            corners[i] = getGridPos(cornersPixel[i], 48);
+        
+        for(const auto& corner : corners)
+        {
+            if(collision_map.index(corner.x, corner.y) == 1)
+            {
+                if(m_direction.x == 1) {}
+            }
+        }
+    }
 };
+
+

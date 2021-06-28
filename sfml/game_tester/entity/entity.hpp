@@ -8,29 +8,23 @@ class Entity
 {
 protected:    
     sf::RectangleShape m_rectangle;
-    sf::Texture m_texture;
 
 public:
 
     Entity(){}
 
-    Entity(const sf::Vector2f& position, const sf::Vector2f& size, const std::string& texture_path)
+    Entity(const sf::Vector2f& position, const sf::Vector2f& size, sf::Texture* texture)
     {
-        m_texture.loadFromFile(texture_path);
 
         m_rectangle = sf::RectangleShape(size);
         m_rectangle.setPosition(position);
         m_rectangle.setOrigin(size.x/2, size.y/2);
         // m_rectangle.setFillColor(sf::Color::Green);
 
-        m_rectangle.setTexture(&m_texture);
+        m_rectangle.setTexture(texture);
     }
 
-    Entity(const Entity& other)
-    {   
-        m_rectangle.setTexture(&m_texture); 
-    }
-
+   
 
     void drawHitbox(sf::RenderWindow& wn)
     {
@@ -45,7 +39,6 @@ public:
 
     void draw(sf::RenderWindow& wn)
     {   
-        m_rectangle.setTexture(&m_texture);
 
         wn.draw(m_rectangle);
         drawHitbox(wn);
@@ -54,7 +47,15 @@ public:
     const sf::Vector2f& getPos() const { return m_rectangle.getPosition(); }
     const int getWidth() const { return m_rectangle.getSize().x; }
     const int getHeight() const { return m_rectangle.getSize().y; }
-
+    const sf::Vector2i getGridPos(const sf::Vector2f& pixelPos, int sql) 
+    {  
+        return { (int)(pixelPos.x / sql), (int)(pixelPos.y / sql) }; 
+    }
+    const sf::Vector2i getGridPos(int sql) 
+    {  
+        return { (int)(getPos().x / sql), (int)(getPos().y / sql) }; 
+    }
+    
 
     std::array<sf::Vector2f, 4> hitbox() const
 	{

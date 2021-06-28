@@ -5,29 +5,26 @@
 #include <SFML/Graphics.hpp>
 
 #include "../raycasting/dda.hpp"
+#include "../raycasting/camera.hpp"
 #include "dynamic_grid.hpp"
 #include "player.hpp"
-#include "camera.hpp"
-
-#define WALL true
-#define PASSAGE false
-
 
 sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
 {
-    sf::Image image;
-    image.create(grid.get_width()*grid.get_scl(), grid.get_height()*grid.get_scl(), sf::Color::Black);
     
     int screen_width = grid.get_width() * grid.get_scl();
     int screen_height = grid.get_height() * grid.get_scl();
 
-
+    sf::Image image;
+    image.create(screen_width, screen_height, sf::Color::Black);
+        
     for(int x = 0; x < screen_width; x++)
     {
         // Calculating distance with raytracing
         float ray_angle = (camera.angle - camera.fov / 2.0f) + ((float)x / (float)screen_width) * camera.fov;
         
         float distance_to_wall = DDA(camera.pos, ray_angle, grid);
+        if(distance_to_wall < 0.0f) continue;
 
         // Drawing 
         int ceiling = (float)(screen_height / 2.0) -screen_height / ((float)distance_to_wall);
@@ -39,14 +36,14 @@ sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
         {
             if(y < ceiling)
                 image.setPixel(x, y, sf::Color::Black);
-            else if(y > ceiling && y <= floor)
+            else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
                 image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
             else
             {
                 image.setPixel(x, y, sf::Color::Black);
 
-                // float b = (((float)y -screescreen_height/2.0f) / ((float)screescreen_height / 2.0f));
-                // m_image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
+                // float b = (((float)y -screen_height/2.0f) / ((float)screen_height / 2.0f));
+                // image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
             }
         }
     }

@@ -131,9 +131,9 @@ public:
                     // Calculate intersection location
                     if (tile_found)
                     {
-                        trig::Vector2f vIntersection = ray_start + ray_direction * cur_distance;
+                        trig::Vector2f intersection = ray_start + ray_direction * cur_distance;
                         float angle = atan2f(ray_direction.y, ray_direction.x);
-                        m_triangles.push_back({vIntersection.x*m_scl, vIntersection.y*m_scl, angle}); 
+                        m_triangles.push_back({intersection.x*m_scl, intersection.y*m_scl, angle}); 
                     }
                 }
             }
