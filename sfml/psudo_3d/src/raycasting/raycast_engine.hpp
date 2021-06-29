@@ -4,7 +4,7 @@
 #include "vector2.hpp"
 #include "camera.hpp"
 
-class RaycasterWorld
+class RaycastEngine
 {
 protected:
     Camera m_camera; 
@@ -29,7 +29,7 @@ protected:
 
 public:
 
-    RaycasterWorld(int screen_width, int screen_height)
+    RaycastEngine(int screen_width, int screen_height)
         : m_screen_width(screen_width), m_screen_height(screen_height)
     {}
 
@@ -45,7 +45,7 @@ public:
 };
 
 
-float RaycasterWorld::get_distance(float angle)
+float RaycastEngine::get_distance(float angle)
 {
     // Form ray cast from player into scene
     trig::Vector2f ray_direction = trig::Vector2f(angle);
@@ -107,7 +107,7 @@ float RaycasterWorld::get_distance(float angle)
     // return (tile_found ? cur_distance : -1.0f);
 }
 
-void RaycasterWorld::render(sf::RenderWindow& wn)
+void RaycastEngine::render(sf::RenderWindow& wn)
 {
     sf::Image image;
     image.create(m_screen_width, m_screen_height, sf::Color::Black);
@@ -150,13 +150,13 @@ void RaycasterWorld::render(sf::RenderWindow& wn)
 }
 
 
-void RaycasterWorld::set_camera_position(const trig::Vector2f& positon)
+void RaycastEngine::set_camera_position(const trig::Vector2f& positon)
 {
     m_camera.pos = positon;
 }
 
 // Returns a pointer to the camera
-Camera* RaycasterWorld::get_camera_pointer()
+Camera* RaycastEngine::get_camera_pointer()
 {
     return &m_camera;
 }

@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../raycasting/raycaster_world.hpp"
+#include "../raycasting/raycast_engine.hpp"
 #include "dynamic_grid.hpp"
 
 
@@ -51,7 +51,7 @@ sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
 }
 */
 
-class MyWorld : public RaycasterWorld
+class MyWorld : public RaycastEngine
 {
 private:
     DynamicGrid<bool> m_grid;
@@ -60,7 +60,7 @@ private:
 public:
 
     MyWorld(int screen_width, int screen_height, int scl)
-        : RaycasterWorld(screen_width, screen_height)
+        : RaycastEngine(screen_width, screen_height)
     {    
         std::vector<bool> grid = 
         {
