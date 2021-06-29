@@ -12,6 +12,10 @@ protected:
     int m_screen_height;
     float m_render_distance = 20.0f;
 
+    enum CellSide
+    {
+        TOP, MIDDLE, BOTTOM
+    };
 
 protected:        
     // Returns distance to nearest solid cell using DDA
@@ -25,6 +29,9 @@ protected:
 
     // Returns true if the cell position is solid
     virtual bool is_solid(const trig::Vector2i& position) = 0;
+
+    // Returns the color of the pixel based on the position, cell side and distance to cell
+    virtual sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance) = 0;
 
 
 public:
@@ -42,6 +49,14 @@ public:
     // Returns a pointer to the camera
     Camera* get_camera_pointer();
     
+    // Returns numbers in range 0 to 1 based on the argument distance 
+    // and the render distance
+    float get_releative_dept(float distance);
+
+    // Used to shadow ground and sky, which needs to be shadowed based on 
+    // the y position   
+    float get_releative_breath(float y);
+
 };
 
 
@@ -128,16 +143,22 @@ void RaycastEngine::render(sf::RenderWindow& wn)
         {
             if(distance_to_wall > m_render_distance) 
                 image.setPixel(x, y, sf::Color::Black);
+
             else if(y < ceiling)
-                image.setPixel(x, y, sf::Color::Black);
+                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::TOP, distance_to_wall));
             else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
-                image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
+                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::MIDDLE, distance_to_wall));
             else
             {
-                image.setPixel(x, y, sf::Color::Black);
-                float b = (((float)y - m_screen_height/2.0f) / ((float)m_screen_height / 2.0f));
-                image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
+                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::BOTTOM, distance_to_wall));
+
+                // image.setPixel(x, y, sf::Color::Black);
+                // float b = (((float)y - m_screen_height/2.0f) / ((float)m_screen_height / 2.0f));
+                // image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
             }
+
+
+            
         }
     }
 
@@ -159,4 +180,14 @@ void RaycastEngine::set_camera_position(const trig::Vector2f& positon)
 Camera* RaycastEngine::get_camera_pointer()
 {
     return &m_camera;
+}
+
+float RaycastEngine::get_releative_dept(float distance)
+{
+    return 1 - distance / m_render_distance;
+}
+    
+float RaycastEngine::get_releative_breath(float y)
+{
+    return (((float)y - m_screen_height/2.0f) / ((float)m_screen_height / 2.0f));
 }

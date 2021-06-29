@@ -112,6 +112,16 @@ public:
         return m_grid.index(position.x, position.y);
     } 
 
+
+    sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance) override
+    {
+        float shade = (1-distance/20.0f);
+        if(cell_side == CellSide::TOP ) return sf::Color::Black;
+        else if(cell_side == CellSide::MIDDLE ) return sf::Color(0, 255*shade, 120*shade);
+        else if(cell_side == CellSide::BOTTOM ) return sf::Color::Black;
+        return sf::Color::Black;
+    }
+
 };
 
 
