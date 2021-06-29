@@ -4,11 +4,11 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../raycasting/dda.hpp"
-#include "../raycasting/camera.hpp"
+#include "../raycasting/raycaster_world.hpp"
 #include "dynamic_grid.hpp"
-#include "player.hpp"
 
+
+/*
 sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
 {
     
@@ -49,26 +49,19 @@ sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
     }
     return image;
 }
+*/
 
-
-class World
+class MyWorld : public RaycasterWorld
 {
 private:
-    int m_width, m_height, m_scl;
-    sf::RenderWindow m_window;
     DynamicGrid<bool> m_grid;
-    
-    Player m_player;
 
-private:
 
 public:
 
-    World(int width, int height, int scl)
-        : m_width(width), m_height(height), m_scl(scl),
-        m_window(sf::VideoMode(width, height), "Psudo 3D", sf::Style::Close | sf::Style::Titlebar)
-    {
-        
+    MyWorld(int screen_width, int screen_height, int scl)
+        : RaycasterWorld(screen_width, screen_height)
+    {    
         std::vector<bool> grid = 
         {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -89,14 +82,10 @@ public:
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         };
         
-        
-        
-        m_grid = DynamicGrid<bool>(m_width/m_scl, m_height/m_scl, m_scl, grid);
+    
+        m_grid = DynamicGrid<bool>(screen_width/scl, screen_height/scl, scl, grid);
        
-        m_player.camera.pos.x = 2.0f;
-        m_player.camera.pos.y = 2.0f;
-        m_player.speed = 5.0f;
-
+        
         std::cout << m_grid.get_width()  << "\n";
         std::cout << m_grid.get_height() << "\n";
 
@@ -112,6 +101,41 @@ public:
             std::cout << "\n";
         }
     }
+
+    bool out_of_bounds(const trig::Vector2i& position) override
+    {
+        return m_grid.out_of_bounds(position.x, position.y);
+    }
+
+    bool is_solid(const trig::Vector2i& position) override
+    {
+        return m_grid.index(position.x, position.y);
+    } 
+
+};
+
+
+class World
+{
+private:
+    int m_width, m_height, m_scl;
+    sf::RenderWindow m_window;
+    MyWorld m_world;
+    
+private:
+
+
+
+public:
+
+    World(int width, int height, int scl)
+        : m_width(width), m_height(height), m_scl(scl),
+        m_window(sf::VideoMode(width, height), "Psudo 3D", sf::Style::Close | sf::Style::Titlebar),
+        m_world(width, height, scl)
+    {
+        m_world.set_camera_position({4.0f, 4.0f});
+    }
+
     void update()
     {
         sf::Clock delta_clock;
@@ -133,16 +157,25 @@ public:
                 acc = 0.0f;
             }
 
-            m_player.move(dt, m_grid);
+            Camera* camera = m_world.get_camera_pointer();
 
-            auto image = render_world(m_player.camera, m_grid);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                camera->rotate_left(dt);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                camera->rotate_right(dt);
 
-            sf::Texture texture;
-            texture.loadFromImage(image);
-            sf::Sprite sprite;
-            sprite.setTexture(texture, true);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                camera->move_forward(dt);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                camera->move_backward(dt);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
+                camera->move_left(dt);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+                camera->move_right(dt);
 
-            m_window.draw(sprite);
+            m_world.render(m_window);
+
+            
             m_window.display();
 
         }

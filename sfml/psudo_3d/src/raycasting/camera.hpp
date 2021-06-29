@@ -7,51 +7,36 @@ struct Camera
     float fov = PI / 4.0f; // Field of view
     float angle = 0.0f;
     trig::Vector2f pos = {0, 0};
-    // float speed = 5.0f;
+    float speed = 5.0f;
 
-
-    /*
-    void move_forward(const DynamicGrid<bool>& grid)
+    void rotate_left(float dt)
     {
-        camera.pos.x += sinf(camera.angle) * speed * dt;
-        camera.pos.y += cosf(camera.angle) * speed * dt;
-        if(grid.index((int)camera.pos.x, (int)camera.pos.y) == true || 
-            grid.out_of_bounds((int)camera.pos.x, (int)camera.pos.y))
-        {
-            camera.pos.x -= sinf(camera.angle) * speed * dt;
-            camera.pos.y -= cosf(camera.angle) * speed * dt;
-        }
+        angle -= (speed * 0.75f) * dt;
     }
 
-    void move_backward(const DynamicGrid<bool>& grid)
+    void rotate_right(float dt)
     {
-        // trig::Vector2f move_angle(angle);
-        camera.pos.x -= sinf(camera.angle) * speed * dt;
-        camera.pos.y -= cosf(camera.angle) * speed * dt;
-        if(grid.index((int)camera.pos.x, (int)camera.pos.y) == true || 
-            grid.out_of_bounds((int)camera.pos.x, (int)camera.pos.y))
-        {
-            camera.pos.x += sinf(camera.angle) * speed * dt;
-            camera.pos.y += cosf(camera.angle) * speed * dt;
-        }
+        angle += (speed * 0.75f) * dt;
     }
-
-    void move_left()
+        
+    void move_forward(float dt)
     {
+        pos += trig::Vector2f(angle) * speed * dt;
+    }   
+
+    void move_backward(float dt)
+    {
+        pos += trig::Vector2f(angle + PI) * speed * dt;
 
     }
 
-
-    void look_left()
+    void move_left(float dt)
     {
-        camera.angle -= (speed * 0.75f) * dt;
+        pos += trig::Vector2f(angle - (PI/2.0f)) * speed * dt;
     }
 
-    void look_right()
+    void move_right(float dt)
     {
-        camera.angle += (speed * 0.75f) * dt;
+        pos += trig::Vector2f(angle + (PI/2.0f)) * speed * dt;
     }
-
-    */
-
 };
