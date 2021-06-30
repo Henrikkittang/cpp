@@ -12,6 +12,8 @@ protected:
     int m_screen_height;
     float m_render_distance = 20.0f;
 
+    sf::Texture m_wall_texture;
+
     enum CellSide
     {
         TOP, MIDDLE, BOTTOM
@@ -38,7 +40,9 @@ public:
 
     RaycastEngine(int screen_width, int screen_height)
         : m_screen_width(screen_width), m_screen_height(screen_height)
-    {}
+    {
+        m_wall_texture.loadFromFile("src/sprites/wall.jpg");
+    }
 
     // Renders the 2D grid as a 3D perspective, column by column
     void render(sf::RenderWindow& wn);

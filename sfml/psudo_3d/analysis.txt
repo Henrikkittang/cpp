@@ -1,0 +1,1238 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 34.78      0.16     0.16                             __fentry__
+ 32.61      0.31     0.15                             _mcount_private
+ 15.22      0.38     0.07 20971520     0.00     0.00  MyWorld::get_pixel_color(trig::Vector2<int> const&, RaycastEngine::CellSide, float)
+ 10.87      0.43     0.05       20     2.50     7.50  RaycastEngine::render(sf::RenderWindow&)
+  4.35      0.45     0.02 20992000     0.00     0.00  trig::Vector2<int>::Vector2(int, int)
+  2.17      0.46     0.01   264140     0.00     0.00  DynamicGrid<bool>::out_of_bounds(int, int) const
+  0.00      0.46     0.00   264652     0.00     0.00  std::_Bit_reference::_Bit_reference(unsigned long*, unsigned long)
+  0.00      0.46     0.00   264413     0.00     0.00  DynamicGrid<bool>::get_width() const
+  0.00      0.46     0.00   264413     0.00     0.00  std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int)
+  0.00      0.46     0.00   264397     0.00     0.00  std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int)
+  0.00      0.46     0.00   264396     0.00     0.00  DynamicGrid<bool>::index(int, int) const
+  0.00      0.46     0.00   264396     0.00     0.00  std::_Bit_reference::operator bool() const
+  0.00      0.46     0.00   264396     0.00     0.00  std::_Bit_const_iterator::operator*() const
+  0.00      0.46     0.00   264396     0.00     0.00  std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const
+  0.00      0.46     0.00   264158     0.00     0.00  DynamicGrid<bool>::get_height() const
+  0.00      0.46     0.00   264140     0.00     0.00  MyWorld::out_of_bounds(trig::Vector2<int> const&)
+  0.00      0.46     0.00   264140     0.00     0.00  MyWorld::is_solid(trig::Vector2<int> const&)
+  0.00      0.46     0.00    40960     0.00     0.00  std::abs(float)
+  0.00      0.46     0.00    20482     0.00     0.00  trig::Vector2<float>::Vector2(float, float)
+  0.00      0.46     0.00    20480     0.00     0.00  RaycastEngine::get_distance(float)
+  0.00      0.46     0.00    20480     0.00     0.00  trig::Vector2<float>::Vector2(float)
+  0.00      0.46     0.00    20480     0.00     0.00  trig::Vector2<float>::Vector2()
+  0.00      0.46     0.00    20480     0.00     0.00  trig::Vector2<int>::Vector2()
+  0.00      0.46     0.00    20480     0.00     0.00  trig::Vector2<float>::operator trig::Vector2<int>() const
+  0.00      0.46     0.00      256     0.00     0.00  std::_Bit_iterator::operator*() const
+  0.00      0.46     0.00      256     0.00     0.00  std::_Bit_iterator::operator++()
+  0.00      0.46     0.00      256     0.00     0.00  std::_Bit_reference::operator=(bool)
+  0.00      0.46     0.00      256     0.00     0.00  std::_Bit_iterator_base::_M_bump_up()
+  0.00      0.46     0.00       21     0.00     0.00  sf::Rect<int>::Rect()
+  0.00      0.46     0.00       20     0.00     0.00  RaycastEngine::get_camera_pointer()
+  0.00      0.46     0.00       20     0.00     0.00  sf::Sprite::~Sprite()
+  0.00      0.46     0.00       20     0.00     0.00  sf::Drawable::~Drawable()
+  0.00      0.46     0.00        9     0.00     0.00  std::_Bit_iterator::_Bit_iterator()
+  0.00      0.46     0.00        6     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::~new_allocator()
+  0.00      0.46     0.00        4     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const
+  0.00      0.46     0.00        4     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_M_deallocate()
+  0.00      0.46     0.00        4     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_S_nword(unsigned long long)
+  0.00      0.46     0.00        4     0.00     0.00  std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&)
+  0.00      0.46     0.00        4     0.00     0.00  unsigned long* std::__addressof<unsigned long>(unsigned long&)
+  0.00      0.46     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::new_allocator(__gnu_cxx::new_allocator<unsigned long> const&)
+  0.00      0.46     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::new_allocator()
+  0.00      0.46     0.00        3     0.00     0.00  std::allocator<unsigned long>::~allocator()
+  0.00      0.46     0.00        3     0.00     0.00  std::allocator<unsigned long>::~allocator()
+  0.00      0.46     0.00        3     0.00     0.00  std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int)
+  0.00      0.46     0.00        3     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::~_Bvector_impl()
+  0.00      0.46     0.00        3     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset()
+  0.00      0.46     0.00        3     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data()
+  0.00      0.46     0.00        3     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::~_Bvector_base()
+  0.00      0.46     0.00        3     0.00     0.00  std::vector<bool, std::allocator<bool> >::~vector()
+  0.00      0.46     0.00        3     0.00     0.00  unsigned long* std::__niter_base<unsigned long*>(unsigned long*)
+  0.00      0.46     0.00        2     0.00     0.00  DynamicGrid<bool>::~DynamicGrid()
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<bool>::new_allocator()
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<bool>::~new_allocator()
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::deallocate(unsigned long*, unsigned long long)
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long long, void const*)
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<char>::max_size() const
+  0.00      0.46     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<unsigned long>::max_size() const
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_iterator::operator+(long long) const
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_M_end_addr() const
+  0.00      0.46     0.00        2     0.00     0.00  std::initializer_list<bool>::begin() const
+  0.00      0.46     0.00        2     0.00     0.00  std::vector<bool, std::allocator<bool> >::end() const
+  0.00      0.46     0.00        2     0.00     0.00  std::vector<bool, std::allocator<bool> >::begin() const
+  0.00      0.46     0.00        2     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_data() const
+  0.00      0.46     0.00        2     0.00     0.00  std::allocator<bool>::~allocator()
+  0.00      0.46     0.00        2     0.00     0.00  std::allocator<unsigned long>::allocator<bool>(std::allocator<bool> const&)
+  0.00      0.46     0.00        2     0.00     0.00  std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_iterator::operator+=(long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator()
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&)
+  0.00      0.46     0.00        2     0.00     0.00  std::allocator_traits<std::allocator<unsigned long> >::deallocate(std::allocator<unsigned long>&, unsigned long*, unsigned long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_iterator_base::_M_incr(long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long)
+  0.00      0.46     0.00        2     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator()
+  0.00      0.46     0.00        2     0.00     0.00  bool const* std::__miter_base<bool const*>(bool const*)
+  0.00      0.46     0.00        2     0.00     0.00  unsigned long* std::__miter_base<unsigned long*>(unsigned long*)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_const_iterator std::__miter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator)
+  0.00      0.46     0.00        2     0.00     0.00  bool const* std::__niter_base<bool const*>(bool const*)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_iterator std::__niter_base<std::_Bit_iterator>(std::_Bit_iterator)
+  0.00      0.46     0.00        2     0.00     0.00  std::_Bit_const_iterator std::__niter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator)
+  0.00      0.46     0.00        2     0.00     0.00  std::operator-(std::_Bit_iterator_base const&, std::_Bit_iterator_base const&)
+  0.00      0.46     0.00        1     0.00     0.00  DynamicGrid<bool>::DynamicGrid(unsigned int, unsigned int, unsigned int, std::vector<bool, std::allocator<bool> > const&)
+  0.00      0.46     0.00        1     0.00     0.00  DynamicGrid<bool>::DynamicGrid()
+  0.00      0.46     0.00        1     0.00     0.00  DynamicGrid<bool>::operator=(DynamicGrid<bool>&&)
+  0.00      0.46     0.00        1     0.00     0.00  RaycastEngine::set_camera_position(trig::Vector2<float> const&)
+  0.00      0.46     0.00        1     0.00     0.00  RaycastEngine::RaycastEngine(int, int)
+  0.00      0.46     0.00        1     0.00     0.00  RaycastEngine::~RaycastEngine()
+  0.00      0.46     0.00        1     0.00     0.00  sf::ContextSettings::ContextSettings(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, bool)
+  0.00      0.46     0.00        1     0.00     0.00  sf::String::~String()
+  0.00      0.46     0.00        1     0.00   150.00  World::update()
+  0.00      0.46     0.00        1     0.00     0.00  World::World(int, int, int)
+  0.00      0.46     0.00        1     0.00     0.00  World::~World()
+  0.00      0.46     0.00        1     0.00     0.00  Camera::Camera()
+  0.00      0.46     0.00        1     0.00     0.00  MyWorld::MyWorld(int, int, int)
+  0.00      0.46     0.00        1     0.00     0.00  MyWorld::~MyWorld()
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<char>::allocate(unsigned long long, void const*)
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<unsigned int>::deallocate(unsigned int*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<unsigned int>::~new_allocator()
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_select_on_copy(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        1     0.00     0.00  __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_propagate_on_move_assign()
+  0.00      0.46     0.00        1     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char const>(char const*)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() const
+  0.00      0.46     0.00        1     0.00     0.00  std::initializer_list<bool>::end() const
+  0.00      0.46     0.00        1     0.00     0.00  std::initializer_list<bool>::size() const
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::size() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_local_data() const
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator<bool>::allocator()
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator<bool>::allocator<unsigned long>(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator<unsigned int>::~allocator()
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator<unsigned long>::allocator()
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned long* std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<unsigned long>(unsigned long const*, unsigned long const*, unsigned long*)
+  0.00      0.46     0.00        1     0.00     0.00  std::char_traits<char>::copy(char*, char const*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::char_traits<char>::assign(char&, char const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::char_traits<char>::length(char const*)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl()
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_move_data(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data&&)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bvector_base<std::allocator<bool> >::_Bvector_base()
+  0.00      0.46     0.00        1     0.00     0.00  std::pointer_traits<char const*>::pointer_to(char const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::pointer_traits<unsigned int const*>::pointer_to(unsigned int const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::pointer_traits<char*>::pointer_to(char&)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator_traits<std::allocator<char> >::deallocate(std::allocator<char>&, char*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator_traits<std::allocator<char> >::allocate(std::allocator<char>&, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator_traits<std::allocator<char> >::max_size(std::allocator<char> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator_traits<std::allocator<unsigned int> >::deallocate(std::allocator<unsigned int>&, unsigned int*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::allocator_traits<std::allocator<unsigned long> >::select_on_container_copy_construction(std::allocator<unsigned long> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag)
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::vector()
+  0.00      0.46     0.00        1     0.00     0.00  std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::~_Alloc_hider()
+  0.00      0.46     0.00        1     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*)
+  0.00      0.46     0.00        1     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)
+  0.00      0.46     0.00        1     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char const*>(char const*, char const*, std::__false_type)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long)
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_Alloc_hider::~_Alloc_hider()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_get_allocator()
+  0.00      0.46     0.00        1     0.00     0.00  std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string()
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<bool const*>::difference_type std::__distance<bool const*>(bool const*, bool const*, std::random_access_iterator_tag)
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<char const*>::difference_type std::__distance<char const*>(char const*, char const*, std::random_access_iterator_tag)
+  0.00      0.46     0.00        1     0.00     0.00  char const* std::__addressof<char const>(char const&)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned int const* std::__addressof<unsigned int const>(unsigned int const&)
+  0.00      0.46     0.00        1     0.00     0.00  char* std::__addressof<char>(char&)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move_a<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned long* std::__copy_move_a<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  void std::__alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&)
+  0.00      0.46     0.00        1     0.00     0.00  void std::__do_alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&, std::integral_constant<bool, true>)
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<bool const*>::iterator_category std::__iterator_category<bool const*>(bool const* const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<char const*>::iterator_category std::__iterator_category<char const*>(char const* const&)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+  0.00      0.46     0.00        1     0.00     0.00  std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  0.00      0.46     0.00        1     0.00     0.00  std::remove_reference<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>::type&& std::move<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&)
+  0.00      0.46     0.00        1     0.00     0.00  std::remove_reference<std::allocator<unsigned long>&>::type&& std::move<std::allocator<unsigned long>&>(std::allocator<unsigned long>&)
+  0.00      0.46     0.00        1     0.00     0.00  std::remove_reference<std::vector<bool, std::allocator<bool> >&>::type&& std::move<std::vector<bool, std::allocator<bool> >&>(std::vector<bool, std::allocator<bool> >&)
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*)
+  0.00      0.46     0.00        1     0.00     0.00  std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*)
+  0.00      0.46     0.00        1     0.00     0.00  char const* std::addressof<char const>(char const&)
+  0.00      0.46     0.00        1     0.00     0.00  unsigned int const* std::addressof<unsigned int const>(unsigned int const&)
+  0.00      0.46     0.00        1     0.00     0.00  char* std::addressof<char>(char&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 2.17% of 0.46 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     34.8    0.16    0.00                 __fentry__ [1]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     32.6    0.00    0.15                 main [2]
+                0.00    0.15       1/1           World::update() [4]
+                0.00    0.00       1/1           World::World(int, int, int) [165]
+                0.00    0.00       1/1           World::~World() [166]
+-----------------------------------------------
+                0.05    0.10      20/20          World::update() [4]
+[3]     32.6    0.05    0.10      20         RaycastEngine::render(sf::RenderWindow&) [3]
+                0.07    0.00 20971520/20971520     MyWorld::get_pixel_color(trig::Vector2<int> const&, RaycastEngine::CellSide, float) [6]
+                0.02    0.00 20971520/20992000     trig::Vector2<int>::Vector2(int, int) [7]
+                0.00    0.01   20480/20480       RaycastEngine::get_distance(float) [8]
+                0.00    0.00      20/21          sf::Rect<int>::Rect() [102]
+                0.00    0.00      20/20          sf::Sprite::~Sprite() [104]
+-----------------------------------------------
+                0.00    0.15       1/1           main [2]
+[4]     32.6    0.00    0.15       1         World::update() [4]
+                0.05    0.10      20/20          RaycastEngine::render(sf::RenderWindow&) [3]
+                0.00    0.00      20/20          RaycastEngine::get_camera_pointer() [103]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     32.6    0.15    0.00                 _mcount_private [5]
+-----------------------------------------------
+                0.07    0.00 20971520/20971520     RaycastEngine::render(sf::RenderWindow&) [3]
+[6]     15.2    0.07    0.00 20971520         MyWorld::get_pixel_color(trig::Vector2<int> const&, RaycastEngine::CellSide, float) [6]
+-----------------------------------------------
+                0.00    0.00   20480/20992000     trig::Vector2<float>::operator trig::Vector2<int>() const [11]
+                0.02    0.00 20971520/20992000     RaycastEngine::render(sf::RenderWindow&) [3]
+[7]      4.3    0.02    0.00 20992000         trig::Vector2<int>::Vector2(int, int) [7]
+-----------------------------------------------
+                0.00    0.01   20480/20480       RaycastEngine::render(sf::RenderWindow&) [3]
+[8]      2.2    0.00    0.01   20480         RaycastEngine::get_distance(float) [8]
+                0.00    0.01  264140/264140      MyWorld::out_of_bounds(trig::Vector2<int> const&) [9]
+                0.00    0.00   20480/20480       trig::Vector2<float>::operator trig::Vector2<int>() const [11]
+                0.00    0.00  264140/264140      MyWorld::is_solid(trig::Vector2<int> const&) [92]
+                0.00    0.00   40960/40960       std::abs(float) [93]
+                0.00    0.00   20480/20480       trig::Vector2<float>::Vector2(float) [95]
+                0.00    0.00   20480/20482       trig::Vector2<float>::Vector2(float, float) [94]
+                0.00    0.00   20480/20480       trig::Vector2<int>::Vector2() [97]
+                0.00    0.00   20480/20480       trig::Vector2<float>::Vector2() [96]
+-----------------------------------------------
+                0.00    0.01  264140/264140      RaycastEngine::get_distance(float) [8]
+[9]      2.2    0.00    0.01  264140         MyWorld::out_of_bounds(trig::Vector2<int> const&) [9]
+                0.01    0.00  264140/264140      DynamicGrid<bool>::out_of_bounds(int, int) const [10]
+-----------------------------------------------
+                0.01    0.00  264140/264140      MyWorld::out_of_bounds(trig::Vector2<int> const&) [9]
+[10]     2.2    0.01    0.00  264140         DynamicGrid<bool>::out_of_bounds(int, int) const [10]
+                0.00    0.00  264140/264413      DynamicGrid<bool>::get_width() const [84]
+                0.00    0.00  264140/264158      DynamicGrid<bool>::get_height() const [91]
+-----------------------------------------------
+                0.00    0.00   20480/20480       RaycastEngine::get_distance(float) [8]
+[11]     0.0    0.00    0.00   20480         trig::Vector2<float>::operator trig::Vector2<int>() const [11]
+                0.00    0.00   20480/20992000     trig::Vector2<int>::Vector2(int, int) [7]
+-----------------------------------------------
+                0.00    0.00     256/264652      std::_Bit_iterator::operator*() const [98]
+                0.00    0.00  264396/264652      std::_Bit_const_iterator::operator*() const [89]
+[83]     0.0    0.00    0.00  264652         std::_Bit_reference::_Bit_reference(unsigned long*, unsigned long) [83]
+-----------------------------------------------
+                0.00    0.00     273/264413      MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00  264140/264413      DynamicGrid<bool>::out_of_bounds(int, int) const [10]
+[84]     0.0    0.00    0.00  264413         DynamicGrid<bool>::get_width() const [84]
+-----------------------------------------------
+                0.00    0.00       3/264413      std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int) [117]
+                0.00    0.00       4/264413      std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&) [111]
+                0.00    0.00       9/264413      std::_Bit_iterator::_Bit_iterator() [106]
+                0.00    0.00  264397/264413      std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int) [86]
+[85]     0.0    0.00    0.00  264413         std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [85]
+-----------------------------------------------
+                0.00    0.00       1/264397      std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+                0.00    0.00  264396/264397      std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const [90]
+[86]     0.0    0.00    0.00  264397         std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int) [86]
+                0.00    0.00  264397/264413      std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [85]
+-----------------------------------------------
+                0.00    0.00     256/264396      MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00  264140/264396      MyWorld::is_solid(trig::Vector2<int> const&) [92]
+[87]     0.0    0.00    0.00  264396         DynamicGrid<bool>::index(int, int) const [87]
+                0.00    0.00  264396/264396      std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const [90]
+-----------------------------------------------
+                0.00    0.00  264396/264396      std::_Bit_const_iterator::operator*() const [89]
+[88]     0.0    0.00    0.00  264396         std::_Bit_reference::operator bool() const [88]
+-----------------------------------------------
+                0.00    0.00  264396/264396      std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const [90]
+[89]     0.0    0.00    0.00  264396         std::_Bit_const_iterator::operator*() const [89]
+                0.00    0.00  264396/264652      std::_Bit_reference::_Bit_reference(unsigned long*, unsigned long) [83]
+                0.00    0.00  264396/264396      std::_Bit_reference::operator bool() const [88]
+-----------------------------------------------
+                0.00    0.00  264396/264396      DynamicGrid<bool>::index(int, int) const [87]
+[90]     0.0    0.00    0.00  264396         std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const [90]
+                0.00    0.00  264396/264397      std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int) [86]
+                0.00    0.00  264396/264396      std::_Bit_const_iterator::operator*() const [89]
+-----------------------------------------------
+                0.00    0.00      18/264158      MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00  264140/264158      DynamicGrid<bool>::out_of_bounds(int, int) const [10]
+[91]     0.0    0.00    0.00  264158         DynamicGrid<bool>::get_height() const [91]
+-----------------------------------------------
+                0.00    0.00  264140/264140      RaycastEngine::get_distance(float) [8]
+[92]     0.0    0.00    0.00  264140         MyWorld::is_solid(trig::Vector2<int> const&) [92]
+                0.00    0.00  264140/264396      DynamicGrid<bool>::index(int, int) const [87]
+-----------------------------------------------
+                0.00    0.00   40960/40960       RaycastEngine::get_distance(float) [8]
+[93]     0.0    0.00    0.00   40960         std::abs(float) [93]
+-----------------------------------------------
+                0.00    0.00       1/20482       World::World(int, int, int) [165]
+                0.00    0.00       1/20482       Camera::Camera() [167]
+                0.00    0.00   20480/20482       RaycastEngine::get_distance(float) [8]
+[94]     0.0    0.00    0.00   20482         trig::Vector2<float>::Vector2(float, float) [94]
+-----------------------------------------------
+                0.00    0.00   20480/20480       RaycastEngine::get_distance(float) [8]
+[95]     0.0    0.00    0.00   20480         trig::Vector2<float>::Vector2(float) [95]
+-----------------------------------------------
+                0.00    0.00   20480/20480       RaycastEngine::get_distance(float) [8]
+[96]     0.0    0.00    0.00   20480         trig::Vector2<float>::Vector2() [96]
+-----------------------------------------------
+                0.00    0.00   20480/20480       RaycastEngine::get_distance(float) [8]
+[97]     0.0    0.00    0.00   20480         trig::Vector2<int>::Vector2() [97]
+-----------------------------------------------
+                0.00    0.00     256/256         std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [192]
+[98]     0.0    0.00    0.00     256         std::_Bit_iterator::operator*() const [98]
+                0.00    0.00     256/264652      std::_Bit_reference::_Bit_reference(unsigned long*, unsigned long) [83]
+-----------------------------------------------
+                0.00    0.00     256/256         std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [192]
+[99]     0.0    0.00    0.00     256         std::_Bit_iterator::operator++() [99]
+                0.00    0.00     256/256         std::_Bit_iterator_base::_M_bump_up() [101]
+-----------------------------------------------
+                0.00    0.00     256/256         std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [192]
+[100]    0.0    0.00    0.00     256         std::_Bit_reference::operator=(bool) [100]
+-----------------------------------------------
+                0.00    0.00     256/256         std::_Bit_iterator::operator++() [99]
+[101]    0.0    0.00    0.00     256         std::_Bit_iterator_base::_M_bump_up() [101]
+-----------------------------------------------
+                0.00    0.00       1/21          RaycastEngine::RaycastEngine(int, int) [161]
+                0.00    0.00      20/21          RaycastEngine::render(sf::RenderWindow&) [3]
+[102]    0.0    0.00    0.00      21         sf::Rect<int>::Rect() [102]
+-----------------------------------------------
+                0.00    0.00      20/20          World::update() [4]
+[103]    0.0    0.00    0.00      20         RaycastEngine::get_camera_pointer() [103]
+-----------------------------------------------
+                0.00    0.00      20/20          RaycastEngine::render(sf::RenderWindow&) [3]
+[104]    0.0    0.00    0.00      20         sf::Sprite::~Sprite() [104]
+                0.00    0.00      20/20          sf::Drawable::~Drawable() [105]
+-----------------------------------------------
+                0.00    0.00      20/20          sf::Sprite::~Sprite() [104]
+[105]    0.0    0.00    0.00      20         sf::Drawable::~Drawable() [105]
+-----------------------------------------------
+                0.00    0.00       3/9           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset() [119]
+                0.00    0.00       6/9           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data() [120]
+[106]    0.0    0.00    0.00       9         std::_Bit_iterator::_Bit_iterator() [106]
+                0.00    0.00       9/264413      std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [85]
+-----------------------------------------------
+                0.00    0.00       3/6           std::allocator<unsigned long>::~allocator() [115]
+                0.00    0.00       3/6           std::allocator<unsigned long>::~allocator() [116]
+[107]    0.0    0.00    0.00       6         __gnu_cxx::new_allocator<unsigned long>::~new_allocator() [107]
+-----------------------------------------------
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const [181]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long) [216]
+                0.00    0.00       1/4           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long) [224]
+[108]    0.0    0.00    0.00       4         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [108]
+-----------------------------------------------
+                0.00    0.00       1/4           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+                0.00    0.00       3/4           std::_Bvector_base<std::allocator<bool> >::~_Bvector_base() [121]
+[109]    0.0    0.00    0.00       4         std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_M_end_addr() const [132]
+                0.00    0.00       2/2           std::allocator_traits<std::allocator<unsigned long> >::deallocate(std::allocator<unsigned long>&, unsigned long*, unsigned long long) [145]
+                0.00    0.00       2/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset() [119]
+-----------------------------------------------
+                0.00    0.00       2/4           std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long) [141]
+                0.00    0.00       2/4           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+[110]    0.0    0.00    0.00       4         std::_Bvector_base<std::allocator<bool> >::_S_nword(unsigned long long) [110]
+-----------------------------------------------
+                0.00    0.00       2/4           std::vector<bool, std::allocator<bool> >::end() const [134]
+                0.00    0.00       2/4           std::vector<bool, std::allocator<bool> >::begin() const [135]
+[111]    0.0    0.00    0.00       4         std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&) [111]
+                0.00    0.00       4/264413      std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [85]
+-----------------------------------------------
+                0.00    0.00       2/4           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_M_end_addr() const [132]
+                0.00    0.00       2/4           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+[112]    0.0    0.00    0.00       4         unsigned long* std::__addressof<unsigned long>(unsigned long&) [112]
+-----------------------------------------------
+                0.00    0.00       1/3           std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [190]
+                0.00    0.00       2/3           std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [139]
+[113]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<unsigned long>::new_allocator(__gnu_cxx::new_allocator<unsigned long> const&) [113]
+-----------------------------------------------
+                0.00    0.00       1/3           std::allocator<unsigned long>::allocator() [191]
+                0.00    0.00       2/3           std::allocator<unsigned long>::allocator<bool>(std::allocator<bool> const&) [138]
+[114]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<unsigned long>::new_allocator() [114]
+-----------------------------------------------
+                0.00    0.00       1/3           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+                0.00    0.00       2/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+[115]    0.0    0.00    0.00       3         std::allocator<unsigned long>::~allocator() [115]
+                0.00    0.00       3/6           __gnu_cxx::new_allocator<unsigned long>::~new_allocator() [107]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::~_Bvector_impl() [118]
+[116]    0.0    0.00    0.00       3         std::allocator<unsigned long>::~allocator() [116]
+                0.00    0.00       3/6           __gnu_cxx::new_allocator<unsigned long>::~new_allocator() [107]
+-----------------------------------------------
+                0.00    0.00       1/3           std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+                0.00    0.00       2/3           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+[117]    0.0    0.00    0.00       3         std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int) [117]
+                0.00    0.00       3/264413      std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [85]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Bvector_base<std::allocator<bool> >::~_Bvector_base() [121]
+[118]    0.0    0.00    0.00       3         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::~_Bvector_impl() [118]
+                0.00    0.00       3/3           std::allocator<unsigned long>::~allocator() [116]
+-----------------------------------------------
+                0.00    0.00       1/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_move_data(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data&&) [200]
+                0.00    0.00       2/3           std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+[119]    0.0    0.00    0.00       3         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset() [119]
+                0.00    0.00       3/9           std::_Bit_iterator::_Bit_iterator() [106]
+-----------------------------------------------
+                0.00    0.00       1/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl() [199]
+                0.00    0.00       2/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&) [142]
+[120]    0.0    0.00    0.00       3         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data() [120]
+                0.00    0.00       6/9           std::_Bit_iterator::_Bit_iterator() [106]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<bool, std::allocator<bool> >::~vector() [122]
+[121]    0.0    0.00    0.00       3         std::_Bvector_base<std::allocator<bool> >::~_Bvector_base() [121]
+                0.00    0.00       3/4           std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+                0.00    0.00       3/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::~_Bvector_impl() [118]
+-----------------------------------------------
+                0.00    0.00       1/3           MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00       2/3           DynamicGrid<bool>::~DynamicGrid() [124]
+[122]    0.0    0.00    0.00       3         std::vector<bool, std::allocator<bool> >::~vector() [122]
+                0.00    0.00       3/3           std::_Bvector_base<std::allocator<bool> >::~_Bvector_base() [121]
+-----------------------------------------------
+                0.00    0.00       3/3           unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [247]
+[123]    0.0    0.00    0.00       3         unsigned long* std::__niter_base<unsigned long*>(unsigned long*) [123]
+-----------------------------------------------
+                0.00    0.00       1/2           MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00       1/2           MyWorld::~MyWorld() [169]
+[124]    0.0    0.00    0.00       2         DynamicGrid<bool>::~DynamicGrid() [124]
+                0.00    0.00       2/3           std::vector<bool, std::allocator<bool> >::~vector() [122]
+-----------------------------------------------
+                0.00    0.00       1/2           std::allocator<bool>::allocator() [187]
+                0.00    0.00       1/2           std::allocator<bool>::allocator<unsigned long>(std::allocator<unsigned long> const&) [188]
+[125]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<bool>::new_allocator() [125]
+-----------------------------------------------
+                0.00    0.00       2/2           std::allocator<bool>::~allocator() [137]
+[126]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<bool>::~new_allocator() [126]
+-----------------------------------------------
+                0.00    0.00       2/2           std::allocator_traits<std::allocator<unsigned long> >::deallocate(std::allocator<unsigned long>&, unsigned long*, unsigned long long) [145]
+[127]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<unsigned long>::deallocate(unsigned long*, unsigned long long) [127]
+-----------------------------------------------
+                0.00    0.00       2/2           std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long long) [146]
+[128]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long long, void const*) [128]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<unsigned long>::max_size() const [130]
+-----------------------------------------------
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<char>::allocate(unsigned long long, void const*) [171]
+                0.00    0.00       1/2           std::allocator_traits<std::allocator<char> >::max_size(std::allocator<char> const&) [207]
+[129]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<char>::max_size() const [129]
+-----------------------------------------------
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long long, void const*) [128]
+[130]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<unsigned long>::max_size() const [130]
+-----------------------------------------------
+                0.00    0.00       2/2           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+[131]    0.0    0.00    0.00       2         std::_Bit_iterator::operator+(long long) const [131]
+                0.00    0.00       2/2           std::_Bit_iterator::operator+=(long long) [140]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+[132]    0.0    0.00    0.00       2         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_M_end_addr() const [132]
+                0.00    0.00       2/4           unsigned long* std::__addressof<unsigned long>(unsigned long&) [112]
+-----------------------------------------------
+                0.00    0.00       1/2           std::initializer_list<bool>::end() const [178]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+[133]    0.0    0.00    0.00       2         std::initializer_list<bool>::begin() const [133]
+-----------------------------------------------
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::size() const [180]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[134]    0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >::end() const [134]
+                0.00    0.00       2/4           std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&) [111]
+-----------------------------------------------
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::size() const [180]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[135]    0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >::begin() const [135]
+                0.00    0.00       2/4           std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&) [111]
+-----------------------------------------------
+                0.00    0.00       1/2           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const [185]
+                0.00    0.00       1/2           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long) [233]
+[136]    0.0    0.00    0.00       2         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_data() const [136]
+-----------------------------------------------
+                0.00    0.00       1/2           MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[137]    0.0    0.00    0.00       2         std::allocator<bool>::~allocator() [137]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<bool>::~new_allocator() [126]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+[138]    0.0    0.00    0.00       2         std::allocator<unsigned long>::allocator<bool>(std::allocator<bool> const&) [138]
+                0.00    0.00       2/3           __gnu_cxx::new_allocator<unsigned long>::new_allocator() [114]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&) [142]
+[139]    0.0    0.00    0.00       2         std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [139]
+                0.00    0.00       2/3           __gnu_cxx::new_allocator<unsigned long>::new_allocator(__gnu_cxx::new_allocator<unsigned long> const&) [113]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator::operator+(long long) const [131]
+[140]    0.0    0.00    0.00       2         std::_Bit_iterator::operator+=(long long) [140]
+                0.00    0.00       2/2           std::_Bit_iterator_base::_M_incr(long long) [147]
+-----------------------------------------------
+                0.00    0.00       2/2           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+[141]    0.0    0.00    0.00       2         std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long) [141]
+                0.00    0.00       2/4           std::_Bvector_base<std::allocator<bool> >::_S_nword(unsigned long long) [110]
+                0.00    0.00       2/2           std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long long) [146]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+[142]    0.0    0.00    0.00       2         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&) [142]
+                0.00    0.00       2/2           std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [139]
+                0.00    0.00       2/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data() [120]
+-----------------------------------------------
+                0.00    0.00       2/2           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+[143]    0.0    0.00    0.00       2         std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() [143]
+-----------------------------------------------
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+[144]    0.0    0.00    0.00       2         std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+                0.00    0.00       2/2           std::allocator<unsigned long>::allocator<bool>(std::allocator<bool> const&) [138]
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&) [142]
+                0.00    0.00       2/3           std::allocator<unsigned long>::~allocator() [115]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+[145]    0.0    0.00    0.00       2         std::allocator_traits<std::allocator<unsigned long> >::deallocate(std::allocator<unsigned long>&, unsigned long*, unsigned long long) [145]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<unsigned long>::deallocate(unsigned long*, unsigned long long) [127]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long) [141]
+[146]    0.0    0.00    0.00       2         std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long long) [146]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long long, void const*) [128]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator::operator+=(long long) [140]
+[147]    0.0    0.00    0.00       2         std::_Bit_iterator_base::_M_incr(long long) [147]
+-----------------------------------------------
+                0.00    0.00       1/2           void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [211]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[148]    0.0    0.00    0.00       2         std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long) [141]
+                0.00    0.00       2/4           std::_Bvector_base<std::allocator<bool> >::_S_nword(unsigned long long) [110]
+                0.00    0.00       2/4           unsigned long* std::__addressof<unsigned long>(unsigned long&) [112]
+                0.00    0.00       2/3           std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int) [117]
+                0.00    0.00       2/2           std::_Bit_iterator::operator+(long long) const [131]
+-----------------------------------------------
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long) [216]
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long) [229]
+[149]    0.0    0.00    0.00       2         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() [149]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [253]
+[150]    0.0    0.00    0.00       2         bool const* std::__miter_base<bool const*>(bool const*) [150]
+-----------------------------------------------
+                0.00    0.00       2/2           unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [254]
+[151]    0.0    0.00    0.00       2         unsigned long* std::__miter_base<unsigned long*>(unsigned long*) [151]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [255]
+[152]    0.0    0.00    0.00       2         std::_Bit_const_iterator std::__miter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator) [152]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [246]
+[153]    0.0    0.00    0.00       2         bool const* std::__niter_base<bool const*>(bool const*) [153]
+-----------------------------------------------
+                0.00    0.00       1/2           std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [246]
+                0.00    0.00       1/2           std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [248]
+[154]    0.0    0.00    0.00       2         std::_Bit_iterator std::__niter_base<std::_Bit_iterator>(std::_Bit_iterator) [154]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [248]
+[155]    0.0    0.00    0.00       2         std::_Bit_const_iterator std::__niter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator) [155]
+-----------------------------------------------
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::size() const [180]
+                0.00    0.00       1/2           std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [193]
+[156]    0.0    0.00    0.00       2         std::operator-(std::_Bit_iterator_base const&, std::_Bit_iterator_base const&) [156]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[157]    0.0    0.00    0.00       1         DynamicGrid<bool>::DynamicGrid(unsigned int, unsigned int, unsigned int, std::vector<bool, std::allocator<bool> > const&) [157]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[158]    0.0    0.00    0.00       1         DynamicGrid<bool>::DynamicGrid() [158]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector() [214]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[159]    0.0    0.00    0.00       1         DynamicGrid<bool>::operator=(DynamicGrid<bool>&&) [159]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [165]
+[160]    0.0    0.00    0.00       1         RaycastEngine::set_camera_position(trig::Vector2<float> const&) [160]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[161]    0.0    0.00    0.00       1         RaycastEngine::RaycastEngine(int, int) [161]
+                0.00    0.00       1/1           Camera::Camera() [167]
+                0.00    0.00       1/21          sf::Rect<int>::Rect() [102]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() [232]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::~MyWorld() [169]
+[162]    0.0    0.00    0.00       1         RaycastEngine::~RaycastEngine() [162]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [165]
+[163]    0.0    0.00    0.00       1         sf::ContextSettings::ContextSettings(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, bool) [163]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [165]
+[164]    0.0    0.00    0.00       1         sf::String::~String() [164]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string() [237]
+-----------------------------------------------
+                0.00    0.00       1/1           main [2]
+[165]    0.0    0.00    0.00       1         World::World(int, int, int) [165]
+                0.00    0.00       1/1           sf::ContextSettings::ContextSettings(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, bool) [163]
+                0.00    0.00       1/1           sf::String::~String() [164]
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00       1/20482       trig::Vector2<float>::Vector2(float, float) [94]
+                0.00    0.00       1/1           RaycastEngine::set_camera_position(trig::Vector2<float> const&) [160]
+-----------------------------------------------
+                0.00    0.00       1/1           main [2]
+[166]    0.0    0.00    0.00       1         World::~World() [166]
+                0.00    0.00       1/1           MyWorld::~MyWorld() [169]
+-----------------------------------------------
+                0.00    0.00       1/1           RaycastEngine::RaycastEngine(int, int) [161]
+[167]    0.0    0.00    0.00       1         Camera::Camera() [167]
+                0.00    0.00       1/20482       trig::Vector2<float>::Vector2(float, float) [94]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [165]
+[168]    0.0    0.00    0.00       1         MyWorld::MyWorld(int, int, int) [168]
+                0.00    0.00     273/264413      DynamicGrid<bool>::get_width() const [84]
+                0.00    0.00     256/264396      DynamicGrid<bool>::index(int, int) const [87]
+                0.00    0.00      18/264158      DynamicGrid<bool>::get_height() const [91]
+                0.00    0.00       1/1           RaycastEngine::RaycastEngine(int, int) [161]
+                0.00    0.00       1/1           DynamicGrid<bool>::DynamicGrid() [158]
+                0.00    0.00       1/1           std::allocator<bool>::allocator() [187]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+                0.00    0.00       1/2           std::allocator<bool>::~allocator() [137]
+                0.00    0.00       1/1           DynamicGrid<bool>::DynamicGrid(unsigned int, unsigned int, unsigned int, std::vector<bool, std::allocator<bool> > const&) [157]
+                0.00    0.00       1/1           DynamicGrid<bool>::operator=(DynamicGrid<bool>&&) [159]
+                0.00    0.00       1/2           DynamicGrid<bool>::~DynamicGrid() [124]
+                0.00    0.00       1/3           std::vector<bool, std::allocator<bool> >::~vector() [122]
+-----------------------------------------------
+                0.00    0.00       1/1           World::~World() [166]
+[169]    0.0    0.00    0.00       1         MyWorld::~MyWorld() [169]
+                0.00    0.00       1/2           DynamicGrid<bool>::~DynamicGrid() [124]
+                0.00    0.00       1/1           RaycastEngine::~RaycastEngine() [162]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<char> >::deallocate(std::allocator<char>&, char*, unsigned long long) [205]
+[170]    0.0    0.00    0.00       1         __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long long) [170]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<char> >::allocate(std::allocator<char>&, unsigned long long) [206]
+[171]    0.0    0.00    0.00       1         __gnu_cxx::new_allocator<char>::allocate(unsigned long long, void const*) [171]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<char>::max_size() const [129]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<unsigned int> >::deallocate(std::allocator<unsigned int>&, unsigned int*, unsigned long long) [208]
+[172]    0.0    0.00    0.00       1         __gnu_cxx::new_allocator<unsigned int>::deallocate(unsigned int*, unsigned long long) [172]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<unsigned int>::~allocator() [189]
+[173]    0.0    0.00    0.00       1         __gnu_cxx::new_allocator<unsigned int>::~new_allocator() [173]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[174]    0.0    0.00    0.00       1         __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_select_on_copy(std::allocator<unsigned long> const&) [174]
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<unsigned long> >::select_on_container_copy_construction(std::allocator<unsigned long> const&) [209]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+[175]    0.0    0.00    0.00       1         __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_propagate_on_move_assign() [175]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[176]    0.0    0.00    0.00       1         bool __gnu_cxx::__is_null_pointer<char const>(char const*) [176]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[177]    0.0    0.00    0.00       1         std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() const [177]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+[178]    0.0    0.00    0.00       1         std::initializer_list<bool>::end() const [178]
+                0.00    0.00       1/2           std::initializer_list<bool>::begin() const [133]
+                0.00    0.00       1/1           std::initializer_list<bool>::size() const [179]
+-----------------------------------------------
+                0.00    0.00       1/1           std::initializer_list<bool>::end() const [178]
+[179]    0.0    0.00    0.00       1         std::initializer_list<bool>::size() const [179]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[180]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::size() const [180]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::begin() const [135]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::end() const [134]
+                0.00    0.00       1/2           std::operator-(std::_Bit_iterator_base const&, std::_Bit_iterator_base const&) [156]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() [217]
+[181]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const [181]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [108]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const [182]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const [181]
+[182]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const [182]
+                0.00    0.00       1/1           std::pointer_traits<char const*>::pointer_to(char const&) [202]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const [184]
+[183]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const [183]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long) [229]
+[184]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const [184]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const [183]
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<char> >::max_size(std::allocator<char> const&) [207]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose() [234]
+[185]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const [185]
+                0.00    0.00       1/2           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_data() const [136]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_local_data() const [186]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const [185]
+[186]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_local_data() const [186]
+                0.00    0.00       1/1           std::pointer_traits<unsigned int const*>::pointer_to(unsigned int const&) [203]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[187]    0.0    0.00    0.00       1         std::allocator<bool>::allocator() [187]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<bool>::new_allocator() [125]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[188]    0.0    0.00    0.00       1         std::allocator<bool>::allocator<unsigned long>(std::allocator<unsigned long> const&) [188]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<bool>::new_allocator() [125]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_Alloc_hider::~_Alloc_hider() [235]
+[189]    0.0    0.00    0.00       1         std::allocator<unsigned int>::~allocator() [189]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<unsigned int>::~new_allocator() [173]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<unsigned long> >::select_on_container_copy_construction(std::allocator<unsigned long> const&) [209]
+[190]    0.0    0.00    0.00       1         std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [190]
+                0.00    0.00       1/3           __gnu_cxx::new_allocator<unsigned long>::new_allocator(__gnu_cxx::new_allocator<unsigned long> const&) [113]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl() [199]
+[191]    0.0    0.00    0.00       1         std::allocator<unsigned long>::allocator() [191]
+                0.00    0.00       1/3           __gnu_cxx::new_allocator<unsigned long>::new_allocator() [114]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [243]
+[192]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [192]
+                0.00    0.00     256/256         std::_Bit_iterator::operator*() const [98]
+                0.00    0.00     256/256         std::_Bit_reference::operator=(bool) [100]
+                0.00    0.00     256/256         std::_Bit_iterator::operator++() [99]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [245]
+[193]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [193]
+                0.00    0.00       1/2           std::operator-(std::_Bit_iterator_base const&, std::_Bit_iterator_base const&) [156]
+-----------------------------------------------
+                0.00    0.00       1/1           unsigned long* std::__copy_move_a<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [244]
+[194]    0.0    0.00    0.00       1         unsigned long* std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<unsigned long>(unsigned long const*, unsigned long const*, unsigned long*) [194]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long long) [228]
+[195]    0.0    0.00    0.00       1         std::char_traits<char>::copy(char*, char const*, unsigned long long) [195]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long) [224]
+[196]    0.0    0.00    0.00       1         std::char_traits<char>::assign(char&, char const&) [196]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+[197]    0.0    0.00    0.00       1         std::char_traits<char>::length(char const*) [197]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+[198]    0.0    0.00    0.00       1         std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&) [198]
+                0.00    0.00       1/1           std::remove_reference<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>::type&& std::move<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&) [256]
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_move_data(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data&&) [200]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_Bvector_base() [201]
+[199]    0.0    0.00    0.00       1         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl() [199]
+                0.00    0.00       1/1           std::allocator<unsigned long>::allocator() [191]
+                0.00    0.00       1/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data() [120]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&) [198]
+[200]    0.0    0.00    0.00       1         std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_move_data(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data&&) [200]
+                0.00    0.00       1/3           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset() [119]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector() [214]
+[201]    0.0    0.00    0.00       1         std::_Bvector_base<std::allocator<bool> >::_Bvector_base() [201]
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl() [199]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const [182]
+[202]    0.0    0.00    0.00       1         std::pointer_traits<char const*>::pointer_to(char const&) [202]
+                0.00    0.00       1/1           char const* std::addressof<char const>(char const&) [261]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_local_data() const [186]
+[203]    0.0    0.00    0.00       1         std::pointer_traits<unsigned int const*>::pointer_to(unsigned int const&) [203]
+                0.00    0.00       1/1           unsigned int const* std::addressof<unsigned int const>(unsigned int const&) [262]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() [223]
+[204]    0.0    0.00    0.00       1         std::pointer_traits<char*>::pointer_to(char&) [204]
+                0.00    0.00       1/1           char* std::addressof<char>(char&) [263]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long) [216]
+[205]    0.0    0.00    0.00       1         std::allocator_traits<std::allocator<char> >::deallocate(std::allocator<char>&, char*, unsigned long long) [205]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long long) [170]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long) [229]
+[206]    0.0    0.00    0.00       1         std::allocator_traits<std::allocator<char> >::allocate(std::allocator<char>&, unsigned long long) [206]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<char>::allocate(unsigned long long, void const*) [171]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const [184]
+[207]    0.0    0.00    0.00       1         std::allocator_traits<std::allocator<char> >::max_size(std::allocator<char> const&) [207]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<char>::max_size() const [129]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long) [233]
+[208]    0.0    0.00    0.00       1         std::allocator_traits<std::allocator<unsigned int> >::deallocate(std::allocator<unsigned int>&, unsigned int*, unsigned long long) [208]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<unsigned int>::deallocate(unsigned int*, unsigned long long) [172]
+-----------------------------------------------
+                0.00    0.00       1/1           __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_select_on_copy(std::allocator<unsigned long> const&) [174]
+[209]    0.0    0.00    0.00       1         std::allocator_traits<std::allocator<unsigned long> >::select_on_container_copy_construction(std::allocator<unsigned long> const&) [209]
+                0.00    0.00       1/1           std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [190]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+[210]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+                0.00    0.00       1/1           unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [254]
+                0.00    0.00       1/3           std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int) [117]
+                0.00    0.00       1/264397      std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int) [86]
+                0.00    0.00       1/1           std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [255]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+[211]    0.0    0.00    0.00       1         void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [211]
+                0.00    0.00       1/1           std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*) [259]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+                0.00    0.00       1/1           std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [253]
+-----------------------------------------------
+                0.00    0.00       1/1           DynamicGrid<bool>::DynamicGrid(unsigned int, unsigned int, unsigned int, std::vector<bool, std::allocator<bool> > const&) [157]
+[212]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [212]
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() const [177]
+                0.00    0.00       1/1           __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_select_on_copy(std::allocator<unsigned long> const&) [174]
+                0.00    0.00       1/1           std::allocator<bool>::allocator<unsigned long>(std::allocator<unsigned long> const&) [188]
+                0.00    0.00       1/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+                0.00    0.00       1/2           std::allocator<bool>::~allocator() [137]
+                0.00    0.00       1/3           std::allocator<unsigned long>::~allocator() [115]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::size() const [180]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [148]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::end() const [134]
+                0.00    0.00       1/2           std::vector<bool, std::allocator<bool> >::begin() const [135]
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+-----------------------------------------------
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [168]
+[213]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [213]
+                0.00    0.00       1/2           std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [144]
+                0.00    0.00       1/1           std::initializer_list<bool>::end() const [178]
+                0.00    0.00       1/2           std::initializer_list<bool>::begin() const [133]
+                0.00    0.00       1/1           void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [211]
+-----------------------------------------------
+                0.00    0.00       1/1           DynamicGrid<bool>::DynamicGrid() [158]
+[214]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::vector() [214]
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_Bvector_base() [201]
+-----------------------------------------------
+                0.00    0.00       1/1           DynamicGrid<bool>::operator=(DynamicGrid<bool>&&) [159]
+[215]    0.0    0.00    0.00       1         std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+                0.00    0.00       2/2           std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() [143]
+                0.00    0.00       1/1           __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_propagate_on_move_assign() [175]
+                0.00    0.00       1/4           std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [109]
+                0.00    0.00       1/1           std::remove_reference<std::vector<bool, std::allocator<bool> >&>::type&& std::move<std::vector<bool, std::allocator<bool> >&>(std::vector<bool, std::allocator<bool> >&) [258]
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&) [198]
+                0.00    0.00       1/1           void std::__alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&) [249]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() [217]
+[216]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long) [216]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [108]
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() [149]
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<char> >::deallocate(std::allocator<char>&, char*, unsigned long long) [205]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() [232]
+[217]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() [217]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const [181]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long) [216]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[218]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned long long) [218]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+[219]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&) [219]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() [232]
+[220]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::~_Alloc_hider() [220]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+[221]    0.0    0.00    0.00       1         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*) [221]
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char const*>(char const*, char const*, std::__false_type) [226]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char const*>(char const*, char const*, std::__false_type) [226]
+[222]    0.0    0.00    0.00       1         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+                0.00    0.00       1/1           bool __gnu_cxx::__is_null_pointer<char const>(char const*) [176]
+                0.00    0.00       1/1           std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*) [260]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long) [229]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*) [227]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned long long) [218]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [108]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*) [225]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long) [224]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+[223]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() [223]
+                0.00    0.00       1/1           std::pointer_traits<char*>::pointer_to(char&) [204]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[224]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long) [224]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned long long) [230]
+                0.00    0.00       1/4           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [108]
+                0.00    0.00       1/1           std::char_traits<char>::assign(char&, char const&) [196]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[225]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*) [225]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long long) [228]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*) [221]
+[226]    0.0    0.00    0.00       1         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char const*>(char const*, char const*, std::__false_type) [226]
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[227]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*) [227]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*) [225]
+[228]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long long) [228]
+                0.00    0.00       1/1           std::char_traits<char>::copy(char*, char const*, unsigned long long) [195]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[229]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long) [229]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const [184]
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() [149]
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<char> >::allocate(std::allocator<char>&, unsigned long long) [206]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long) [224]
+[230]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned long long) [230]
+-----------------------------------------------
+                0.00    0.00       1/1           RaycastEngine::RaycastEngine(int, int) [161]
+[231]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) [231]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() [223]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&) [219]
+                0.00    0.00       1/1           std::char_traits<char>::length(char const*) [197]
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*) [221]
+-----------------------------------------------
+                0.00    0.00       1/1           RaycastEngine::RaycastEngine(int, int) [161]
+[232]    0.0    0.00    0.00       1         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() [232]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() [217]
+                0.00    0.00       1/1           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::~_Alloc_hider() [220]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose() [234]
+[233]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long) [233]
+                0.00    0.00       1/2           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_data() const [136]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_get_allocator() [236]
+                0.00    0.00       1/1           std::allocator_traits<std::allocator<unsigned int> >::deallocate(std::allocator<unsigned int>&, unsigned int*, unsigned long long) [208]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string() [237]
+[234]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose() [234]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const [185]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long) [233]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string() [237]
+[235]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_Alloc_hider::~_Alloc_hider() [235]
+                0.00    0.00       1/1           std::allocator<unsigned int>::~allocator() [189]
+-----------------------------------------------
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long) [233]
+[236]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_get_allocator() [236]
+-----------------------------------------------
+                0.00    0.00       1/1           sf::String::~String() [164]
+[237]    0.0    0.00    0.00       1         std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string() [237]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose() [234]
+                0.00    0.00       1/1           std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_Alloc_hider::~_Alloc_hider() [235]
+-----------------------------------------------
+                0.00    0.00       1/1           std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*) [259]
+[238]    0.0    0.00    0.00       1         std::iterator_traits<bool const*>::difference_type std::__distance<bool const*>(bool const*, bool const*, std::random_access_iterator_tag) [238]
+-----------------------------------------------
+                0.00    0.00       1/1           std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*) [260]
+[239]    0.0    0.00    0.00       1         std::iterator_traits<char const*>::difference_type std::__distance<char const*>(char const*, char const*, std::random_access_iterator_tag) [239]
+-----------------------------------------------
+                0.00    0.00       1/1           char const* std::addressof<char const>(char const&) [261]
+[240]    0.0    0.00    0.00       1         char const* std::__addressof<char const>(char const&) [240]
+-----------------------------------------------
+                0.00    0.00       1/1           unsigned int const* std::addressof<unsigned int const>(unsigned int const&) [262]
+[241]    0.0    0.00    0.00       1         unsigned int const* std::__addressof<unsigned int const>(unsigned int const&) [241]
+-----------------------------------------------
+                0.00    0.00       1/1           char* std::addressof<char>(char&) [263]
+[242]    0.0    0.00    0.00       1         char* std::__addressof<char>(char&) [242]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [246]
+[243]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move_a<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [243]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [192]
+-----------------------------------------------
+                0.00    0.00       1/1           unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [247]
+[244]    0.0    0.00    0.00       1         unsigned long* std::__copy_move_a<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [244]
+                0.00    0.00       1/1           unsigned long* std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<unsigned long>(unsigned long const*, unsigned long const*, unsigned long*) [194]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [248]
+[245]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [245]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [193]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [253]
+[246]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [246]
+                0.00    0.00       2/2           bool const* std::__niter_base<bool const*>(bool const*) [153]
+                0.00    0.00       1/2           std::_Bit_iterator std::__niter_base<std::_Bit_iterator>(std::_Bit_iterator) [154]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [243]
+-----------------------------------------------
+                0.00    0.00       1/1           unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [254]
+[247]    0.0    0.00    0.00       1         unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [247]
+                0.00    0.00       3/3           unsigned long* std::__niter_base<unsigned long*>(unsigned long*) [123]
+                0.00    0.00       1/1           unsigned long* std::__copy_move_a<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [244]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [255]
+[248]    0.0    0.00    0.00       1         std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [248]
+                0.00    0.00       2/2           std::_Bit_const_iterator std::__niter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator) [155]
+                0.00    0.00       1/2           std::_Bit_iterator std::__niter_base<std::_Bit_iterator>(std::_Bit_iterator) [154]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [245]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+[249]    0.0    0.00    0.00       1         void std::__alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&) [249]
+                0.00    0.00       1/1           void std::__do_alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&, std::integral_constant<bool, true>) [250]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&) [249]
+[250]    0.0    0.00    0.00       1         void std::__do_alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&, std::integral_constant<bool, true>) [250]
+                0.00    0.00       1/1           std::remove_reference<std::allocator<unsigned long>&>::type&& std::move<std::allocator<unsigned long>&>(std::allocator<unsigned long>&) [257]
+-----------------------------------------------
+                0.00    0.00       1/1           std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*) [259]
+[251]    0.0    0.00    0.00       1         std::iterator_traits<bool const*>::iterator_category std::__iterator_category<bool const*>(bool const* const&) [251]
+-----------------------------------------------
+                0.00    0.00       1/1           std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*) [260]
+[252]    0.0    0.00    0.00       1         std::iterator_traits<char const*>::iterator_category std::__iterator_category<char const*>(char const* const&) [252]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [211]
+[253]    0.0    0.00    0.00       1         std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [253]
+                0.00    0.00       2/2           bool const* std::__miter_base<bool const*>(bool const*) [150]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [246]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+[254]    0.0    0.00    0.00       1         unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [254]
+                0.00    0.00       2/2           unsigned long* std::__miter_base<unsigned long*>(unsigned long*) [151]
+                0.00    0.00       1/1           unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*) [247]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [210]
+[255]    0.0    0.00    0.00       1         std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [255]
+                0.00    0.00       2/2           std::_Bit_const_iterator std::__miter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator) [152]
+                0.00    0.00       1/1           std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [248]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&) [198]
+[256]    0.0    0.00    0.00       1         std::remove_reference<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>::type&& std::move<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&) [256]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__do_alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&, std::integral_constant<bool, true>) [250]
+[257]    0.0    0.00    0.00       1         std::remove_reference<std::allocator<unsigned long>&>::type&& std::move<std::allocator<unsigned long>&>(std::allocator<unsigned long>&) [257]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&) [215]
+[258]    0.0    0.00    0.00       1         std::remove_reference<std::vector<bool, std::allocator<bool> >&>::type&& std::move<std::vector<bool, std::allocator<bool> >&>(std::vector<bool, std::allocator<bool> >&) [258]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [211]
+[259]    0.0    0.00    0.00       1         std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*) [259]
+                0.00    0.00       1/1           std::iterator_traits<bool const*>::iterator_category std::__iterator_category<bool const*>(bool const* const&) [251]
+                0.00    0.00       1/1           std::iterator_traits<bool const*>::difference_type std::__distance<bool const*>(bool const*, bool const*, std::random_access_iterator_tag) [238]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [222]
+[260]    0.0    0.00    0.00       1         std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*) [260]
+                0.00    0.00       1/1           std::iterator_traits<char const*>::iterator_category std::__iterator_category<char const*>(char const* const&) [252]
+                0.00    0.00       1/1           std::iterator_traits<char const*>::difference_type std::__distance<char const*>(char const*, char const*, std::random_access_iterator_tag) [239]
+-----------------------------------------------
+                0.00    0.00       1/1           std::pointer_traits<char const*>::pointer_to(char const&) [202]
+[261]    0.0    0.00    0.00       1         char const* std::addressof<char const>(char const&) [261]
+                0.00    0.00       1/1           char const* std::__addressof<char const>(char const&) [240]
+-----------------------------------------------
+                0.00    0.00       1/1           std::pointer_traits<unsigned int const*>::pointer_to(unsigned int const&) [203]
+[262]    0.0    0.00    0.00       1         unsigned int const* std::addressof<unsigned int const>(unsigned int const&) [262]
+                0.00    0.00       1/1           unsigned int const* std::__addressof<unsigned int const>(unsigned int const&) [241]
+-----------------------------------------------
+                0.00    0.00       1/1           std::pointer_traits<char*>::pointer_to(char&) [204]
+[263]    0.0    0.00    0.00       1         char* std::addressof<char>(char&) [263]
+                0.00    0.00       1/1           char* std::__addressof<char>(char&) [242]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+ [157] DynamicGrid<bool>::DynamicGrid(unsigned int, unsigned int, unsigned int, std::vector<bool, std::allocator<bool> > const&) [182] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const [122] std::vector<bool, std::allocator<bool> >::~vector()
+ [158] DynamicGrid<bool>::DynamicGrid() [183] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const [215] std::vector<bool, std::allocator<bool> >::operator=(std::vector<bool, std::allocator<bool> >&&)
+ [124] DynamicGrid<bool>::~DynamicGrid() [108] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const [216] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned long long)
+ [159] DynamicGrid<bool>::operator=(DynamicGrid<bool>&&) [184] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const [217] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+   [8] RaycastEngine::get_distance(float) [185] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_is_local() const [218] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned long long)
+ [103] RaycastEngine::get_camera_pointer() [186] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_local_data() const [219] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
+ [160] RaycastEngine::set_camera_position(trig::Vector2<float> const&) [136] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_data() const [220] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::~_Alloc_hider()
+   [3] RaycastEngine::render(sf::RenderWindow&) [187] std::allocator<bool>::allocator() [221] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*)
+ [161] RaycastEngine::RaycastEngine(int, int) [188] std::allocator<bool>::allocator<unsigned long>(std::allocator<unsigned long> const&) [222] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
+ [162] RaycastEngine::~RaycastEngine() [137] std::allocator<bool>::~allocator() [223] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data()
+ [163] sf::ContextSettings::ContextSettings(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, bool) [189] std::allocator<unsigned int>::~allocator() [224] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long long)
+ [102] sf::Rect<int>::Rect() [190] std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [225] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)
+ [104] sf::Sprite::~Sprite() [138] std::allocator<unsigned long>::allocator<bool>(std::allocator<bool> const&) [226] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char const*>(char const*, char const*, std::__false_type)
+ [164] sf::String::~String() [139] std::allocator<unsigned long>::allocator(std::allocator<unsigned long> const&) [149] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator()
+ [105] sf::Drawable::~Drawable() [191] std::allocator<unsigned long>::allocator() [227] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*)
+  [95] trig::Vector2<float>::Vector2(float) [115] std::allocator<unsigned long>::~allocator() [228] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long long)
+  [94] trig::Vector2<float>::Vector2(float, float) [116] std::allocator<unsigned long>::~allocator() [229] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long long&, unsigned long long)
+  [96] trig::Vector2<float>::Vector2() [192] std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator) [230] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned long long)
+   [7] trig::Vector2<int>::Vector2(int, int) [193] std::_Bit_iterator std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [231] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
+  [97] trig::Vector2<int>::Vector2() [194] unsigned long* std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<unsigned long>(unsigned long const*, unsigned long const*, unsigned long*) [232] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
+   [4] World::update()       [195] std::char_traits<char>::copy(char*, char const*, unsigned long long) [233] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_destroy(unsigned long long)
+ [165] World::World(int, int, int) [196] std::char_traits<char>::assign(char&, char const&) [234] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_dispose()
+ [166] World::~World()       [197] std::char_traits<char>::length(char const*) [235] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_Alloc_hider::~_Alloc_hider()
+ [167] Camera::Camera()      [117] std::_Bit_iterator::_Bit_iterator(unsigned long*, unsigned int) [236] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::_M_get_allocator()
+   [9] MyWorld::out_of_bounds(trig::Vector2<int> const&) [106] std::_Bit_iterator::_Bit_iterator() [237] std::__cxx11::basic_string<unsigned int, std::char_traits<unsigned int>, std::allocator<unsigned int> >::~basic_string()
+   [6] MyWorld::get_pixel_color(trig::Vector2<int> const&, RaycastEngine::CellSide, float) [140] std::_Bit_iterator::operator+=(long long) [238] std::iterator_traits<bool const*>::difference_type std::__distance<bool const*>(bool const*, bool const*, std::random_access_iterator_tag)
+  [92] MyWorld::is_solid(trig::Vector2<int> const&) [99] std::_Bit_iterator::operator++() [239] std::iterator_traits<char const*>::difference_type std::__distance<char const*>(char const*, char const*, std::random_access_iterator_tag)
+ [168] MyWorld::MyWorld(int, int, int) [141] std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long long) [240] char const* std::__addressof<char const>(char const&)
+ [169] MyWorld::~MyWorld()   [198] std::_Bvector_base<std::allocator<bool> >::_M_move_data(std::_Bvector_base<std::allocator<bool> >&&) [241] unsigned int const* std::__addressof<unsigned int const>(unsigned int const&)
+ [125] __gnu_cxx::new_allocator<bool>::new_allocator() [142] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl(std::allocator<unsigned long> const&) [242] char* std::__addressof<char>(char&)
+ [126] __gnu_cxx::new_allocator<bool>::~new_allocator() [199] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_Bvector_impl() [112] unsigned long* std::__addressof<unsigned long>(unsigned long&)
+ [170] __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long long) [118] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::~_Bvector_impl() [150] bool const* std::__miter_base<bool const*>(bool const*)
+ [171] __gnu_cxx::new_allocator<char>::allocate(unsigned long long, void const*) [109] std::_Bvector_base<std::allocator<bool> >::_M_deallocate() [151] unsigned long* std::__miter_base<unsigned long*>(unsigned long*)
+ [172] __gnu_cxx::new_allocator<unsigned int>::deallocate(unsigned int*, unsigned long long) [200] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_move_data(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data&&) [152] std::_Bit_const_iterator std::__miter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator)
+ [173] __gnu_cxx::new_allocator<unsigned int>::~new_allocator() [119] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_M_reset() [153] bool const* std::__niter_base<bool const*>(bool const*)
+ [127] __gnu_cxx::new_allocator<unsigned long>::deallocate(unsigned long*, unsigned long long) [120] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl_data::_Bvector_impl_data() [123] unsigned long* std::__niter_base<unsigned long*>(unsigned long*)
+ [128] __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long long, void const*) [143] std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() [154] std::_Bit_iterator std::__niter_base<std::_Bit_iterator>(std::_Bit_iterator)
+ [113] __gnu_cxx::new_allocator<unsigned long>::new_allocator(__gnu_cxx::new_allocator<unsigned long> const&) [110] std::_Bvector_base<std::allocator<bool> >::_S_nword(unsigned long long) [155] std::_Bit_const_iterator std::__niter_base<std::_Bit_const_iterator>(std::_Bit_const_iterator)
+ [114] __gnu_cxx::new_allocator<unsigned long>::new_allocator() [144] std::_Bvector_base<std::allocator<bool> >::_Bvector_base(std::allocator<bool> const&) [243] std::_Bit_iterator std::__copy_move_a<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+ [107] __gnu_cxx::new_allocator<unsigned long>::~new_allocator() [201] std::_Bvector_base<std::allocator<bool> >::_Bvector_base() [244] unsigned long* std::__copy_move_a<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+ [174] __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_select_on_copy(std::allocator<unsigned long> const&) [121] std::_Bvector_base<std::allocator<bool> >::~_Bvector_base() [245] std::_Bit_iterator std::__copy_move_a<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+ [175] __gnu_cxx::__alloc_traits<std::allocator<unsigned long>, unsigned long>::_S_propagate_on_move_assign() [83] std::_Bit_reference::_Bit_reference(unsigned long*, unsigned long) [246] std::_Bit_iterator std::__copy_move_a2<false, bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+ [176] bool __gnu_cxx::__is_null_pointer<char const>(char const*) [100] std::_Bit_reference::operator=(bool) [247] unsigned long* std::__copy_move_a2<false, unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+  [91] DynamicGrid<bool>::get_height() const [202] std::pointer_traits<char const*>::pointer_to(char const&) [248] std::_Bit_iterator std::__copy_move_a2<false, std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+  [10] DynamicGrid<bool>::out_of_bounds(int, int) const [203] std::pointer_traits<unsigned int const*>::pointer_to(unsigned int const&) [249] void std::__alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&)
+  [87] DynamicGrid<bool>::index(int, int) const [204] std::pointer_traits<char*>::pointer_to(char&) [250] void std::__do_alloc_on_move<std::allocator<unsigned long> >(std::allocator<unsigned long>&, std::allocator<unsigned long>&, std::integral_constant<bool, true>)
+  [84] DynamicGrid<bool>::get_width() const [205] std::allocator_traits<std::allocator<char> >::deallocate(std::allocator<char>&, char*, unsigned long long) [251] std::iterator_traits<bool const*>::iterator_category std::__iterator_category<bool const*>(bool const* const&)
+  [11] trig::Vector2<float>::operator trig::Vector2<int>() const [206] std::allocator_traits<std::allocator<char> >::allocate(std::allocator<char>&, unsigned long long) [252] std::iterator_traits<char const*>::iterator_category std::__iterator_category<char const*>(char const* const&)
+ [129] __gnu_cxx::new_allocator<char>::max_size() const [207] std::allocator_traits<std::allocator<char> >::max_size(std::allocator<char> const&) [93] std::abs(float)
+ [130] __gnu_cxx::new_allocator<unsigned long>::max_size() const [208] std::allocator_traits<std::allocator<unsigned int> >::deallocate(std::allocator<unsigned int>&, unsigned int*, unsigned long long) [253] std::_Bit_iterator std::copy<bool const*, std::_Bit_iterator>(bool const*, bool const*, std::_Bit_iterator)
+  [98] std::_Bit_iterator::operator*() const [145] std::allocator_traits<std::allocator<unsigned long> >::deallocate(std::allocator<unsigned long>&, unsigned long*, unsigned long long) [254] unsigned long* std::copy<unsigned long*, unsigned long*>(unsigned long*, unsigned long*, unsigned long*)
+ [131] std::_Bit_iterator::operator+(long long) const [209] std::allocator_traits<std::allocator<unsigned long> >::select_on_container_copy_construction(std::allocator<unsigned long> const&) [255] std::_Bit_iterator std::copy<std::_Bit_const_iterator, std::_Bit_iterator>(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator)
+ [132] std::_Bvector_base<std::allocator<bool> >::_Bvector_impl::_M_end_addr() const [146] std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long long) [256] std::remove_reference<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>::type&& std::move<std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&>(std::_Bvector_base<std::allocator<bool> >::_Bvector_impl&)
+ [177] std::_Bvector_base<std::allocator<bool> >::_M_get_Bit_allocator() const [101] std::_Bit_iterator_base::_M_bump_up() [257] std::remove_reference<std::allocator<unsigned long>&>::type&& std::move<std::allocator<unsigned long>&>(std::allocator<unsigned long>&)
+  [88] std::_Bit_reference::operator bool() const [147] std::_Bit_iterator_base::_M_incr(long long) [258] std::remove_reference<std::vector<bool, std::allocator<bool> >&>::type&& std::move<std::vector<bool, std::allocator<bool> >&>(std::vector<bool, std::allocator<bool> >&)
+ [178] std::initializer_list<bool>::end() const [85] std::_Bit_iterator_base::_Bit_iterator_base(unsigned long*, unsigned int) [259] std::iterator_traits<bool const*>::difference_type std::distance<bool const*>(bool const*, bool const*)
+ [179] std::initializer_list<bool>::size() const [86] std::_Bit_const_iterator::_Bit_const_iterator(unsigned long*, unsigned int) [260] std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*)
+ [133] std::initializer_list<bool>::begin() const [111] std::_Bit_const_iterator::_Bit_const_iterator(std::_Bit_iterator const&) [261] char const* std::addressof<char const>(char const&)
+  [89] std::_Bit_const_iterator::operator*() const [148] std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long long) [262] unsigned int const* std::addressof<unsigned int const>(unsigned int const&)
+ [134] std::vector<bool, std::allocator<bool> >::end() const [210] std::vector<bool, std::allocator<bool> >::_M_copy_aligned(std::_Bit_const_iterator, std::_Bit_const_iterator, std::_Bit_iterator) [263] char* std::addressof<char>(char&)
+ [180] std::vector<bool, std::allocator<bool> >::size() const [211] void std::vector<bool, std::allocator<bool> >::_M_initialize_range<bool const*>(bool const*, bool const*, std::forward_iterator_tag) [156] std::operator-(std::_Bit_iterator_base const&, std::_Bit_iterator_base const&)
+ [135] std::vector<bool, std::allocator<bool> >::begin() const [212] std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) [1] __fentry__
+  [90] std::vector<bool, std::allocator<bool> >::operator[](unsigned long long) const [213] std::vector<bool, std::allocator<bool> >::vector(std::initializer_list<bool>, std::allocator<bool> const&) [5] _mcount_private
+ [181] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const [214] std::vector<bool, std::allocator<bool> >::vector()
