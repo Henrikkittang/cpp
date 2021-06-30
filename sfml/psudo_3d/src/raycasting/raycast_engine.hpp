@@ -12,7 +12,12 @@ protected:
     int m_screen_height;
     float m_render_distance = 20.0f;
 
-    sf::Texture m_wall_texture;
+    sf::Image m_wall_image;
+
+
+    sf::Image m_image;
+    sf::Texture m_texture;
+    sf::Sprite m_sprite;
 
     enum CellSide
     {
@@ -21,10 +26,10 @@ protected:
 
 protected:        
     // Returns distance to nearest solid cell using DDA
-    // Returns -1.0f if no solid cells where found, 
-    // aka ray went outside grid or when exceeding render_distance
-    float get_distance(float angle);
+    // as the first element and the x sampling value as the second, 
+    std::array<float, 2> get_distance(float angle);
 
+    sf::Color get_sample(float x, float y);
 
     // Returns true if position is outside grid dimensions
     virtual bool out_of_bounds(const trig::Vector2i& position) = 0;
@@ -41,7 +46,12 @@ public:
     RaycastEngine(int screen_width, int screen_height)
         : m_screen_width(screen_width), m_screen_height(screen_height)
     {
-        m_wall_texture.loadFromFile("src/sprites/wall.jpg");
+        m_wall_image.loadFromFile("src/sprites/pixel_wall.jpg");
+
+        m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
+
+        m_texture.create(m_screen_width, m_screen_height);
+        m_sprite.setTexture(m_texture);
     }
 
     // Renders the 2D grid as a 3D perspective, column by column
@@ -64,7 +74,7 @@ public:
 };
 
 
-float RaycastEngine::get_distance(float angle)
+std::array<float, 2> RaycastEngine::get_distance(float angle)
 {
     // Form ray cast from player into scene
     trig::Vector2f ray_direction = trig::Vector2f(angle);
@@ -118,43 +128,71 @@ float RaycastEngine::get_distance(float angle)
             tile_found = true;
         else
             if( is_solid(map_check) )
+            {
                 tile_found = true;
-        
+            }   
     }
 
-    return cur_distance;
+    float sample_x = 0.0f;
+
+    if(tile_found)
+    {
+        trig::Vector2f intersection = m_camera.pos + ray_direction * cur_distance;
+        trig::Vector2f cell_mid = ((trig::Vector2f)map_check) + trig::Vector2f(0.5f, 0.5f);
+
+        float test_angle = atan2f((intersection.y - cell_mid.y), (intersection.x - cell_mid.x));
+
+        if (test_angle >= -PI * 0.25f && test_angle < PI * 0.25f)
+            sample_x = intersection.y - (float)map_check.y;
+        if (test_angle >= PI * 0.25f && test_angle < PI * 0.75f)
+            sample_x = intersection.x - (float)map_check.x;
+        if (test_angle < -PI * 0.25f && test_angle >= -PI * 0.75f)
+            sample_x = intersection.x - (float)map_check.x;
+        if (test_angle >= PI * 0.75f || test_angle < -PI * 0.75f)
+            sample_x = intersection.y - (float)map_check.y;
+    }
+
+    return {cur_distance, sample_x};
     // return (tile_found ? cur_distance : -1.0f);
 }
 
 void RaycastEngine::render(sf::RenderWindow& wn)
-{
-    sf::Image image;
-    image.create(m_screen_width, m_screen_height, sf::Color::Black);
-        
+{    
+    m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
     for(int x = 0; x < m_screen_width; x++)
     {
-        // Calculating distance with raytracing
+        // Get the angle of the direction for the given x in the field of view
         float ray_angle = (m_camera.angle - m_camera.fov / 2.0f) + ((float)x / (float)m_screen_width) * m_camera.fov;
         
-        float distance_to_wall = get_distance(ray_angle);
+
+        auto args = get_distance(ray_angle);
+        float distance_to_wall = args[0];
+        float sample_x = args[1];
 
         // Drawing 
         int ceiling = (float)(m_screen_height / 2.0) -m_screen_height / ((float)distance_to_wall);
         int floor = m_screen_height - ceiling;
         float shade = 1 - (distance_to_wall / m_render_distance);
     
-        for(int y = 0; y < m_screen_height; y++)
+        for(int y = 0; y < m_screen_height; y ++)
         {
             if(distance_to_wall > m_render_distance) 
-                image.setPixel(x, y, sf::Color::Black);
+                m_image.setPixel(x, y, sf::Color::Black);
 
             else if(y < ceiling)
-                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::TOP, distance_to_wall));
+                m_image.setPixel(x, y, get_pixel_color({x, y}, CellSide::TOP, distance_to_wall));
             else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
-                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::MIDDLE, distance_to_wall));
+            {
+                float sample_y = ((float)y - (float)ceiling) / ((float)floor - (float)ceiling);
+                
+                auto sample = get_sample(sample_x, sample_y);
+                m_image.setPixel(x, y, sample);
+                
+
+            }
             else
             {
-                image.setPixel(x, y, get_pixel_color({x, y}, CellSide::BOTTOM, distance_to_wall));
+                m_image.setPixel(x, y, get_pixel_color({x, y}, CellSide::BOTTOM, distance_to_wall));
 
                 // image.setPixel(x, y, sf::Color::Black);
                 // float b = (((float)y - m_screen_height/2.0f) / ((float)m_screen_height / 2.0f));
@@ -166,14 +204,27 @@ void RaycastEngine::render(sf::RenderWindow& wn)
         }
     }
 
-    sf::Texture texture;
-    texture.loadFromImage(image);
-    sf::Sprite sprite;
-    sprite.setTexture(texture, true);
+    m_texture.update(m_image);
+    
 
-    wn.draw(sprite);
+    wn.draw(m_sprite);
 }
 
+
+sf::Color RaycastEngine::get_sample(float x, float y)
+{
+    int pixel_x = (int)(m_wall_image.getSize().x * x);
+    int pixel_y = (int)(m_wall_image.getSize().y * y);
+
+    if(pixel_x >= 0 && pixel_x < m_wall_image.getSize().x && 
+       pixel_y >= 0 && pixel_y < m_wall_image.getSize().y)
+    {
+        return m_wall_image.getPixel(pixel_x, pixel_y);
+    }
+    else
+        return sf::Color::Black;
+
+}
 
 void RaycastEngine::set_camera_position(const trig::Vector2f& positon)
 {
