@@ -12,9 +12,6 @@ protected:
     int m_screen_height;
     float m_render_distance = 20.0f;
 
-    sf::Image m_wall_image;
-
-
     sf::Image m_image;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
@@ -29,7 +26,8 @@ protected:
     // as the first element and the x sampling value as the second, 
     std::array<float, 2> get_distance(float angle);
 
-    sf::Color get_sample(float x, float y);
+    // Returns pixel given relative float coordinates
+    sf::Color sample_image(float x, float y, const sf::Image& image);
 
     // Returns true if position is outside grid dimensions
     virtual bool out_of_bounds(const trig::Vector2i& position) = 0;
@@ -38,7 +36,7 @@ protected:
     virtual bool is_solid(const trig::Vector2i& position) = 0;
 
     // Returns the color of the pixel based on the position, cell side and distance to cell
-    virtual sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance) = 0;
+    virtual sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance, float sample_x, float sample_y) = 0;
 
 
 public:
@@ -46,8 +44,6 @@ public:
     RaycastEngine(int screen_width, int screen_height)
         : m_screen_width(screen_width), m_screen_height(screen_height)
     {
-        m_wall_image.loadFromFile("src/sprites/pixel_wall.jpg");
-
         m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
 
         m_texture.create(m_screen_width, m_screen_height);
@@ -176,31 +172,25 @@ void RaycastEngine::render(sf::RenderWindow& wn)
     
         for(int y = 0; y < m_screen_height; y ++)
         {
-            if(distance_to_wall > m_render_distance) 
+            if(distance_to_wall > m_render_distance)
+            { 
                 m_image.setPixel(x, y, sf::Color::Black);
-
-            else if(y < ceiling)
-                m_image.setPixel(x, y, get_pixel_color({x, y}, CellSide::TOP, distance_to_wall));
-            else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
-            {
-                float sample_y = ((float)y - (float)ceiling) / ((float)floor - (float)ceiling);
-                
-                auto sample = get_sample(sample_x, sample_y);
-                m_image.setPixel(x, y, sample);
-                
-
-            }
-            else
-            {
-                m_image.setPixel(x, y, get_pixel_color({x, y}, CellSide::BOTTOM, distance_to_wall));
-
-                // image.setPixel(x, y, sf::Color::Black);
-                // float b = (((float)y - m_screen_height/2.0f) / ((float)m_screen_height / 2.0f));
-                // image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
+                continue;
             }
 
-
+            float sample_y = ((float)y - (float)ceiling) / ((float)floor - (float)ceiling);
             
+            CellSide cell_side;
+            if(y < ceiling)
+                cell_side = CellSide::TOP;
+            else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
+                cell_side = CellSide::MIDDLE;
+            else
+                cell_side = CellSide::BOTTOM;            
+
+            sf::Color pixel_color = get_pixel_color(m_camera.pos, cell_side, distance_to_wall, sample_x, sample_y);
+            m_image.setPixel(x, y, pixel_color);
+
         }
     }
 
@@ -211,16 +201,13 @@ void RaycastEngine::render(sf::RenderWindow& wn)
 }
 
 
-sf::Color RaycastEngine::get_sample(float x, float y)
+sf::Color RaycastEngine::sample_image(float x, float y, const sf::Image& image)
 {
-    int pixel_x = (int)(m_wall_image.getSize().x * x);
-    int pixel_y = (int)(m_wall_image.getSize().y * y);
+    int pixel_x = (int)(image.getSize().x * x);
+    int pixel_y = (int)(image.getSize().y * y);
 
-    if(pixel_x >= 0 && pixel_x < m_wall_image.getSize().x && 
-       pixel_y >= 0 && pixel_y < m_wall_image.getSize().y)
-    {
-        return m_wall_image.getPixel(pixel_x, pixel_y);
-    }
+    if(pixel_x >= 0 && pixel_x < image.getSize().x && pixel_y >= 0 && pixel_y < image.getSize().y)
+        return image.getPixel(pixel_x, pixel_y);
     else
         return sf::Color::Black;
 

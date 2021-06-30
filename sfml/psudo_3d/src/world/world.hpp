@@ -8,53 +8,11 @@
 #include "dynamic_grid.hpp"
 
 
-/*
-sf::Image render_world(const Camera& camera, const DynamicGrid<bool>& grid)
-{
-    
-    int screen_width = grid.get_width() * grid.get_scl();
-    int screen_height = grid.get_height() * grid.get_scl();
-
-    sf::Image image;
-    image.create(screen_width, screen_height, sf::Color::Black);
-        
-    for(int x = 0; x < screen_width; x++)
-    {
-        // Calculating distance with raytracing
-        float ray_angle = (camera.angle - camera.fov / 2.0f) + ((float)x / (float)screen_width) * camera.fov;
-        
-        float distance_to_wall = DDA(camera.pos, ray_angle, grid);
-        if(distance_to_wall < 0.0f) continue;
-
-        // Drawing 
-        int ceiling = (float)(screen_height / 2.0) -screen_height / ((float)distance_to_wall);
-        int floor =screen_height - ceiling;
-        float max_dist = sqrtf(powf(grid.get_width()-1, 2) + powf(grid.get_height()-1, 2) );
-        float shade = 1 - (distance_to_wall / max_dist);
-    
-        for(int y = 0; y < screen_height; y++)
-        {
-            if(y < ceiling)
-                image.setPixel(x, y, sf::Color::Black);
-            else if(y > ceiling && y <= floor && distance_to_wall > 0.0f)
-                image.setPixel(x, y, sf::Color(0, 255*shade, 120*shade));
-            else
-            {
-                image.setPixel(x, y, sf::Color::Black);
-
-                // float b = (((float)y -screen_height/2.0f) / ((float)screen_height / 2.0f));
-                // image.setPixel(x, y, sf::Color(255*b, 255*b, 255*b));
-            }
-        }
-    }
-    return image;
-}
-*/
-
 class MyWorld : public RaycastEngine
 {
 private:
     DynamicGrid<bool> m_grid;
+    sf::Image m_wall_image;
 
 
 public:
@@ -62,6 +20,9 @@ public:
     MyWorld(int screen_width, int screen_height, int scl)
         : RaycastEngine(screen_width, screen_height)
     {    
+
+        m_wall_image.loadFromFile("src/sprites/pixel_wall.jpg");
+
         std::vector<bool> grid = 
         {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -85,7 +46,7 @@ public:
     
         m_grid = DynamicGrid<bool>(screen_width/scl, screen_height/scl, scl, grid);
        
-        
+     
         std::cout << m_grid.get_width()  << "\n";
         std::cout << m_grid.get_height() << "\n";
 
@@ -113,12 +74,14 @@ public:
     } 
 
 
-    sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance) override
+    sf::Color get_pixel_color(const trig::Vector2i& position, CellSide cell_side, float distance, float sample_x, float sample_y) override
     {
-        float shade = (1-distance/20.0f);
-        if(cell_side == CellSide::TOP ) return sf::Color::Black;
-        else if(cell_side == CellSide::MIDDLE ) return sf::Color(0, 255*shade, 120*shade);
-        else if(cell_side == CellSide::BOTTOM ) return sf::Color::Black;
+       
+
+        // float shade = (1-distance/20.0f);
+        if(cell_side == CellSide::TOP ) return sf::Color(120, 120, 200);
+        else if(cell_side == CellSide::MIDDLE ) return sample_image(sample_x, sample_y, m_wall_image);
+        else if(cell_side == CellSide::BOTTOM ) return sf::Color(60, 120, 60);
         return sf::Color::Black;
     }
 
