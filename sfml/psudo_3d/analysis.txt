@@ -2,20 +2,14 @@ Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls   s/call   s/call  name    
- 41.49      3.78     3.78 660917436     0.00     0.00  RaycastEngine::get_sample(float, float)
- 34.80      6.95     3.17        1     3.17     7.16  World::update()
- 10.76      7.93     0.98                             _mcount_private
-  8.23      8.68     0.75                             __fentry__
-  2.31      8.89     0.21  2690048     0.00     0.00  RaycastEngine::get_distance(float)
-  0.88      8.97     0.08                             atan2f
-  0.66      9.03     0.06                             __cosl_internal
-  0.55      9.08     0.05                             sin
-  0.22      9.10     0.02                             __sinl_internal
-  0.11      9.11     0.01                             cos
-  0.00      9.11     0.00        1     0.00     0.00  World::World(int, int, int)
-  0.00      9.11     0.00        1     0.00     0.00  World::~World()
-  0.00      9.11     0.00        1     0.00     0.00  MyWorld::MyWorld(int, int, int)
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 70.59      0.12     0.12        1   120.00   130.00  World::update()
+ 23.53      0.16     0.04                             __tcf_0
+  5.88      0.17     0.01    23552     0.00     0.00  RaycastEngine::get_distance(float)
+  0.00      0.17     0.00  4413700     0.00     0.00  __gcc_deregister_frame
+  0.00      0.17     0.00        1     0.00     0.00  World::World(int, int, int)
+  0.00      0.17     0.00        1     0.00     0.00  MyWorld::MyWorld(int, int, int)
+  0.00      0.17     0.00        1     0.00     0.00  MyWorld::~MyWorld()
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -53,56 +47,38 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) for 0.11% of 9.11 seconds
+granularity: each sample hit covers 4 byte(s) for 5.88% of 0.17 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     78.6    0.00    7.16                 main [1]
-                3.17    3.99       1/1           World::update() [2]
-                0.00    0.00       1/1           World::World(int, int, int) [81]
-                0.00    0.00       1/1           World::~World() [82]
+[1]     76.5    0.00    0.13                 main [1]
+                0.12    0.01       1/1           World::update() [2]
+                0.00    0.00       1/1           World::World(int, int, int) [78]
+                0.00    0.00       1/1           MyWorld::~MyWorld() [80]
 -----------------------------------------------
-                3.17    3.99       1/1           main [1]
-[2]     78.6    3.17    3.99       1         World::update() [2]
-                3.78    0.00 660917436/660917436     RaycastEngine::get_sample(float, float) [3]
-                0.21    0.00 2690048/2690048     RaycastEngine::get_distance(float) [6]
------------------------------------------------
-                3.78    0.00 660917436/660917436     World::update() [2]
-[3]     41.5    3.78    0.00 660917436         RaycastEngine::get_sample(float, float) [3]
+                0.12    0.01       1/1           main [1]
+[2]     76.5    0.12    0.01       1         World::update() [2]
+                0.01    0.00   23552/23552       RaycastEngine::get_distance(float) [4]
+                0.00    0.00 4413700/4413700     __gcc_deregister_frame [77]
 -----------------------------------------------
                                                  <spontaneous>
-[4]     10.8    0.98    0.00                 _mcount_private [4]
+[3]     23.5    0.04    0.00                 __tcf_0 [3]
 -----------------------------------------------
-                                                 <spontaneous>
-[5]      8.2    0.75    0.00                 __fentry__ [5]
+                0.01    0.00   23552/23552       World::update() [2]
+[4]      5.9    0.01    0.00   23552         RaycastEngine::get_distance(float) [4]
 -----------------------------------------------
-                0.21    0.00 2690048/2690048     World::update() [2]
-[6]      2.3    0.21    0.00 2690048         RaycastEngine::get_distance(float) [6]
------------------------------------------------
-                                                 <spontaneous>
-[7]      0.9    0.08    0.00                 atan2f [7]
------------------------------------------------
-                                                 <spontaneous>
-[8]      0.7    0.06    0.00                 __cosl_internal [8]
------------------------------------------------
-                                                 <spontaneous>
-[9]      0.5    0.05    0.00                 sin [9]
------------------------------------------------
-                                                 <spontaneous>
-[10]     0.2    0.02    0.00                 __sinl_internal [10]
------------------------------------------------
-                                                 <spontaneous>
-[11]     0.1    0.01    0.00                 cos [11]
+                0.00    0.00 4413700/4413700     World::update() [2]
+[77]     0.0    0.00    0.00 4413700         __gcc_deregister_frame [77]
 -----------------------------------------------
                 0.00    0.00       1/1           main [1]
-[81]     0.0    0.00    0.00       1         World::World(int, int, int) [81]
-                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [83]
+[78]     0.0    0.00    0.00       1         World::World(int, int, int) [78]
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [79]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [78]
+[79]     0.0    0.00    0.00       1         MyWorld::MyWorld(int, int, int) [79]
 -----------------------------------------------
                 0.00    0.00       1/1           main [1]
-[82]     0.0    0.00    0.00       1         World::~World() [82]
------------------------------------------------
-                0.00    0.00       1/1           World::World(int, int, int) [81]
-[83]     0.0    0.00    0.00       1         MyWorld::MyWorld(int, int, int) [83]
+[80]     0.0    0.00    0.00       1         MyWorld::~MyWorld() [80]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -195,8 +171,6 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [3] RaycastEngine::get_sample(float, float) [83] MyWorld::MyWorld(int, int, int) [7] atan2f
-   [6] RaycastEngine::get_distance(float) [8] __cosl_internal [11] cos
-   [2] World::update()         [5] __fentry__              [9] sin
-  [81] World::World(int, int, int) [10] __sinl_internal
-  [82] World::~World()         [4] _mcount_private
+   [4] RaycastEngine::get_distance(float) [79] MyWorld::MyWorld(int, int, int) [3] __tcf_0
+   [2] World::update()        [80] MyWorld::~MyWorld()
+  [78] World::World(int, int, int) [77] __gcc_deregister_frame

@@ -8,9 +8,13 @@ class RaycastEngine
 {
 protected:
     Camera m_camera; 
-    int m_screen_width;
-    int m_screen_height;
+    uint32_t m_screen_width;
+    uint32_t m_screen_height;
+    uint32_t m_resolution = 2;
     float m_render_distance = 20.0f;
+
+    float stepster = 2.0f;
+
 
     sf::Image m_image;
     sf::Texture m_texture;
@@ -41,7 +45,7 @@ protected:
 
 public:
 
-    RaycastEngine(int screen_width, int screen_height)
+    RaycastEngine(uint32_t screen_width, uint32_t screen_height)
         : m_screen_width(screen_width), m_screen_height(screen_height)
     {
         m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
@@ -58,6 +62,9 @@ public:
     
     // Returns a pointer to the camera
     Camera* get_camera_pointer();
+
+
+    void set_resolution(uint32_t resolution);
     
     // Returns numbers in range 0 to 1 based on the argument distance 
     // and the render distance
@@ -154,8 +161,15 @@ std::array<float, 2> RaycastEngine::get_distance(float angle)
 
 void RaycastEngine::render(sf::RenderWindow& wn)
 {    
+
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
+        stepster += 5.0f;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
+        stepster -= 5.0f;
+
     m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
-    for(int x = 0; x < m_screen_width; x++)
+    for(int x = 0; x < m_screen_width; x += m_resolution)
     {
         // Get the angle of the direction for the given x in the field of view
         float ray_angle = (m_camera.angle - m_camera.fov / 2.0f) + ((float)x / (float)m_screen_width) * m_camera.fov;
@@ -166,8 +180,9 @@ void RaycastEngine::render(sf::RenderWindow& wn)
         float sample_x = args[1];
 
         // Drawing 
-        int ceiling = (float)(m_screen_height / 2.0) -m_screen_height / ((float)distance_to_wall);
-        int floor = m_screen_height - ceiling;
+        int ceiling = (float)(m_screen_height / 2.0f) - m_screen_height / ((float)distance_to_wall);
+        int floor = m_screen_height - ceiling  - stepster;
+        ceiling -= stepster;
         float shade = 1 - (distance_to_wall / m_render_distance);
     
         for(int y = 0; y < m_screen_height; y ++)
@@ -189,7 +204,9 @@ void RaycastEngine::render(sf::RenderWindow& wn)
                 cell_side = CellSide::BOTTOM;            
 
             sf::Color pixel_color = get_pixel_color(m_camera.pos, cell_side, distance_to_wall, sample_x, sample_y);
-            m_image.setPixel(x, y, pixel_color);
+            
+            for(int i = 0; i < m_resolution; i++)
+                m_image.setPixel(x+i, y, pixel_color);
 
         }
     }
@@ -222,6 +239,11 @@ void RaycastEngine::set_camera_position(const trig::Vector2f& positon)
 Camera* RaycastEngine::get_camera_pointer()
 {
     return &m_camera;
+}
+
+void RaycastEngine::set_resolution(uint32_t resolution)
+{
+    m_resolution = resolution;
 }
 
 float RaycastEngine::get_releative_dept(float distance)
