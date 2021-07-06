@@ -9,7 +9,7 @@ SOURCE 	     = src/main.cpp
 
 # Flags for all modes
 CC        = g++
-CPPFLAGS  = -std=c++17
+CPPFLAGS  = -std=c++17 
 
 DEBUG_FLAGS   = -g 
 RELEASE_FLAGS = -O3

@@ -8,7 +8,7 @@
 
 int main()
 {
-    World world = {1024, 1024, 64};
+    World world = {1024, 1024, 32};
     world.update();
     
 }

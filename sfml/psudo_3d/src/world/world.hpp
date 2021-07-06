@@ -44,7 +44,7 @@ public:
         };
         
     
-        m_grid = DynamicGrid<bool>(screen_width/scl, screen_height/scl, scl, grid);
+        m_grid = DynamicGrid<bool>(screen_width/scl, screen_height/scl, scl);
        
      
         std::cout << m_grid.get_width()  << "\n";
@@ -146,7 +146,7 @@ public:
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
                 camera->move_right(dt);
 
-            m_world.render(m_window);
+            m_world.multi_render(m_window);
 
             
             m_window.display();

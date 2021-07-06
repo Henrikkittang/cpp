@@ -3,13 +3,23 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 70.59      0.12     0.12        1   120.00   130.00  World::update()
- 23.53      0.16     0.04                             __tcf_0
-  5.88      0.17     0.01    23552     0.00     0.00  RaycastEngine::get_distance(float)
-  0.00      0.17     0.00  4413700     0.00     0.00  __gcc_deregister_frame
-  0.00      0.17     0.00        1     0.00     0.00  World::World(int, int, int)
-  0.00      0.17     0.00        1     0.00     0.00  MyWorld::MyWorld(int, int, int)
-  0.00      0.17     0.00        1     0.00     0.00  MyWorld::~MyWorld()
+ 54.55      0.06     0.06                             _mcount_private
+ 18.18      0.08     0.02    10564     0.00     0.00  RaycastEngine::multi_render(sf::RenderWindow&)
+  9.09      0.09     0.01    21128     0.00     0.00  std::future<std::result_of<std::decay<sf::Image (RaycastEngine::*)(int, int)>::type (std::decay<RaycastEngine*>::type, std::decay<int>::type, std::decay<int>::type)>::type> std::async<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int>(std::launch, sf::Image (RaycastEngine::*&&)(int, int), RaycastEngine*&&, int&&, int&&)
+  9.09      0.10     0.01    21105     0.00     0.00  std::__future_base::_Async_state_commonV2::_M_complete_async()
+  9.09      0.11     0.01    21020     0.00     0.00  std::__future_base::_Result<sf::Image>::_M_destroy()
+  0.00      0.11     0.00 2183615427     0.00     0.00  __gcc_deregister_frame
+  0.00      0.11     0.00 10709367     0.00     0.00  RaycastEngine::get_distance(float)
+  0.00      0.11     0.00    21124     0.00     0.00  RaycastEngine::render(int, int)
+  0.00      0.11     0.00    21123     0.00     0.00  std::_Function_handler<std::unique_ptr<std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter> (), std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_invoke(std::_Any_data const&)
+  0.00      0.11     0.00    21123     0.00     0.00  std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&)
+  0.00      0.11     0.00    21029     0.00     0.00  std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_destroy()
+  0.00      0.11     0.00    21029     0.00     0.00  std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+  0.00      0.11     0.00    20961     0.00     0.00  std::_Function_base::_Base_manager<std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+  0.00      0.11     0.00        1     0.00    50.00  World::update()
+  0.00      0.11     0.00        1     0.00     0.00  World::World(int, int, int)
+  0.00      0.11     0.00        1     0.00     0.00  MyWorld::MyWorld(int, int, int)
+  0.00      0.11     0.00        1     0.00     0.00  MyWorld::~MyWorld()
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -47,38 +57,76 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) for 5.88% of 0.17 seconds
+granularity: each sample hit covers 4 byte(s) for 9.09% of 0.11 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     76.5    0.00    0.13                 main [1]
-                0.12    0.01       1/1           World::update() [2]
-                0.00    0.00       1/1           World::World(int, int, int) [78]
-                0.00    0.00       1/1           MyWorld::~MyWorld() [80]
------------------------------------------------
-                0.12    0.01       1/1           main [1]
-[2]     76.5    0.12    0.01       1         World::update() [2]
-                0.01    0.00   23552/23552       RaycastEngine::get_distance(float) [4]
-                0.00    0.00 4413700/4413700     __gcc_deregister_frame [77]
+[1]     54.5    0.06    0.00                 _mcount_private [1]
 -----------------------------------------------
                                                  <spontaneous>
-[3]     23.5    0.04    0.00                 __tcf_0 [3]
+[2]     45.5    0.00    0.05                 main [2]
+                0.00    0.05       1/1           World::update() [4]
+                0.00    0.00       1/1           World::World(int, int, int) [93]
+                0.00    0.00       1/1           MyWorld::~MyWorld() [95]
 -----------------------------------------------
-                0.01    0.00   23552/23552       World::update() [2]
-[4]      5.9    0.01    0.00   23552         RaycastEngine::get_distance(float) [4]
+                0.02    0.03   10564/10564       World::update() [4]
+[3]     45.5    0.02    0.03   10564         RaycastEngine::multi_render(sf::RenderWindow&) [3]
+                0.01    0.00   21128/21128       std::future<std::result_of<std::decay<sf::Image (RaycastEngine::*)(int, int)>::type (std::decay<RaycastEngine*>::type, std::decay<int>::type, std::decay<int>::type)>::type> std::async<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int>(std::launch, sf::Image (RaycastEngine::*&&)(int, int), RaycastEngine*&&, int&&, int&&) [5]
+                0.01    0.00   21105/21105       std::__future_base::_Async_state_commonV2::_M_complete_async() [6]
+                0.01    0.00   21020/21020       std::__future_base::_Result<sf::Image>::_M_destroy() [7]
+                0.00    0.00   21029/21029       std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() [91]
+                0.00    0.00   21029/21029       std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_destroy() [90]
 -----------------------------------------------
-                0.00    0.00 4413700/4413700     World::update() [2]
-[77]     0.0    0.00    0.00 4413700         __gcc_deregister_frame [77]
+                0.00    0.05       1/1           main [2]
+[4]     45.5    0.00    0.05       1         World::update() [4]
+                0.02    0.03   10564/10564       RaycastEngine::multi_render(sf::RenderWindow&) [3]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[78]     0.0    0.00    0.00       1         World::World(int, int, int) [78]
-                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [79]
+                0.01    0.00   21128/21128       RaycastEngine::multi_render(sf::RenderWindow&) [3]
+[5]      9.1    0.01    0.00   21128         std::future<std::result_of<std::decay<sf::Image (RaycastEngine::*)(int, int)>::type (std::decay<RaycastEngine*>::type, std::decay<int>::type, std::decay<int>::type)>::type> std::async<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int>(std::launch, sf::Image (RaycastEngine::*&&)(int, int), RaycastEngine*&&, int&&, int&&) [5]
+                0.00    0.00   21123/21123       std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&) [89]
 -----------------------------------------------
-                0.00    0.00       1/1           World::World(int, int, int) [78]
-[79]     0.0    0.00    0.00       1         MyWorld::MyWorld(int, int, int) [79]
+                0.01    0.00   21105/21105       RaycastEngine::multi_render(sf::RenderWindow&) [3]
+[6]      9.1    0.01    0.00   21105         std::__future_base::_Async_state_commonV2::_M_complete_async() [6]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[80]     0.0    0.00    0.00       1         MyWorld::~MyWorld() [80]
+                0.01    0.00   21020/21020       RaycastEngine::multi_render(sf::RenderWindow&) [3]
+[7]      9.1    0.01    0.00   21020         std::__future_base::_Result<sf::Image>::_M_destroy() [7]
+-----------------------------------------------
+                0.00    0.00 2183615427/2183615427     RaycastEngine::render(int, int) [87]
+[85]     0.0    0.00    0.00 2183615427         __gcc_deregister_frame [85]
+-----------------------------------------------
+                0.00    0.00 10709367/10709367     RaycastEngine::render(int, int) [87]
+[86]     0.0    0.00    0.00 10709367         RaycastEngine::get_distance(float) [86]
+-----------------------------------------------
+                0.00    0.00   21124/21124       std::_Function_handler<std::unique_ptr<std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter> (), std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_invoke(std::_Any_data const&) [88]
+[87]     0.0    0.00    0.00   21124         RaycastEngine::render(int, int) [87]
+                0.00    0.00 2183615427/2183615427     __gcc_deregister_frame [85]
+                0.00    0.00 10709367/10709367     RaycastEngine::get_distance(float) [86]
+-----------------------------------------------
+                0.00    0.00   21123/21123       std::__future_base::_State_baseV2::_M_do_set(std::function<std::unique_ptr<std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter> ()>*, bool*) [163]
+[88]     0.0    0.00    0.00   21123         std::_Function_handler<std::unique_ptr<std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter> (), std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_invoke(std::_Any_data const&) [88]
+                0.00    0.00   21124/21124       RaycastEngine::render(int, int) [87]
+-----------------------------------------------
+                0.00    0.00   21123/21123       std::future<std::result_of<std::decay<sf::Image (RaycastEngine::*)(int, int)>::type (std::decay<RaycastEngine*>::type, std::decay<int>::type, std::decay<int>::type)>::type> std::async<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int>(std::launch, sf::Image (RaycastEngine::*&&)(int, int), RaycastEngine*&&, int&&, int&&) [5]
+[89]     0.0    0.00    0.00   21123         std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&) [89]
+-----------------------------------------------
+                0.00    0.00   21029/21029       RaycastEngine::multi_render(sf::RenderWindow&) [3]
+[90]     0.0    0.00    0.00   21029         std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_destroy() [90]
+-----------------------------------------------
+                0.00    0.00   21029/21029       RaycastEngine::multi_render(sf::RenderWindow&) [3]
+[91]     0.0    0.00    0.00   21029         std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() [91]
+-----------------------------------------------
+                0.00    0.00   20961/20961       std::thread::_State_impl<std::thread::_Invoker<std::tuple<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>::_Async_state_impl(std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >&&)::{lambda()#1}> > >::_M_run() [197]
+[92]     0.0    0.00    0.00   20961         std::_Function_base::_Base_manager<std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation) [92]
+-----------------------------------------------
+                0.00    0.00       1/1           main [2]
+[93]     0.0    0.00    0.00       1         World::World(int, int, int) [93]
+                0.00    0.00       1/1           MyWorld::MyWorld(int, int, int) [94]
+-----------------------------------------------
+                0.00    0.00       1/1           World::World(int, int, int) [93]
+[94]     0.0    0.00    0.00       1         MyWorld::MyWorld(int, int, int) [94]
+-----------------------------------------------
+                0.00    0.00       1/1           main [2]
+[95]     0.0    0.00    0.00       1         MyWorld::~MyWorld() [95]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -171,6 +219,9 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [4] RaycastEngine::get_distance(float) [79] MyWorld::MyWorld(int, int, int) [3] __tcf_0
-   [2] World::update()        [80] MyWorld::~MyWorld()
-  [78] World::World(int, int, int) [77] __gcc_deregister_frame
+  [86] RaycastEngine::get_distance(float) [95] MyWorld::~MyWorld() [91] std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+   [3] RaycastEngine::multi_render(sf::RenderWindow&) [6] std::__future_base::_Async_state_commonV2::_M_complete_async() [89] std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&)
+  [87] RaycastEngine::render(int, int) [7] std::__future_base::_Result<sf::Image>::_M_destroy() [5] std::future<std::result_of<std::decay<sf::Image (RaycastEngine::*)(int, int)>::type (std::decay<RaycastEngine*>::type, std::decay<int>::type, std::decay<int>::type)>::type> std::async<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int>(std::launch, sf::Image (RaycastEngine::*&&)(int, int), RaycastEngine*&&, int&&, int&&)
+   [4] World::update()        [92] std::_Function_base::_Base_manager<std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation) [85] __gcc_deregister_frame
+  [93] World::World(int, int, int) [88] std::_Function_handler<std::unique_ptr<std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter> (), std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<sf::Image>, std::__future_base::_Result_base::_Deleter>, std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >::_M_invoke(std::_Any_data const&) [1] _mcount_private
+  [94] MyWorld::MyWorld(int, int, int) [90] std::_Sp_counted_ptr_inplace<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image>, std::allocator<std::__future_base::_Async_state_impl<std::thread::_Invoker<std::tuple<sf::Image (RaycastEngine::*)(int, int), RaycastEngine*, int, int> >, sf::Image> >, (__gnu_cxx::_Lock_policy)2>::_M_destroy()

@@ -1,4 +1,6 @@
 #pragma once
+#include <future>
+
 #include <SFML/Graphics.hpp>
 
 #include "vector2.hpp"
@@ -11,10 +13,7 @@ protected:
     uint32_t m_screen_width;
     uint32_t m_screen_height;
     uint32_t m_resolution = 2;
-    float m_render_distance = 20.0f;
-
-    float stepster = 2.0f;
-
+    float m_render_distance = 40.0f;
 
     sf::Image m_image;
     sf::Texture m_texture;
@@ -54,8 +53,11 @@ public:
         m_sprite.setTexture(m_texture);
     }
 
+    // Divides the screen into sections and renders them concurrencly
+    void multi_render(sf::RenderWindow& wn);
+    
     // Renders the 2D grid as a 3D perspective, column by column
-    void render(sf::RenderWindow& wn);
+    sf::Image render(int x_start, int x_end);
     
     // Sets camera position
     void set_camera_position(const trig::Vector2f& positon);
@@ -159,17 +161,13 @@ std::array<float, 2> RaycastEngine::get_distance(float angle)
     // return (tile_found ? cur_distance : -1.0f);
 }
 
-void RaycastEngine::render(sf::RenderWindow& wn)
+sf::Image RaycastEngine::render(int x_start, int x_end)
 {    
+        
+    sf::Image image;
+    image.create(m_screen_width, m_screen_height, sf::Color(0, 0, 0, 0));
 
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
-        stepster += 5.0f;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
-        stepster -= 5.0f;
-
-    m_image.create(m_screen_width, m_screen_height, sf::Color::Black);
-    for(int x = 0; x < m_screen_width; x += m_resolution)
+    for(int x = x_start; x < x_end; x += m_resolution)
     {
         // Get the angle of the direction for the given x in the field of view
         float ray_angle = (m_camera.angle - m_camera.fov / 2.0f) + ((float)x / (float)m_screen_width) * m_camera.fov;
@@ -181,15 +179,14 @@ void RaycastEngine::render(sf::RenderWindow& wn)
 
         // Drawing 
         int ceiling = (float)(m_screen_height / 2.0f) - m_screen_height / ((float)distance_to_wall);
-        int floor = m_screen_height - ceiling  - stepster;
-        ceiling -= stepster;
+        int floor = m_screen_height - ceiling;
         float shade = 1 - (distance_to_wall / m_render_distance);
     
         for(int y = 0; y < m_screen_height; y ++)
         {
             if(distance_to_wall > m_render_distance)
             { 
-                m_image.setPixel(x, y, sf::Color::Black);
+                image.setPixel(x, y, sf::Color::Black);
                 continue;
             }
 
@@ -206,15 +203,47 @@ void RaycastEngine::render(sf::RenderWindow& wn)
             sf::Color pixel_color = get_pixel_color(m_camera.pos, cell_side, distance_to_wall, sample_x, sample_y);
             
             for(int i = 0; i < m_resolution; i++)
-                m_image.setPixel(x+i, y, pixel_color);
+                image.setPixel(x+i, y, pixel_color);
 
         }
-    }
+    }    
 
-    m_texture.update(m_image);
+    return image;
+}
+
+void RaycastEngine::multi_render(sf::RenderWindow& wn)
+{
     
+    int number_of_threads = 3;
+    int step_size = m_screen_width / number_of_threads;
 
-    wn.draw(m_sprite);
+    std::vector<std::future<sf::Image>> threads;  
+    threads.reserve(number_of_threads);
+    for(int i = 0; i < number_of_threads; i++)
+    {
+        auto f = std::async(std::launch::async, &RaycastEngine::render, this, step_size*i, step_size*(i+1));
+        threads.emplace_back(std::move(f));
+    }
+    threads.pop_back();
+
+    sf::RenderTexture render_texture;
+    render_texture.create(m_screen_width, m_screen_height);
+    for(auto& f : threads)
+    {
+        auto result = f.get();
+        sf::Texture texture;
+        texture.loadFromImage(result);
+
+        sf::Sprite sprite(texture);
+        render_texture.draw(sprite);
+    }
+    
+    
+    render_texture.display();
+    sf::Sprite display_sprite(render_texture.getTexture());
+
+    wn.draw(display_sprite);
+
 }
 
 
