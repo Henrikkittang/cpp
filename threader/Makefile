@@ -9,7 +9,7 @@ CPPFLAGS  = -std=c++17 -pthread
 DEBUG_FLAGS   = -g 
 RELEASE_FLAGS = -O3
 
-
+	
 # //////////////////////////////////
 #            Debug
 # //////////////////////////////////

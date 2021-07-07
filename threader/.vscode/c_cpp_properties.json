@@ -3,7 +3,6 @@
         {
             "name": "Windows",
             "includePath": [
-                "include/"
             ],
             "cStandard": "c17",
             "cppStandard": "c++17",
